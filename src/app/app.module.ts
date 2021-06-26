@@ -22,7 +22,6 @@ import { WagesViewComponent } from './ui/admin/wages-view/wages-view.component';
 import { WagesViewIndividualComponent } from './ui/admin/wages-view-individual/wages-view-individual.component';
 import { AccountCreateComponent } from './ui/admin/account-create/account-create.component';
 import { AccountDeleteComponent } from './ui/admin/account-delete/account-delete.component';
-import { LoginModaComponent } from './ui/home/login-moda/login-moda.component';
 import { LoginModalComponent } from './ui/home/login-modal/login-modal.component';
 import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.component';
 
@@ -46,7 +45,6 @@ import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.compon
     WagesViewIndividualComponent,
     AccountCreateComponent,
     AccountDeleteComponent,
-    LoginModaComponent,
     LoginModalComponent,
     SignupModalComponent
   ],
