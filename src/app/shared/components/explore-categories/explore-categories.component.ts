@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HomeCategory} from '../../../core/models/home-category';
 
 @Component({
@@ -6,7 +6,10 @@ import {HomeCategory} from '../../../core/models/home-category';
   templateUrl: './explore-categories.component.html',
   styleUrls: ['./explore-categories.component.scss']
 })
-export class ExploreCategoriesComponent {
-  homeCategories: Array<HomeCategory>;
+export class ExploreCategoriesComponent implements OnInit {
+  @Input() homeCategories: Array<HomeCategory>;
+  constructor() { }
 
+  ngOnInit(): void {
+  }
 }
