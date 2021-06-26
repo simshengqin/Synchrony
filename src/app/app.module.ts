@@ -24,6 +24,8 @@ import { AccountCreateComponent } from './ui/admin/account-create/account-create
 import { AccountDeleteComponent } from './ui/admin/account-delete/account-delete.component';
 import { LoginModalComponent } from './ui/home/login-modal/login-modal.component';
 import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.component';
+import { UploadedViewComponent } from './shared/components/uploaded-view/uploaded-view.component';
+import { DropzoneComponent } from './shared/components/dropzone/dropzone.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.compon
     AccountCreateComponent,
     AccountDeleteComponent,
     LoginModalComponent,
-    SignupModalComponent
+    SignupModalComponent,
+    UploadedViewComponent,
+    DropzoneComponent
   ],
   imports: [
     BrowserModule,
