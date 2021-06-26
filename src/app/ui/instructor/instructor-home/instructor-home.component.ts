@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {HomeCategory} from '../../core/models/home-category';
+import {HomeCategory} from '../../../core/models/home-category';
 
 @Component({
-  selector: 'app-home-instructor',
-  templateUrl: './home-instructor.component.html',
-  styleUrls: ['./home-instructor.component.scss']
+  selector: 'app-instructor-home',
+  templateUrl: './instructor-home.component.html',
+  styleUrls: ['./instructor-home.component.scss']
 })
-export class HomeInstructorComponent implements OnInit {
+export class InstructorHomeComponent implements OnInit {
   homeCategories: Array<HomeCategory> = [
     {title: 'New Assignments', description: 'Create assignments for students',
       image_url: '', link_text: 'Create new assignment', target_url: ''},

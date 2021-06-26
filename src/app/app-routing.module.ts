@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeInstructorComponent} from './ui/home-instructor/home-instructor.component';
+import {InstructorHomeComponent} from './ui/instructor/instructor-home/instructor-home.component';
 
 
 const routes: Routes = [{
@@ -9,7 +9,7 @@ const routes: Routes = [{
     {
       path: '**',
       pathMatch: 'full',
-      component: HomeInstructorComponent
+      component: InstructorHomeComponent
     }
   ]
 }

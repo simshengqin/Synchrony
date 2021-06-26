@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeInstructorComponent } from './home-instructor.component';
+import { AccountDeleteComponent } from './account-delete.component';
 
-describe('HomeInstructorComponent', () => {
-  let component: HomeInstructorComponent;
-  let fixture: ComponentFixture<HomeInstructorComponent>;
+describe('AccountDeleteComponent', () => {
+  let component: AccountDeleteComponent;
+  let fixture: ComponentFixture<AccountDeleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeInstructorComponent ]
+      declarations: [ AccountDeleteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeInstructorComponent);
+    fixture = TestBed.createComponent(AccountDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
