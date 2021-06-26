@@ -1,1 +1,946 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+//@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+//@include mat-core();
+
+// import custom theme
+@import 'theme';
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+//@include angular-material-theme($gigworks-web-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+// regular style toast
+// @import '~ngx-toastr/toastr';
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 !important;
+}
+
+@import "app/styles/variables";
+.toast-top-center {
+  top: 50px;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Gilroy Regular", sans-serif;
+}
+
+ul {
+  padding: 0;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.bold-text {
+  font-family: "Gilroy Bold", "Noto Sans SC Bold", sans-serif !important;
+}
+
+.semibold-text {
+  font-family: "Gilroy SemiBold", sans-serif !important;
+}
+
+.medium-text {
+  font-family: "Gilroy SemiBold", "Noto Sans SC Medium", sans-serif !important;
+}
+
+.regular-text {
+  font-family: "Gilroy Regular", "Noto Sans SC Regular", sans-serif !important;
+}
+
+.box-shadow {
+  box-shadow: 0 1px 21px 0 rgb(135 140 157 / 20%);
+}
+
+.bg-core {
+  background: $coreOrange;
+}
+
+.mat-sidenav-container {
+  background-color: #FFF;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.small-mat-icon {
+  font-size: 20px !important;
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.xs-mat-icon {
+  font-size: 16px !important;
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* Importing Bootstrap SCSS file. */
+//@import '~bootstrap/scss/bootstrap.scss';
+//@import "~bootstrap/dist/css/bootstrap.css";
+//@import "~slick-carousel/slick/slick.scss";
+//@import "~slick-carousel/slick/slick-theme.scss";
+
+
+@mixin margin-classes {
+  @for $i from 1 through 12 {
+    $margin: $i * 0.25rem;
+    .m-#{$i} {
+      margin: $margin !important;
+    }
+    .ml-#{$i} {
+      margin-left: $margin !important;
+    }
+    .mr-#{$i} {
+      margin-right: $margin !important;
+    }
+    .mt-#{$i} {
+      margin-top: $margin !important;
+    }
+    .mb-#{$i} {
+      margin-bottom: $margin !important;
+    }
+    .mx-#{$i} {
+      margin-left: $margin !important;
+      margin-right: $margin !important;
+    }
+    .my-#{$i} {
+      margin-top: $margin !important;
+      margin-bottom: $margin !important;
+    }
+  }
+}
+
+@include margin-classes;
+
+@mixin spinner-white {
+  ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white !important;
+  }
+}
+
+
+@mixin padding-classes {
+  @for $i from 1 through 12 {
+    $padding: $i * 0.25rem;
+    .p-#{$i} {
+      padding: $padding !important;
+    }
+    .pl-#{$i} {
+      padding-left: $padding !important;
+    }
+    .pr-#{$i} {
+      padding-right: $padding !important;
+    }
+    .pt-#{$i} {
+      padding-top: $padding !important;
+    }
+    .pb-#{$i} {
+      padding-bottom: $padding !important;
+    }
+    .px-#{$i} {
+      padding-left: $padding !important;
+      padding-right: $padding !important;
+    }
+    .py-#{$i} {
+      padding-top: $padding !important;
+      padding-bottom: $padding !important;
+    }
+  }
+}
+
+@include padding-classes;
+
+@mixin modal-mobile($width) {
+  @media screen and (max-width: $width - 1) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+    max-height: 100vh !important;
+
+    .mat-card-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      z-index: 2;
+    }
+
+    .mat-card-content {
+      margin-bottom: 73px !important;
+    }
+  }
+}
+
+@mixin flex {
+  display: flex !important;
+  flex-wrap: wrap;
+  -webkit-box-flex: 0;
+  flex: 0 1 auto;
+}
+
+.w- {
+  &25 {
+    width: 25%;
+  }
+
+  &50 {
+    width: 50%;
+  }
+
+  &60 {
+    width: 60%;
+  }
+
+  &75 {
+    width: 75%;
+  }
+
+  &80 {
+    width: 80%;
+  }
+
+  &100 {
+    width: 100%;
+  }
+}
+
+.h- {
+  &25 {
+    height: 25%;
+  }
+
+  &50 {
+    height: 50%;
+  }
+
+  &75 {
+    height: 75%;
+  }
+
+  &100 {
+    height: 100%;
+  }
+}
+
+.flex {
+  @include flex;
+}
+
+.justify-content {
+
+  &-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+  }
+
+  &-start {
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important;
+  }
+
+  &-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+  }
+
+  &-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+  }
+
+  &-around {
+    -ms-flex-pack: distribute !important;
+    justify-content: space-around !important;
+  }
+}
+
+@mixin center-align-item {
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+@mixin a-text($color:$black, $fontSize: $fontSize, $fontWeight: $fontWeight) {
+  text-decoration: none;
+  color: $color;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+}
+
+@mixin default-font {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+}
+
+@mixin default-btn($borderRadius: 8px) {
+  @include default-font;
+  display: block;
+  cursor: pointer;
+  outline: none;
+  border-radius: $borderRadius;
+  padding: 12px 24px;
+  line-height: 20px !important;
+
+  @media screen and (max-width: 599px) {
+    min-width: 80px;
+  }
+}
+
+@mixin btn-disabled {
+  &:disabled, &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin transition($duration: 0.2s, $transition: linear) {
+  -webkit-transition: $duration $transition;
+  transition: $duration $transition;
+}
+
+@mixin eclipse($line:1) {
+  box-sizing: border-box;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+.social-media-btn {
+  @include default-btn;
+  @include btn-disabled;
+  @include transition;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.btn-google-login {
+  background: $white;
+  border: 1px solid $googleColour;
+
+  &:hover {
+    background: $softGrey;
+  }
+}
+
+.btn-apple-login {
+  background: $coreBlack;
+  color: $white;
+
+  &:hover {
+    opacity: .9;
+  }
+}
+
+.btn-fb-login {
+  background: $fbColour;
+  color: $white;
+
+  &:hover {
+    opacity: .9;
+  }
+}
+
+.img-social-media {
+  height: 20px;
+  width: 20px;
+  margin-left: 8px;
+}
+
+mat-sidenav-content {
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: $white;
+  opacity: 0.6;
+}
+
+.primary-btn {
+  @include default-btn;
+  @include btn-disabled;
+  @include transition;
+  background: -webkit-gradient(linear, left top, right top, from($gradientOrange1), to($gradientOrange2));
+  background: linear-gradient(to right, $gradientOrange1, $gradientOrange2);
+  color: #FFFFFF !important;
+  border: 1px solid $coreOrange;
+  outline: none;
+
+  .mat-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  &:hover:not(:disabled) {
+    background: -webkit-gradient(linear, left top, right top, from($carnation), to($carnation));
+    background: linear-gradient(to right, $carnation, $carnation);
+  }
+
+}
+
+.outline-btn {
+  @include default-btn;
+  @include transition;
+  font: 400 16px/1.5rem "Gilroy SemiBold", sans-serif;
+  background-color: $white;
+  border: 1px solid $coreOrange;
+  color: $coreOrange;
+
+  .mat-icon {
+    height: 16px;
+    width: 16px;
+  }
+
+  .material-icons {
+    font-size: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: $coreOrangeOpac;
+    color: $coreOrange;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+.inline-btn {
+  outline: none;
+  border: none;
+  color: $coreOrange;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+}
+
+.underline-btn {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  text-decoration: underline;
+  color: $coreOrange;
+  cursor: pointer;
+}
+
+.icon-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &.disable {
+    cursor: not-allowed;
+  }
+}
+
+.help-icon {
+  color: $coreGrey;
+  cursor: pointer;
+
+  .mat-icon {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+  }
+}
+
+.check-icon {
+  font-size: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.green-icon {
+  color: $coreGreen;
+}
+
+.grey-icon {
+  color: $coreGrey;
+}
+
+.light-grey-icon {
+  color: $lightGrey;
+}
+
+@media screen and (max-width: 959px) {
+  .icon-btn {
+    .mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.outline-chip {
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  border-radius: 8px;
+  color: black;
+}
+
+.primary-chip {
+  border: 1px solid $coreOrange;
+  background-color: $coreOrangeOpac;
+  border-radius: 8px;
+  color: $coreOrange;
+}
+
+.small-badge {
+  padding: 0 8px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-style: normal;
+  max-height: 20px;
+}
+
+.badge-red {
+  color: $red;
+  background-color: $lightPink;
+}
+
+.badge-orange-red {
+  color: $gradientOrange1;
+  background-color: $lightOrangeRed;
+}
+
+.badge-orange {
+  color: $orange;
+  background-color: $lightOrange;
+}
+
+.badge-grey {
+  color: rgba($coreGrey, 0.3);
+  background-color: $coreGrey;
+}
+
+.badge-purple {
+  background-color: $lightPurple;
+  color: $purple;
+}
+
+.badge-green {
+  color: $green;
+  background-color: $lightGreen;
+}
+
+.badge-grey {
+  color: $fontGrey;
+  background-color: $softGrey;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  &.dark-backdrop {
+    background: #000;
+    opacity: 0.85 !important;
+  }
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+ul, ol, nav ul, nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+b {
+  font-family: "Gilroy Bold", sans-serif !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.max-width-section {
+  max-width: $maxWidth;
+  margin: 0 auto;
+  padding-bottom: 32px;
+  padding-top: 32px;
+}
+
+.mat-toolbar-row, .max-width-section {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.prime-carousel-wrapper {
+  margin: 0 -32px;
+}
+
+.modal-card {
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .standalone {
+    padding-top: 30px;
+  }
+}
+
+.modal-padding {
+  padding: 24px 0 24px;
+
+  @media (max-width: 599px) {
+    padding: 16px 0 16px;
+  }
+}
+
+@media (max-width: 599.99px) {
+  ::ng-deep .cdk-overlay-pane {
+    height: 100%;
+    width: 100%;
+  }
+
+  .modal-card {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.base-modal {
+  position: relative !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+  max-width: 100vw;
+
+
+  // mobile breakpoint = 599px, thus max-width for mobile = 599px
+  &.modal {
+    &-xs {
+      width: 384px;
+      @include modal-mobile(600px);
+    }
+
+    &-sm {
+      width: 464px;
+      @include modal-mobile(600px);
+    }
+
+    &-md {
+      width: 544px;
+      @include modal-mobile(600px);
+    }
+
+    &-lg {
+      width: 624px;
+      @include modal-mobile(624px);
+    }
+
+    &-xl {
+      width: 704px;
+      @include modal-mobile(704px);
+    }
+
+    &-full {
+      width: 95vw;
+      @include modal-mobile(704px);
+    }
+  }
+
+
+  &.mat-card {
+    padding: 0 !important;
+    max-height: 90vh;
+
+    .mat-card {
+      &-header {
+        justify-content: center;
+      }
+
+      &-title {
+        margin-bottom: 0;
+
+        &.base-modal-header {
+          padding: 16px 48px;
+        }
+      }
+
+      &-content {
+        padding: 0 48px;
+        margin-bottom: 0;
+        overflow-y: auto;
+
+        .content-header {
+          text-align: center;
+        }
+      }
+
+      &-footer {
+        border-top: 1px solid $lightGrey2;
+        padding: 16px 48px;
+        margin: 0 !important;
+      }
+
+      @media screen and (max-width: 599px) {
+        &-title.base-modal-header {
+          padding: 16px 32px;
+        }
+
+        &-content {
+          padding: 0 32px;
+        }
+
+        &-footer {
+          padding: 16px 32px;
+        }
+      }
+    }
+
+  }
+}
+
+.grey-card {
+  background-color: $softGrey2;
+  border-radius: 8px;
+  border: none;
+}
+
+.white-card {
+  background-color: white;
+  border: 1px solid $lightGrey2;
+  border-radius: 8px;
+}
+
+.white-card-shadow {
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 21px 0 rgba(135, 140, 157, .2);
+}
+
+.error-text {
+  color: $materialRed;
+  font-size: 75%;
+  margin-top: -10px;
+}
+
+.coloured-link {
+  color: $coreOrange !important;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline !important;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+}
+
+.dashed-link {
+  color: $coreGrey;
+  border-bottom: 1px dashed $coreGrey;
+}
+
+.spinner {
+  margin: auto;
+}
+
+.mat-checkbox {
+  label {
+    margin-bottom: 0 !important;
+  }
+}
+
+.primary-btn {
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: $white !important;
+  }
+}
+
+::ng-deep {
+  & .mat-form-field-prefix {
+    top: 0 !important;
+  }
+}
+
+//Hide number input arrow
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.vertical-img-helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.text-align {
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+}
+
+.visible-linebreaks {
+  white-space: pre-wrap;
+  padding-top: 16px;
+}
+
+.medium-grey-text {
+  color: $mediumGrey !important;
+}
+
+.core-grey-text {
+  color: $coreGrey !important;
+}
+
+.core-orange-text {
+  color: $coreOrange !important;
+}
+
+.core-red-text {
+  color: $coreRed !important;
+}
+
+.word-break {
+  &-word {
+    word-break: break-word;
+  }
+
+  &-all {
+    word-break: break-all;
+  }
+}
+
+.display {
+  &-block {
+    display: block;
+  }
+
+  &-none {
+    display: none;
+  }
+
+  &-inline {
+    display: inline;
+  }
+}
+
+.flex {
+  &-row {
+    flex-direction: row !important;
+  }
+
+  &-column {
+    flex-direction: column !important;
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #bbb;
+  }
+
+  &::before {
+    margin-right: .25em;
+  }
+
+  &::after {
+    margin-left: .25em;
+  }
+}

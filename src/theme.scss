@@ -1,0 +1,78 @@
+//// Define the palettes for your theme using the Material Design palettes available in palette.scss
+//// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+//// hue. Available color palettes: https://material.io/design/color/
+//$gigworks-web-primary: mat-palette($mat-grey);
+//$gigworks-web-accent: mat-palette($mat-deep-orange, A200, A100, A400);
+//
+//// The warn palette is optional (defaults to red).
+//$gigworks-web-warn: mat-palette($mat-red);
+//
+//// Create the theme object (a Sass map containing all of the palettes).
+//$gigworks-web-theme: mat-light-theme($gigworks-web-primary, $gigworks-web-accent, $gigworks-web-warn);
+//
+//
+//@media (max-width: 599px) {
+//  $custom-typography: mat-typography-config(
+//    $font-family: '"Gilroy Regular", sans-serif',
+//    $headline: mat-typography-level(24px, 48px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h1
+//    $title: mat-typography-level(20px, 32px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h2
+//    $subheading-2: mat-typography-level(16px, 24px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h3
+//    $subheading-1: mat-typography-level(14px, 20px, 500, '"Gilroy SemiBold", sans-serif', 0.25px), //h4
+//    $body-1: mat-typography-level(14px, 20px, 400, '"Gilroy Regular", sans-serif', 0.25px), //.mat-body
+//    $body-2: mat-typography-level(14px, 20px, 400, '"Gilroy SemiBold", sans-serif', 0.25px), //.mat-body-strong
+//  );
+//
+//  $option-typography: mat-typography-config(
+//    $font-family: '"Gilroy Regular", sans-serif',
+//    $subheading-2: mat-typography-level(14px, 20px, 400, '"Gilroy Bold", sans-serif', 0.25px), //h3
+//  );
+//
+//  @include mat-core($custom-typography);
+//  @include mat-toolbar-typography($custom-typography);
+//  @include mat-option-typography($option-typography);
+//  @include mat-tooltip-typography($custom-typography);
+//
+//  .mat-body {
+//    $custom-typography: mat-typography-config(
+//      $body-1: mat-typography-level(12px, 20px, 400, '"Gilroy Regular", sans-serif', 0.25px), //.mat-body
+//    );
+//
+//    @include mat-typography-level-to-styles($custom-typography, body-1);
+//  }
+//}
+//
+//@media (min-width: 600px) {
+//  $custom-typography: mat-typography-config(
+//    $font-family: '"Gilroy Regular", sans-serif',
+//    $headline: mat-typography-level(32px, 48px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h1
+//    $title: mat-typography-level(24px, 32px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h2
+//    $subheading-2: mat-typography-level(18px, 24px, 700, '"Gilroy Bold", sans-serif', 0.25px), //h3
+//    $subheading-1: mat-typography-level(16px, 20px, 500, '"Gilroy SemiBold", sans-serif', 0.25px), //h4
+//    $body-1: mat-typography-level(16px, 20px, 400, '"Gilroy Regular", sans-serif', 0.25px), //.mat-body
+//    $body-2: mat-typography-level(16px, 20px, 400, '"Gilroy Regular", sans-serif', 0.25px), //.mat-body-strong
+//  );
+//
+//  $option-typography: mat-typography-config(
+//    $font-family: '"Gilroy Regular", sans-serif',
+//    $subheading-2: mat-typography-level(16px, 20px, 400, '"Gilroy Bold", sans-serif', 0.25px), //h3
+//  );
+//
+//  @include mat-core($custom-typography);
+//  @include mat-toolbar-typography($custom-typography);
+//  @include mat-option-typography($option-typography);
+//  @include mat-tooltip-typography($custom-typography);
+//
+//  .mat-tooltip {
+//    font-size: 14px !important;
+//  }
+//
+//  .mat-body {
+//    $custom-typography: mat-typography-config(
+//      $body-1: mat-typography-level(14px, 20px, 400, '"Gilroy Regular", sans-serif', 0.25px), //.mat-body
+//    );
+//
+//    @include mat-typography-level-to-styles($custom-typography, body-1);
+//  }
+//}
+//
+//

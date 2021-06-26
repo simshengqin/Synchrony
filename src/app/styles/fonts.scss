@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "Proxima Nova Bold";
+  src: url("../assets/fonts/proxima-nova-bold.woff2") format("woff2"),
+  url("../assets/fonts/proxima-nova-bold.woff") format("woff"),
+  url("../assets/fonts/proxima-nova-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Proxima Nova Semibold";
+  src: url("../assets/fonts/proxima-nova-semibold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Proxima Nova Medium";
+  src: url("../assets/fonts/proxima-nova-medium.woff2") format("woff2"),
+  url("../assets/fonts/proxima-nova-medium.woff") format("woff"),
+  url("../assets/fonts/proxima-nova-medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Proxima Nova Regular";
+  src: url("../assets/fonts/proxima-nova-regular.woff2") format("woff2"),
+  url("../assets/fonts/proxima-nova-regular.woff") format("woff"),
+  url("../assets/fonts/proxima-nova-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "OCR A Extended";
+  src: url("../assets/fonts/ocraextended.ttf") format("ttf"),
+  url("../assets/fonts/ocraextended.woff") format("woff"),
+  url("../assets/fonts/ocraextended.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto Sans SC Bold";
+  src: url("../assets/fonts/NotoSansSC-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url("../assets/fonts/Radomir Tinkov - Gilroy-Bold.woff2") format("woff2"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-Bold.woff") format("woff"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: Bold;
+}
+
+@font-face {
+  font-family: "Gilroy Regular";
+  src: url("../assets/fonts/Radomir Tinkov - Gilroy-Regular.woff2") format("woff2"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-Regular.woff") format("woff"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy ExtraBold";
+  src: url("../assets/fonts/Radomir Tinkov - Gilroy-ExtraBold.woff2") format("woff2"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-ExtraBold.woff") format("woff"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-ExtraBold.otf") format("opentype");
+  font-style: normal;
+  /*font-weight: 400;*/
+}
+
+@font-face {
+  font-family: "Gilroy SemiBold";
+  src: url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.woff2") format("woff2"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.woff") format("woff"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.otf") format("opentype");
+  font-style: normal;
+  /*font-weight: 500;*/
+}
+
+@font-face {
+  font-family: "Gilroy Medium";
+  src: url("../assets/fonts/Gilroy-Medium.woff2") format("woff2"),
+  url("../assets/fonts/Gilroy-Medium.woff") format("woff"),
+  url("../assets/fonts/Gilroy-Medium.otf") format("opentype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather LightItalic";
+  src: url("../assets/fonts/Merriweather-LightItalic.woff2") format("woff2"),
+  url("../assets/fonts/Merriweather-LightItalic.woff") format("woff"),
+  url("../assets/fonts/Merriweather-LightItalic.otf") format("opentype");
+  font-style: normal;
+  /*font-weight: 500;*/
+}
+
+@font-face {
+  font-family: "Merriweather BoldItalic";
+  src: url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.woff2") format("woff2"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.woff") format("woff"),
+  url("../assets/fonts/Radomir Tinkov - Gilroy-SemiBold.otf") format("opentype");
+  font-style: normal;
+  /*font-weight: 500;*/
+}
+
+@font-face {
+  font-family: "Proxima Nova Regular";
+  src: url("../assets/fonts/proxima-nova-regular.woff2") format("woff2"),
+  url("../assets/fonts/proxima-nova-regular.woff") format("woff"),
+  url("../assets/fonts/proxima-nova-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Proxima Nova Bold";
+  src: url("../assets/fonts/proxima-nova-bold.woff2") format("woff2"),
+  url("../assets/fonts/proxima-nova-bold.woff") format("woff"),
+  url("../assets/fonts/proxima-nova-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+}

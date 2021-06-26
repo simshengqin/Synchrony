@@ -11,7 +11,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    ExploreCategoriesComponent
+    ExploreCategoriesComponent,
+    HomeInstructorComponent
   ],
   imports: [
     BrowserModule,
