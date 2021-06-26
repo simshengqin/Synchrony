@@ -27,6 +27,7 @@ import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.compon
 import { UploadedViewComponent } from './shared/components/uploaded-view/uploaded-view.component';
 import { DropzoneComponent } from './shared/components/dropzone/dropzone.component';
 import { ServiceFormComponent } from './shared/components/service-form/service-form.component';
+import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ServiceFormComponent } from './shared/components/service-form/service-f
     SignupModalComponent,
     UploadedViewComponent,
     DropzoneComponent,
-    ServiceFormComponent
+    ServiceFormComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
