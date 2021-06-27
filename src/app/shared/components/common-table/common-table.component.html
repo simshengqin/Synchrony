@@ -1,4 +1,55 @@
 <div class="common-table-wrapper">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th *ngFor="let tableColumn of tableColumns" scope="col">{{tableColumn}}</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let assignment of assignments; index as i;">
+          <th scope="row">{{i + 1}}</th>
+          <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignment.name}}</td>
+          <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn)">{{assignment.due_datetime  | date}}</td>
+          <td *ngIf="tableColumns.includes(actionsColumn)">
+            <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary">Edit</button>
+            <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger">Delete</button>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">#</th>-->
+<!--      <th scope="col">First</th>-->
+<!--      <th scope="col">Last</th>-->
+<!--      <th scope="col">Handle</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--      <th scope="row">1</th>-->
+<!--      <td>Mark</td>-->
+<!--      <td>Otto</td>-->
+<!--      <td>@mdo</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th scope="row">2</th>-->
+<!--      <td>Jacob</td>-->
+<!--      <td>Thornton</td>-->
+<!--      <td>@fat</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th scope="row">3</th>-->
+<!--      <td>Larry</td>-->
+<!--      <td>the Bird</td>-->
+<!--      <td>@twitter</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+
   <button class="btn btn-danger" (click)="confirmModalComponent.open
   ('Create Assignment', 'Are you sure you want to delete the following assignment?', ['close', 'delete'])">Delete</button>
   <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
