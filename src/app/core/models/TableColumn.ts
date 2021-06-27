@@ -5,6 +5,8 @@ export enum TableColumn {
   assignment_status = 'Submission Status',
   assignment_feedback_datetime = 'Feedback Status',
   assignment_instructor = 'Instructor',
+  assignment_school = 'School',
+  assignment_group = 'Group',
   freelancer_username = 'Freelancer\'s Name',
   freelancer_school = 'Schools',
   freelancer_group = 'Groups',

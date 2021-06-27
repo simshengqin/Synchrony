@@ -21,7 +21,7 @@ export class AssignmentMarkComponent implements OnInit {
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
   assignments: Array<Assignment>;
   // Hardcoded instructor id
-  instructorId = 'aciE4LqcfAnikbRC0Hfs';
+  instructorId = '9KunUkUy4bjYdhuRrHs8';
   constructor(
     private assignmentService: AssignmentService,
     private studentService: StudentService,

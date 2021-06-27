@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
@@ -16,11 +16,11 @@ import {Assignment} from '../../../core/models/assignment';
 export class AssignmentEditComponent implements OnInit {
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
   tableActions?: Array<TableAction> = [TableAction.assignment_edit, TableAction.assignment_delete];
-  tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_student, TableColumn.assignment_status
-    , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
+  tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_due_datetime,
+    TableColumn.assignment_feedback_datetime,  TableColumn.assignment_school, TableColumn.assignment_group, TableColumn.actions];
   assignments: Array<Assignment>;
   // Hardcoded instructor id
-  instructorId = 'aciE4LqcfAnikbRC0Hfs';
+  instructorId = '9KunUkUy4bjYdhuRrHs8';
   constructor(
     private assignmentService: AssignmentService,
     private studentService: StudentService,

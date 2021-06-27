@@ -13,11 +13,14 @@ export class AssignmentService {
     private fs: FirestoreService
   ) {
   }
-
+  setAssignment(data: Assignment): Promise<string> {
+    console.log(data);
+    return this.fs.add('assignments', data);
+  }
   getAssignments(): Observable<Array<Assignment>> {
     return this.fs.col$('assignments', ref => {
       return ref
-        .orderBy('id', 'asc');
+        .orderBy('created_datetime', 'desc');
     });
   }
   getAssignmentsByInstructor(docId: string): Observable<Array<Assignment>> {
@@ -27,5 +30,9 @@ export class AssignmentService {
         .orderBy('due_datetime', 'asc');
     });
   }
+  deleteAssignment(docId: string): Promise<void> {
+    return this.fs.delete('assignments/' + docId);
+  }
+
 
 }

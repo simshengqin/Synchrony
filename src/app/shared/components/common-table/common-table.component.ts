@@ -23,6 +23,8 @@ export class CommonTableComponent implements OnInit {
   assignmentStatusColumn = TableColumn.assignment_status;
   assignmentFeedbackDatetimeColumn = TableColumn.assignment_feedback_datetime;
   assignmentInstructorColumn = TableColumn.assignment_instructor;
+  assignmentSchoolColumn = TableColumn.assignment_school;
+  assignmentGroupColumn = TableColumn.assignment_group;
   freelancerUsernameColumn = TableColumn.freelancer_username;
   freelancerSchoolColumn = TableColumn.freelancer_school;
   freelancerGroupColumn = TableColumn.freelancer_group;
@@ -68,6 +70,7 @@ export class CommonTableComponent implements OnInit {
   }
 
   onDeleteClick(assignment: Assignment) {
-    this.confirmModalComponent.open('Delete Assignment', 'Are you sure you want to delete ' + assignment.name + '?', ['close', 'delete'])
+    this.confirmModalComponent.open('Delete Assignment', 'Are you sure you want to delete '
+      + assignment.name + '?', ['close', 'delete'], assignment);
   }
 }

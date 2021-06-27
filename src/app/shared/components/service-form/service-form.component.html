@@ -1,9 +1,51 @@
 <div class="service-form-wrapper">
-  service-form
-  <button class="btn btn-primary" (click)="confirmModalComponent.open
-  ('Create Assignment', 'Assignment Created!', ['ok'])">Create</button>
-  <button class="btn btn-danger" (click)="confirmModalComponent.open
+  <form>
+    <div class="form-group">
+      <label>Name</label>
+      <input #name type="text" class="form-control" placeholder="Assignment-01">
+<!--      <small class="form-text text-muted">Assignment's name</small>-->
+    </div>
+    <div class="form-group">
+      <label>Due Datetime</label>
+      <input #dueDateTime type="datetime-local" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Select School</label>
+      <select #school class="form-control">
+        <!-- Hardcoded -->
+        <option>School 1</option>
+        <option>School 2</option>
+        <option>School 3</option>
+        <option>School 4</option>
+        <option>School 5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Select Group</label>
+      <select #group class="form-control">
+        <!-- Hardcoded -->
+        <option>Group 1</option>
+        <option>Group 2</option>
+        <option>Group 3</option>
+        <option>Group 4</option>
+        <option>Group 5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea #description type="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Attach File</label>
+      <input #file type="file" class="form-control">
+    </div>
+    <button class="btn btn-danger mr-4" (click)="confirmModalComponent.open
   ('Discard Changes', 'Are you sure you want to discard the changes made?', ['close', 'discard'])">Discard Changes</button>
-  <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
+    <button class="btn btn-primary" (click)="confirmModalComponent.open
+  ('Create Assignment', 'Assignment Created!', ['ok'])">Create</button>
+
+  </form>
+
+  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 
 </div>

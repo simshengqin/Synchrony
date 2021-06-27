@@ -4,7 +4,7 @@ import {Attachment} from './attachment';
 import {Group} from './group';
 
 export interface Assignment {
-  id?: string;
+  docId?: string;
   name?: string;
   status?: AssignmentStatus;
   due_datetime?: number;
@@ -18,7 +18,9 @@ export interface Assignment {
   feedback?: string;
   feedback_datetime?: number;
   instructor_attachments?: Array<Attachment>;
-  group?: Group;
+  school?: string;
+  group?: string;
+  created_datetime?: number;
 }
 
 export enum AssignmentStatus {
