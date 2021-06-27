@@ -7,6 +7,7 @@ import {Assignment} from '../../../core/models/assignment';
 import {AssignmentService} from '../../../core/services/assignment.service';
 import {InstructorService} from '../../../core/services/instructor.service';
 import {StudentService} from '../../../core/services/student.service';
+import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 
 @Component({
   selector: 'app-assignment-view',
@@ -24,6 +25,7 @@ export class AssignmentViewComponent implements OnInit {
     private studentService: StudentService,
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
+    private assignmentSubmissionService: AssignmentSubmissionService,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -40,6 +42,13 @@ export class AssignmentViewComponent implements OnInit {
           .pipe(first())
           .toPromise();
         assignment.instructor = instructor;
+
+        // Hardcoded studentDocId
+        this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment('TiMPk1PgPWhztZnb5HHp', assignment.docId)
+          .subscribe(async (assignmentSubmissions) => {
+            const assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
+            assignment.submitted_datetime = assignmentSubmission.submitted_datetime;
+          });
       }
       console.log(this.assignments);
     });

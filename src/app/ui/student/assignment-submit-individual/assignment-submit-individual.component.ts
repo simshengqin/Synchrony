@@ -21,6 +21,7 @@ import {AssignmentSubmissionService} from '../../../core/services/assignment-sub
 export class AssignmentSubmitIndividualComponent implements OnInit {
   assignmentDocId: string;
   assignment: Assignment;
+  assignmentSubmission: AssignmentSubmission;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
   @ViewChild('file') file: ElementRef;
   // progress: number;
@@ -38,6 +39,12 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
       this.assignment = await this.assignmentService.getAssignment(this.assignmentDocId)
         .pipe(first())
         .toPromise();
+      // Hardcoded studentDocId
+      this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment('TiMPk1PgPWhztZnb5HHp', this.assignmentDocId)
+        .subscribe(async (assignmentSubmissions) => {
+        this.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
+        console.log(this.assignmentSubmission);
+      });
     });
 
   }
@@ -52,7 +59,7 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
       return await result.ref.getDownloadURL().then(
         (downloadUrl) => {
           console.log(downloadUrl);
-          const assignmentSubmission: AssignmentSubmission = {
+          const newAssignmentSubmission: AssignmentSubmission = {
             student_attachment: downloadUrl,
             student_attachment_name: this.file.nativeElement.files.item(0).name,
             submitted_datetime: Date.now(),
@@ -64,11 +71,14 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
             feedback: '',
             feedback_datetime: -1
           };
-          this.assignmentSubmissionService.setAssignmentSubmission(assignmentSubmission).then(r =>
-          {
-            console.log(r);
-            this.confirmModalComponent.open('Submit Assignment', 'Submitted assignment successfully!', ['ok']);
-          });
+          if (this.assignmentSubmission) {
+            this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, newAssignmentSubmission)
+              .then(r => console.log('a' + r));
+          } else {
+            this.assignmentSubmissionService.setAssignmentSubmission(newAssignmentSubmission).then(r =>
+            {console.log(r); });
+          }
+          this.confirmModalComponent.open('Submit Assignment', 'Submitted assignment successfully!', ['ok']);
 
 
         });

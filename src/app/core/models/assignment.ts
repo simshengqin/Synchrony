@@ -18,6 +18,8 @@ export interface Assignment {
   instructor_attachment_name: string;
   student?: Student;
   instructor?: Instructor;
+  // Not in database, manually created
+  submitted_datetime?: number;
   // submitted_datetime?: number;
   // student?: Student;
   // studentId?: string;
