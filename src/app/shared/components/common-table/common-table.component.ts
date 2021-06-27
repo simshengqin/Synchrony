@@ -6,6 +6,10 @@ import {TableColumn} from '../../../core/models/TableColumn';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 import {Assignment} from '../../../core/models/assignment';
 import {AssignmentService} from '../../../core/services/assignment.service';
+import {DateHelper} from '../../helpers/date-helper';
+import {InstructorService} from '../../../core/services/instructor.service';
+import {first} from 'rxjs/operators';
+import {Instructor} from '../../../core/models/instructor';
 
 @Component({
   selector: 'app-common-table',
@@ -32,7 +36,6 @@ export class CommonTableComponent implements OnInit {
   assignmentSubmitAction = TableAction.assignment_submit;
   assignmentResubmitAction = TableAction.assignment_resubmit;
   assignmentFeedbackAction = TableAction.assignment_feedback;
-  assignmentStudentAction = TableAction.assignment_student;
   freelancerHoursAction = TableAction.freelancer_hours;
   accountDeleteAction = TableAction.account_delete;
   @Input() tableActions?: Array<TableAction>;
@@ -40,14 +43,37 @@ export class CommonTableComponent implements OnInit {
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
   // firebaseget
   assignments: Array<Assignment> = [];
+  monthDayYearFormat: string;
+  fullMonthDayYearFormat: string;
+  dateTimeFormat: string;
   constructor(
     private assignmentService: AssignmentService,
+    private instructorService: InstructorService,
+    private dateHelper: DateHelper,
   ) {}
-  ngOnInit(): void {
-    this.assignmentService.getAssignments().subscribe((assignments) => {
+  async ngOnInit(): Promise<void> {
+    await Promise.all([
+      this.dateHelper.getFormat('monthDayYear'),
+      this.dateHelper.getFormat('fullMonthDayYear'),
+      this.dateHelper.getFormat('dateTime'),
+    ]).then((results) => {
+      this.monthDayYearFormat = results[0];
+      this.fullMonthDayYearFormat = results[1];
+      this.dateTimeFormat = results[2];
+    });
+    this.assignmentService.getAssignments().subscribe(async (assignments) => {
       this.assignments = assignments;
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.assignments.length; i++) {
+        let instructor: Instructor;
+        instructor = await this.instructorService.getInstructor(this.assignments[i].instructorId)
+          .pipe(first())
+          .toPromise();
+        this.assignments[i].instructor = instructor;
+      }
       console.log(this.assignments);
     });
+
 
   }
   onCloseModal(response: string) {
