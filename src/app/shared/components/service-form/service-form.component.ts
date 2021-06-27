@@ -6,6 +6,8 @@ import {AssignmentService} from '../../../core/services/assignment.service';
 import {Assignment} from '../../../core/models/assignment';
 import {Instructor} from '../../../core/models/instructor';
 import {first} from 'rxjs/operators';
+import {AssignmentSubmission} from '../../../core/models/assignment-submission';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-service-form',
@@ -22,9 +24,11 @@ export class ServiceFormComponent implements OnInit {
   @ViewChild('school') school: ElementRef;
   @ViewChild('group') group: ElementRef;
   @ViewChild('description') description: ElementRef;
+  @ViewChild('file') file: ElementRef;
   constructor(
     private router: Router,
     private assignmentService: AssignmentService,
+    private afStorage: AngularFireStorage,
   ) {}
   async ngOnInit(): Promise<void> {
     if (this.assignmentDocId) {
@@ -33,28 +37,38 @@ export class ServiceFormComponent implements OnInit {
         .toPromise();
     }
   }
-  onCloseModal(response: string) {
+  async onCloseModal(response: string) {
     if (response === 'discard') {
       this.router.navigate(['assignment/edit']);
-    }
-    else if (response === 'ok') {
-      // Hardcoded instructorId
-      const newOrUpdatedAssignment: Assignment = {
-        name : this.name.nativeElement.value,
-        dueDatetime : new Date(this.dueDateTime.nativeElement.value).getTime(),
-        school : this.school.nativeElement.value,
-        group : this.group.nativeElement.value,
-        description : this.description.nativeElement.value,
-        instructorDocId: '9KunUkUy4bjYdhuRrHs8',
-        createdDatetime: Date.now()
-      };
-      if (this.assignment) {
-        this.assignmentService.updateAssignment(this.assignmentDocId, newOrUpdatedAssignment).then(r => console.log('a' + r));
-      }
-      else {
-        this.assignmentService.setAssignment(newOrUpdatedAssignment).then(r => console.log(r));
-      }
-      this.router.navigate(['assignment/edit']);
+    } else if (response === 'ok') {
+      const path = 'assignments/' + this.file.nativeElement.files.item(0).name;
+      console.log(this.file.nativeElement.files.item(0));
+      const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
+      return await task.then(async (result) => {
+        return await result.ref.getDownloadURL().then(
+          (downloadUrl) => {
+            // Hardcoded instructorId
+            const newOrUpdatedAssignment: Assignment = {
+              name: this.name.nativeElement.value,
+              dueDatetime: new Date(this.dueDateTime.nativeElement.value).getTime(),
+              school: this.school.nativeElement.value,
+              group: this.group.nativeElement.value,
+              description: this.description.nativeElement.value,
+              instructorDocId: '9KunUkUy4bjYdhuRrHs8',
+              createdDatetime: Date.now(),
+              instructor_attachment: downloadUrl,
+              instructor_attachment_name: this.file.nativeElement.files.item(0).name
+            };
+            if (this.assignment) {
+              this.assignmentService.updateAssignment(this.assignmentDocId, newOrUpdatedAssignment).then(r => console.log('a' + r));
+            } else {
+              this.assignmentService.setAssignment(newOrUpdatedAssignment).then(r => console.log(r));
+            }
+            this.router.navigate(['assignment/edit']);
+          });
+      });
+
+
 
     }
     console.log(response);

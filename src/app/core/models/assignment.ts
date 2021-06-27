@@ -14,7 +14,8 @@ export interface Assignment {
   school?: string;
   studentDocId?: string;
   createdDatetime?: number;
-
+  instructor_attachment: Attachment;
+  instructor_attachment_name: string;
   student?: Student;
   instructor?: Instructor;
   // submitted_datetime?: number;

@@ -11,8 +11,8 @@ export interface AssignmentSubmission {
   school?: string;
   group?: string;
   submitted_datetime?: number;
-  student_attachment: Attachment;
-  instructor_attachment: Attachment;
+  student_attachment?: Attachment;
+  student_attachment_name?: string;
   feedback?: string;
   feedback_datetime?: number;
 

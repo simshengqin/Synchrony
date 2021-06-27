@@ -23,8 +23,6 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
   assignment: Assignment;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
   @ViewChild('file') file: ElementRef;
-  submitted = false;
-  uploadProgress$: Observable<number>;
   // progress: number;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,33 +45,22 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
     this.router.navigate(['assignment/view']);
   }
   async onSubmitClick() {
-    const path = 'assignment_submissions/' + 'VnvnwoVov7eqtzIc8435' + '/student_attachment/' + this.file.nativeElement.files.item(0).name;
+    const path = 'assignment_submissions/' + this.file.nativeElement.files.item(0).name;
     console.log(this.file.nativeElement.files.item(0));
     const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
-    this.submitted = true;
-    this.uploadProgress$ = task.percentageChanges();
-    const sub2 = this.uploadProgress$.subscribe((progress: number) => {
-      // console.log(progress);
-      // this.progress = progress;
-    });
     return await task.then(async (result) => {
       return await result.ref.getDownloadURL().then(
         (downloadUrl) => {
           console.log(downloadUrl);
-          // hardcoded studentDocId
-          // const student = await this.studentService.getStudent('TiMPk1PgPWhztZnb5HHp')
-          //   .pipe(first())
-          //   .toPromise();
-          // console.log(student);
           const assignmentSubmission: AssignmentSubmission = {
             student_attachment: downloadUrl,
+            student_attachment_name: this.file.nativeElement.files.item(0).name,
             submitted_datetime: Date.now(),
             assignmentDocId: this.assignmentDocId,
             studentDocId: 'TiMPk1PgPWhztZnb5HHp',
             instructorDocId: this.assignment.instructorDocId,
             school: this.assignment.school,
             group: this.assignment.group,
-            instructor_attachment: null,
             feedback: '',
             feedback_datetime: -1
           };
@@ -81,7 +68,6 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
           {
             console.log(r);
             this.confirmModalComponent.open('Submit Assignment', 'Submitted assignment successfully!', ['ok']);
-            sub2.unsubscribe();
           });
 
 

@@ -26,7 +26,7 @@ export class AssignmentViewComponent implements OnInit {
     private instructorService: InstructorService,
   ) { }
 
-  async ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     // hardcoded StudentDocId
     const student = await this.studentService.getStudent('TiMPk1PgPWhztZnb5HHp')
       .pipe(first())

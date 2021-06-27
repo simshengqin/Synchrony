@@ -39,6 +39,9 @@
     <div class="form-group">
       <label>Attach File</label>
       <input #file type="file" class="form-control">
+      <small *ngIf="assignment && assignment.instructor_attachment" class="form-text text-muted" >
+        Currently uploaded in database: <a [href]="assignment.instructor_attachment">{{assignment.instructor_attachment_name}}</a>
+      </small>
     </div>
     <button class="btn btn-danger mr-4" (click)="confirmModalComponent.open
   ('Discard Changes', 'Are you sure you want to discard the changes made?', ['close', 'discard'])">Discard Changes</button>
