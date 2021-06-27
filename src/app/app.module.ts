@@ -29,6 +29,7 @@ import { DropzoneComponent } from './shared/components/dropzone/dropzone.compone
 import { ServiceFormComponent } from './shared/components/service-form/service-form.component';
 import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 import {FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {FormsModule} from '@angular/forms';
         FlexLayoutModule,
         NgbModule,
         FormsModule,
+        BrowserAnimationsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
