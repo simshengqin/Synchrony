@@ -4,7 +4,7 @@ import {Attachment} from './attachment';
 import {Group} from './group';
 
 export interface Assignment {
-  AssignmentId?: number;
+  id?: number;
   name?: string;
   status?: AssignmentStatus;
   due_datetime?: number;

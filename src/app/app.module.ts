@@ -30,6 +30,9 @@ import { ServiceFormComponent } from './shared/components/service-form/service-f
 import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         NgbModule,
         FormsModule,
         BrowserAnimationsModule,
+        AngularFireModule.initializeApp(environment.firebase)
+
     ],
   providers: [],
   bootstrap: [AppComponent]

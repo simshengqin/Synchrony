@@ -4,6 +4,8 @@ import {FilterAction} from '../../../core/models/FilterAction';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
+import {Assignment} from '../../../core/models/assignment';
+import {AssignmentService} from '../../../core/services/assignment.service';
 
 @Component({
   selector: 'app-common-table',
@@ -14,8 +16,17 @@ export class CommonTableComponent implements OnInit {
   @Input() tableActions?: Array<TableAction>;
   @Input() tableColumns?: Array<TableColumn>;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
-  constructor() {}
+  // firebaseget
+  assignments: Array<Assignment> = [];
+  constructor(
+    private assignmentService: AssignmentService,
+  ) {}
   ngOnInit(): void {
+    this.assignmentService.getAssignments().subscribe((assignments) => {
+      this.assignments = assignments;
+      console.log(this.assignments);
+    });
+
   }
   onCloseModal(response: string) {
     console.log(response);
