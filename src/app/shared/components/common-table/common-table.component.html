@@ -26,7 +26,10 @@
           <td *ngIf="tableColumns.includes(actionsColumn)">
             <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
             <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
-<!--            <button *ngIf="tableActions.includes(assignmentSubmitAction) && assignment.submitted_datetime == -1" class="mr-3 btn btn-primary">Submit</button>-->
+            <button *ngIf="tableActions.includes(assignmentSubmitAction)" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
+            <button *ngIf="tableActions.includes(assignmentResubmitAction)" class="mr-3 btn btn-primary">Resubmit</button>
+
+            <!--            <button *ngIf="tableActions.includes(assignmentSubmitAction) && assignment.submitted_datetime == -1" class="mr-3 btn btn-primary">Submit</button>-->
 <!--            <button *ngIf="tableActions.includes(assignmentResubmitAction) && assignment.submitted_datetime != -1" class="mr-3 btn btn-primary">Resubmit</button>-->
 <!--            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignment.feedback_datetime == -1" class="mr-3 btn btn-primary">Mark</button>-->
 <!--            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignment.feedback_datetime != -1" class="mr-3 btn btn-primary">Re-mark</button>-->

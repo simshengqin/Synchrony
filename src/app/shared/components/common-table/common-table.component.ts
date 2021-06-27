@@ -79,4 +79,8 @@ export class CommonTableComponent implements OnInit {
   onEditClick(assignment: Assignment) {
     this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : assignment.docId }});
   }
+
+  onSubmitClick(assignment: Assignment) {
+    this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : assignment.docId }});
+  }
 }

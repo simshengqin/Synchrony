@@ -1,5 +1,14 @@
 <div class="assignment-submit-individual-wrapper wrapper-padding">
-  <h1 class="mb-3">Assignment 1</h1>
+  <h1 class="mb-3" *ngIf="assignment">{{assignment.name}}</h1>
   <h2 class="mb-3">Assignment Description</h2>
-  <p>Description</p>
+  <p class="mb-3" *ngIf="assignment">{{assignment.description}}</p>
+  <h2 class="mb-3">Assignment Attachments</h2>
+  <h2 class="mb-3">Assignment Submission</h2>
+  <div class="form-group">
+    <label>Attach File</label>
+    <input #file type="file" class="form-control">
+  </div>
+  <button *ngIf="assignment" class="btn btn-danger mr-4" (click)="onGoBackClick(assignment)">Go Back</button>
+  <button *ngIf="assignment" class="btn btn-primary" (click)="onSubmitClick()">Submit</button>
+  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 </div>

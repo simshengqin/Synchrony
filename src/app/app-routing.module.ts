@@ -51,7 +51,7 @@ const routes: Routes = [{
       component: AssignmentViewComponent
     },
     {
-      path: 'assignment/submit/:assignment-id',
+      path: 'assignment/submit',
       pathMatch: 'full',
       component: AssignmentSubmitIndividualComponent
     },

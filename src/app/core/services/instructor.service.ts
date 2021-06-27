@@ -18,4 +18,11 @@ export class InstructorService {
   getInstructor(id: string): Observable<Instructor> {
     return this.fs.doc$('instructors/' + id);
   }
+  getInstructorBySchoolAndGroup(school: string, group: string): Observable<any[]> {
+    return this.fs.col$('instructors', ref => {
+      return ref
+        .where('school', '==', school)
+        .where('group', '==', group);
+    });
+  }
 }

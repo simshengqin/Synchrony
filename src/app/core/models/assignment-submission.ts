@@ -8,11 +8,11 @@ export interface AssignmentSubmission {
   assignmentDocId?: string;
   instructorDocId?: string;
   studentDocId?: string;
-  schoolDocId?: string;
-  groupDocId?: string;
+  school?: string;
+  group?: string;
   submitted_datetime?: number;
-  student_attachments?: Array<Attachment>;
-  instructor_attachments?: Array<Attachment>;
+  student_attachment: Attachment;
+  instructor_attachment: Attachment;
   feedback?: string;
   feedback_datetime?: number;
 
