@@ -27,6 +27,13 @@ export class AssignmentService {
         .orderBy('createdDatetime', 'desc');
     });
   }
+  getAssignmentsBySchoolAndGroup(school: string, group: string): Observable<any[]> {
+    return this.fs.col$('assignments', ref => {
+      return ref
+        .where('school', '==', school)
+        .where('group', '==', group);
+    });
+  }
   getAssignmentsByInstructor(instructorDocId: string): Observable<Array<Assignment>> {
     return this.fs.col$('assignments', ref => {
       return ref

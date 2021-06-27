@@ -6,6 +6,7 @@ import {first} from 'rxjs/operators';
 import {Assignment} from '../../../core/models/assignment';
 import {AssignmentService} from '../../../core/services/assignment.service';
 import {InstructorService} from '../../../core/services/instructor.service';
+import {StudentService} from '../../../core/services/student.service';
 
 @Component({
   selector: 'app-assignment-view',
@@ -20,13 +21,18 @@ export class AssignmentViewComponent implements OnInit {
     TableColumn.assignment_instructor, TableColumn.actions];
   assignments: Array<Assignment> = [];
   constructor(
+    private studentService: StudentService,
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
   ) { }
 
-  ngOnInit(): void {
-
-    this.assignmentService.getAssignments().subscribe(async (assignments) => {
+  async ngOnInit(): void {
+    // hardcoded StudentDocId
+    const student = await this.studentService.getStudent('TiMPk1PgPWhztZnb5HHp')
+      .pipe(first())
+      .toPromise();
+    console.log(student);
+    this.assignmentService.getAssignmentsBySchoolAndGroup(student.school, student.group).subscribe(async (assignments) => {
       this.assignments = assignments;
       for (const assignment of assignments) {
         let instructor: Instructor;
