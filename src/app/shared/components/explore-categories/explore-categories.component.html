@@ -3,7 +3,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
       <ng-container *ngFor="let category of homeCategories; let i = index">
         <div class="category-group" fxFlex.gt-sm="33.3" fxFlex.gt-xs="50" fxFlex.lt-sm="50" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="start center" fxLayout="column">
-          <a routerLink="{{category.target_url}}">
+          <a href="{{category.target_url}}">
             <div><img class="category-img mb-3" src="{{category.image_url}}"></div>
             <h2 class="category-name">{{ category.title}}</h2>
             <p class="category-desc" fxHide.lt-sm>{{ category.description}}</p>

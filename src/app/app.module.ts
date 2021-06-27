@@ -28,6 +28,7 @@ import { UploadedViewComponent } from './shared/components/uploaded-view/uploade
 import { DropzoneComponent } from './shared/components/dropzone/dropzone.component';
 import { ServiceFormComponent } from './shared/components/service-form/service-form.component';
 import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -56,12 +57,13 @@ import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm
     ServiceFormComponent,
     ConfirmModalComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FlexLayoutModule,
-    NgbModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FlexLayoutModule,
+        NgbModule,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

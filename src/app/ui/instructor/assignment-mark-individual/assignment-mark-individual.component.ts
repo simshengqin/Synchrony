@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ConfirmModalComponent} from '../../../shared/components/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-assignment-mark-individual',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignmentMarkIndividualComponent implements OnInit {
 
-  constructor() { }
-
+  @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
+  constructor() {}
   ngOnInit(): void {
+  }
+  onCloseModal(response: string) {
+    console.log(response);
+  }
+  onFeedback(feedback: string) {
+    console.log(feedback);
   }
 
 }

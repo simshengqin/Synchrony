@@ -9,11 +9,11 @@ import {HomeCategory} from '../../../core/models/home-category';
 export class InstructorHomeComponent implements OnInit {
   homeCategories: Array<HomeCategory> = [
     {title: 'New Assignments', description: 'Create assignments for students',
-      image_url: '', link_text: 'Create new assignment', target_url: ''},
+      image_url: '', link_text: 'Create new assignment', target_url: 'assignment/new'},
     {title: 'Edit Assignments', description: 'View & edit assignments',
-      image_url: '', link_text: 'View assignment', target_url: ''},
+      image_url: '', link_text: 'View assignment', target_url: 'assignment/edit'},
     {title: 'Mark Assignments', description: 'Mark assignments for students',
-      image_url: '', link_text: 'Mark assignment', target_url: ''}
+      image_url: '', link_text: 'Mark assignment', target_url: 'assignment/mark'}
   ];
   constructor() { }
 

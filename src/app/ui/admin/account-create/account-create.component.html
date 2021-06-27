@@ -1,3 +1,5 @@
-<div class="account-create-wrapper">
+<div class="account-create-wrapper wrapper-padding">
 Account-create
+  <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+  <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
 </div>

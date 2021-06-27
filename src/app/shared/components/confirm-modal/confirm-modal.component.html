@@ -1,4 +1,25 @@
 <div class="confirm-modal-wrapper">
+  <ng-template #confirmModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+      <button type="button" class="close" (click)="modal.dismiss('cross')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div  class="modal-body">
+      {{description}}
+      <input *ngIf="title == 'Recording Complete'" class="modal-content form-control mt-2" placeholder="Enter your feedback here" [(ngModel)]="feedback">
+    </div>
+    <div class="modal-footer">
+      <div *ngFor="let button of buttons">
+        <button *ngIf="button == 'close'" type="button" class="btn btn-secondary" (click)="modal.close(button)">Close</button>
+        <button *ngIf="button == 'discard'" type="button" class="btn btn-danger" (click)="modal.close(button)">Discard Changes</button>
+        <button *ngIf="button == 'delete'" type="button" class="btn btn-danger" (click)="modal.close(button)">Delete</button>
+        <button *ngIf="button == 'submit'" type="button" class="btn btn-success" (click)="modal.close(button)">Submit</button>
+        <button *ngIf="button == 'ok'" type="button" class="btn btn-primary" (click)="modal.close(button)">OK</button>
+      </div>
 
+    </div>
+  </ng-template>
 </div>
 

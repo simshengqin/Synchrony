@@ -1,3 +1,6 @@
-<div class="assignment-mark-individual-wrapper">
+<div class="assignment-mark-individual-wrapper wrapper-padding">
 assignment-mark-individual
+  <button class="btn btn-danger" (click)="confirmModalComponent.open
+  ('Recording Complete', 'Would you like to submit your feedback?', ['delete', 'submit'])">Stop</button>
+  <app-confirm-modal (response)="onCloseModal($event)" (feedbackEmit)="onFeedback($event)"></app-confirm-modal>
 </div>

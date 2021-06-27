@@ -1,3 +1,5 @@
 <div class="common-table-wrapper">
-
+  <button class="btn btn-danger" (click)="confirmModalComponent.open
+  ('Create Assignment', 'Are you sure you want to delete the following assignment?', ['close', 'delete'])">Delete</button>
+  <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
 </div>

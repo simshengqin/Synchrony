@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {HomeCategory} from '../../../core/models/home-category';
 import {FilterAction} from '../../../core/models/FilterAction';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-common-table',
@@ -12,8 +13,11 @@ import {TableColumn} from '../../../core/models/TableColumn';
 export class CommonTableComponent implements OnInit {
   @Input() tableActions?: Array<TableAction>;
   @Input() tableColumns?: Array<TableColumn>;
-  constructor() { }
-
+  @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
+  constructor() {}
   ngOnInit(): void {
+  }
+  onCloseModal(response: string) {
+    console.log(response);
   }
 }
