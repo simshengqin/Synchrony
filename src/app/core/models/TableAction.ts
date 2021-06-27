@@ -5,7 +5,6 @@ export enum TableAction {
   assignment_submit = 'Submit',
   assignment_resubmit = 'resubmit',
   assignment_feedback = 'View_feedback',
-  assignment_student = 'null',
   freelancer_hours = 'view_hours',
   account_delete = 'Delete'
 }

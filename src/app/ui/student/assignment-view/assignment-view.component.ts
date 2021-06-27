@@ -8,7 +8,7 @@ import {TableColumn} from '../../../core/models/TableColumn';
   styleUrls: ['./assignment-view.component.scss']
 })
 export class AssignmentViewComponent implements OnInit {
-  tableActions?: Array<TableAction> = [TableAction.assignment_student];
+  tableActions?: Array<TableAction> = [TableAction.assignment_submit, TableAction.assignment_resubmit];
   showOngoing = true;
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name,
     TableColumn.assignment_status, TableColumn.assignment_due_datetime,

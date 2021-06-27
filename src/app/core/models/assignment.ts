@@ -4,12 +4,14 @@ import {Attachment} from './attachment';
 import {Group} from './group';
 
 export interface Assignment {
-  id?: number;
+  id?: string;
   name?: string;
   status?: AssignmentStatus;
   due_datetime?: number;
   submitted_datetime?: number;
-  student?: Student; instructor?: Instructor;
+  student?: Student;
+  instructor?: Instructor;
+  instructorId?: string;
   description?: string;
   student_attachments?: Array<Attachment>;
   feedback?: string;
