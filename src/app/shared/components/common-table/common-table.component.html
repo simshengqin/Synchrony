@@ -10,25 +10,28 @@
         <tr *ngFor="let assignment of assignments; index as i;">
           <th scope="row">{{i + 1}}</th>
           <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignment.name}}</td>
+          <td *ngIf="tableColumns.includes(assignmentStudentColumn)">{{assignment.student.name}}</td>
           <td *ngIf="tableColumns.includes(assignmentStatusColumn)">
             <ng-container *ngIf="assignment.submitted_datetime == -1">Pending Submission</ng-container>
-            <ng-container *ngIf="assignment.submitted_datetime != -1">{{assignment.submitted_datetime  | date : dateTimeFormat}}</ng-container>
+            <ng-container *ngIf="assignment.submitted_datetime != -1">Last submitted on {{assignment.submitted_datetime  | date : dateTimeFormat}}</ng-container>
           </td>
           <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn)">{{assignment.due_datetime  | date : dateTimeFormat}}</td>
+          <td *ngIf="tableColumns.includes(assignmentFeedbackDatetimeColumn)">
+            <ng-container *ngIf="assignment.feedback_datetime == -1">Not marked yet</ng-container>
+            <ng-container *ngIf="assignment.feedback_datetime != -1">Last marked on {{assignment.feedback_datetime  | date : dateTimeFormat}}</ng-container>
+          </td>
           <td *ngIf="tableColumns.includes(assignmentInstructorColumn) && assignment.instructor">{{assignment.instructor.name}}</td>
           <td *ngIf="tableColumns.includes(actionsColumn)">
             <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary">Edit</button>
-            <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger">Delete</button>
-            <button *ngIf="tableActions.includes(assignmentSubmitAction)" class="mr-3 btn btn-primary">Submit</button>
-            <button *ngIf="tableActions.includes(assignmentResubmitAction)" class="mr-3 btn btn-primary">Resubmit</button>
+            <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
+            <button *ngIf="tableActions.includes(assignmentSubmitAction) && assignment.submitted_datetime == -1" class="mr-3 btn btn-primary">Submit</button>
+            <button *ngIf="tableActions.includes(assignmentResubmitAction) && assignment.submitted_datetime != -1" class="mr-3 btn btn-primary">Resubmit</button>
+            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignment.feedback_datetime == -1" class="mr-3 btn btn-primary">Mark</button>
+            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignment.feedback_datetime != -1" class="mr-3 btn btn-primary">Re-mark</button>
           </td>
         </tr>
     </tbody>
   </table>
 
-
-
-  <button class="btn btn-danger" (click)="confirmModalComponent.open
-  ('Create Assignment', 'Are you sure you want to delete the following assignment?', ['close', 'delete'])">Delete</button>
   <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
 </div>

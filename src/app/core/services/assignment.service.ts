@@ -20,4 +20,12 @@ export class AssignmentService {
         .orderBy('id', 'asc');
     });
   }
+  getAssignmentsByInstructor(docId: string): Observable<Array<Assignment>> {
+    return this.fs.col$('assignments', ref => {
+      return ref
+        .where('instructorId', '==', docId)
+        .orderBy('due_datetime', 'asc');
+    });
+  }
+
 }

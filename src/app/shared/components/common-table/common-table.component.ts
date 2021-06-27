@@ -41,8 +41,7 @@ export class CommonTableComponent implements OnInit {
   @Input() tableActions?: Array<TableAction>;
   @Input() tableColumns?: Array<TableColumn>;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
-  // firebaseget
-  assignments: Array<Assignment> = [];
+  @Input() assignments: Array<Assignment> = [];
   monthDayYearFormat: string;
   fullMonthDayYearFormat: string;
   dateTimeFormat: string;
@@ -61,18 +60,6 @@ export class CommonTableComponent implements OnInit {
       this.fullMonthDayYearFormat = results[1];
       this.dateTimeFormat = results[2];
     });
-    this.assignmentService.getAssignments().subscribe(async (assignments) => {
-      this.assignments = assignments;
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.assignments.length; i++) {
-        let instructor: Instructor;
-        instructor = await this.instructorService.getInstructor(this.assignments[i].instructorId)
-          .pipe(first())
-          .toPromise();
-        this.assignments[i].instructor = instructor;
-      }
-      console.log(this.assignments);
-    });
 
 
   }
@@ -80,9 +67,7 @@ export class CommonTableComponent implements OnInit {
     console.log(response);
   }
 
-  arrayContains(assignmentName: string) {
-    const tableColumn = TableColumn.assignment_name;
-    return this.tableColumns.includes(tableColumn);
-
+  onDeleteClick(assignment: Assignment) {
+    this.confirmModalComponent.open('Delete Assignment', 'Are you sure you want to delete ' + assignment.name + '?', ['close', 'delete'])
   }
 }

@@ -3,7 +3,7 @@ import {Group} from './group';
 
 export interface Student {
   StudentId?: number;
-  username?: string;
+  name?: string;
   schools?: Array<School>;
   groups?: Array<Group>;
 }

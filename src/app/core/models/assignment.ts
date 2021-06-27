@@ -10,6 +10,7 @@ export interface Assignment {
   due_datetime?: number;
   submitted_datetime?: number;
   student?: Student;
+  studentId?: string;
   instructor?: Instructor;
   instructorId?: string;
   description?: string;
