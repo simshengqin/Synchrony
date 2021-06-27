@@ -31,7 +31,7 @@ export class AssignmentMarkComponent implements OnInit {
     this.assignmentService.getAssignmentsByInstructor(this.instructorId).subscribe(async (assignments) => {
       for (const assignment of assignments) {
         let student: Student;
-        student = await this.studentService.getStudent(assignment.studentId)
+        student = await this.studentService.getStudent(assignment.studentDocId)
           .pipe(first())
           .toPromise();
         assignment.student = student;

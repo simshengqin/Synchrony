@@ -30,7 +30,7 @@ export class AssignmentViewComponent implements OnInit {
       this.assignments = assignments;
       for (const assignment of assignments) {
         let instructor: Instructor;
-        instructor = await this.instructorService.getInstructor(assignment.instructorId)
+        instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
           .pipe(first())
           .toPromise();
         assignment.instructor = instructor;

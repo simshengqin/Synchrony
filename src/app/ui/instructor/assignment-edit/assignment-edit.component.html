@@ -1,5 +1,11 @@
 <div class="assignment-edit-wrapper wrapper-padding">
-  <h1 class="mb-3">Edit Assignments</h1>
-  <app-search-filter [filterActions] = "filterActions"></app-search-filter>
-  <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [assignments]="assignments" ></app-common-table>
+  <ng-container *ngIf="assignmentDocId">
+    <app-assignment-edit-individual [assignmentDocId]="assignmentDocId"></app-assignment-edit-individual>
+  </ng-container>
+  <ng-container *ngIf="!assignmentDocId">
+    <h1 class="mb-3">Edit Assignments</h1>
+    <app-search-filter [filterActions] = "filterActions"></app-search-filter>
+    <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [assignments]="assignments" ></app-common-table>
+  </ng-container>
+
 </div>

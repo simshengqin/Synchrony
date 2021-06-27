@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {Assignment} from '../models/assignment';
 import {FirestoreService} from './firestore.service';
+import {Instructor} from '../models/instructor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +18,24 @@ export class AssignmentService {
     console.log(data);
     return this.fs.add('assignments', data);
   }
+  getAssignment(docId: string): Observable<Assignment> {
+    return this.fs.doc$('assignments/' + docId);
+  }
   getAssignments(): Observable<Array<Assignment>> {
     return this.fs.col$('assignments', ref => {
       return ref
-        .orderBy('created_datetime', 'desc');
+        .orderBy('createdDatetime', 'desc');
     });
   }
-  getAssignmentsByInstructor(docId: string): Observable<Array<Assignment>> {
+  getAssignmentsByInstructor(instructorDocId: string): Observable<Array<Assignment>> {
     return this.fs.col$('assignments', ref => {
       return ref
-        .where('instructorId', '==', docId)
-        .orderBy('due_datetime', 'asc');
+        .where('instructorDocId', '==', instructorDocId);
+        // .orderBy('createdDatetime', 'asc');
     });
+  }
+  updateAssignment(docId: string, data: Assignment): Promise<void> {
+    return this.fs.update('assignments/' + docId, data);
   }
   deleteAssignment(docId: string): Promise<void> {
     return this.fs.delete('assignments/' + docId);

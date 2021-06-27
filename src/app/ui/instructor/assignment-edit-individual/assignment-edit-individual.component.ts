@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-assignment-edit-individual',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assignment-edit-individual.component.scss']
 })
 export class AssignmentEditIndividualComponent implements OnInit {
+  @Input() assignmentDocId: string;
+  constructor(
+    private activatedRoute: ActivatedRoute) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

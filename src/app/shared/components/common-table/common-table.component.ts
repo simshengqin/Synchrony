@@ -10,6 +10,7 @@ import {DateHelper} from '../../helpers/date-helper';
 import {InstructorService} from '../../../core/services/instructor.service';
 import {first} from 'rxjs/operators';
 import {Instructor} from '../../../core/models/instructor';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-common-table',
@@ -51,6 +52,7 @@ export class CommonTableComponent implements OnInit {
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
     private dateHelper: DateHelper,
+    private router: Router,
   ) {}
   async ngOnInit(): Promise<void> {
     await Promise.all([
@@ -72,5 +74,9 @@ export class CommonTableComponent implements OnInit {
   onDeleteClick(assignment: Assignment) {
     this.confirmModalComponent.open('Delete Assignment', 'Are you sure you want to delete '
       + assignment.name + '?', ['close', 'delete'], assignment);
+  }
+
+  onEditClick(assignment: Assignment) {
+    this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : assignment.docId }});
   }
 }
