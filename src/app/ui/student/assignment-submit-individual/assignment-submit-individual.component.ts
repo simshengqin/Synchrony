@@ -39,8 +39,8 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
       this.assignment = await this.assignmentService.getAssignment(this.assignmentDocId)
         .pipe(first())
         .toPromise();
-      // Hardcoded studentDocId
-      this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment('TiMPk1PgPWhztZnb5HHp', this.assignmentDocId)
+      this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
+        localStorage.getItem('activeDocId'), this.assignmentDocId)
         .subscribe(async (assignmentSubmissions) => {
         this.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
         console.log(this.assignmentSubmission);

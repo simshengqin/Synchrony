@@ -41,37 +41,39 @@ export class ServiceFormComponent implements OnInit {
     if (response === 'discard') {
       this.router.navigate(['assignment/edit']);
     } else if (response === 'ok') {
-      const path = 'assignments/' + this.file.nativeElement.files.item(0).name;
-      console.log(this.file.nativeElement.files.item(0));
-      const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
-      return await task.then(async (result) => {
-        return await result.ref.getDownloadURL().then(
-          (downloadUrl) => {
-            // Hardcoded instructorId
-            const newOrUpdatedAssignment: Assignment = {
-              name: this.name.nativeElement.value,
-              dueDatetime: new Date(this.dueDateTime.nativeElement.value).getTime(),
-              school: this.school.nativeElement.value,
-              group: this.group.nativeElement.value,
-              description: this.description.nativeElement.value,
-              instructorDocId: '9KunUkUy4bjYdhuRrHs8',
-              createdDatetime: Date.now(),
-              instructor_attachment: downloadUrl,
-              instructor_attachment_name: this.file.nativeElement.files.item(0).name
-            };
-            if (this.assignment) {
-              this.assignmentService.updateAssignment(this.assignmentDocId, newOrUpdatedAssignment).then(r => console.log('a' + r));
-            } else {
-              this.assignmentService.setAssignment(newOrUpdatedAssignment).then(r => console.log(r));
-            }
-            this.router.navigate(['assignment/edit']);
-          });
-      });
-
-
-
+      if (this.file.nativeElement.files.item(0) != null) {
+        const path = 'assignments/' + this.file.nativeElement.files.item(0).name;
+        const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
+        return await task.then(async (result) => {
+          return await result.ref.getDownloadURL().then(
+            (downloadUrl) => {
+              this.setOrUpdateAssignment(downloadUrl);
+            });
+        });
+      }
+      else {
+        this.setOrUpdateAssignment('');
+      }
     }
-    console.log(response);
+  }
+  setOrUpdateAssignment(downloadUrl) {
+    const newOrUpdatedAssignment: Assignment = {
+      name: this.name.nativeElement.value,
+      dueDatetime: new Date(this.dueDateTime.nativeElement.value).getTime(),
+      school: this.school.nativeElement.value,
+      group: this.group.nativeElement.value,
+      description: this.description.nativeElement.value,
+      instructorDocId: localStorage.getItem('activeDocId'),
+      createdDatetime: Date.now(),
+      instructor_attachment: downloadUrl,
+      instructor_attachment_name: this.file.nativeElement.files.item(0) ? this.file.nativeElement.files.item(0).name : ''
+    };
+    if (this.assignment) {
+      this.assignmentService.updateAssignment(this.assignmentDocId, newOrUpdatedAssignment).then(r => console.log('a' + r));
+    } else {
+      this.assignmentService.setAssignment(newOrUpdatedAssignment).then(r => console.log(r));
+    }
+    this.router.navigate(['assignment/edit']);
   }
 
 }

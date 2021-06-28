@@ -29,8 +29,7 @@ export class AssignmentViewComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    // hardcoded StudentDocId
-    const student = await this.studentService.getStudent('TiMPk1PgPWhztZnb5HHp')
+    const student = await this.studentService.getStudent(localStorage.getItem('activeDocId'))
       .pipe(first())
       .toPromise();
     console.log(student);
@@ -43,8 +42,8 @@ export class AssignmentViewComponent implements OnInit {
           .toPromise();
         assignment.instructor = instructor;
 
-        // Hardcoded studentDocId
-        this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment('TiMPk1PgPWhztZnb5HHp', assignment.docId)
+        this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
+          localStorage.getItem('activeDocId'), assignment.docId)
           .subscribe(async (assignmentSubmissions) => {
             assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
           });

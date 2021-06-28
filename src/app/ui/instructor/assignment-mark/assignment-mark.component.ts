@@ -20,8 +20,7 @@ export class AssignmentMarkComponent implements OnInit {
     , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
   assignmentSubmissions: Array<AssignmentSubmission>;
-  // Hardcoded instructor id
-  instructorId = '9KunUkUy4bjYdhuRrHs8';
+  instructorId = localStorage.getItem('activeDocId');
   assignmentSubmissionDocId: string;
   constructor(
     private assignmentService: AssignmentService,

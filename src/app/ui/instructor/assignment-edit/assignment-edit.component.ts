@@ -20,8 +20,7 @@ export class AssignmentEditComponent implements OnInit {
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_due_datetime,
     TableColumn.assignment_school, TableColumn.assignment_group, TableColumn.actions];
   assignments: Array<Assignment>;
-  // Hardcoded instructor id
-  instructorDocId = '9KunUkUy4bjYdhuRrHs8';
+  instructorDocId = localStorage.getItem('activeDocId');
   assignmentDocId: string;
   constructor(
     private assignmentService: AssignmentService,
