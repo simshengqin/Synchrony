@@ -35,6 +35,9 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { HeaderComponent } from './shared/components/header/header.component';
 import {CommonModule} from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
+// import {SharedModule} from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -73,7 +76,14 @@ import {CommonModule} from '@angular/common';
         BrowserAnimationsModule,
         AngularFireModule.initializeApp(environment.firebase),
         CommonModule,
-
+        // SharedModule,
+        BrowserModule,
+        BrowserAnimationsModule, // required animations module
+        ToastrModule.forRoot({
+          timeOut: 3500,
+          positionClass: 'toast-top-center',
+          preventDuplicates: true,
+        })
     ],
   providers: [],
   bootstrap: [AppComponent]
