@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HomeCategory} from '../../../core/models/home-category';
+import {LoginService} from '../../../core/services/login.service';
 
 @Component({
   selector: 'app-instructor-home',
@@ -15,8 +16,15 @@ export class InstructorHomeComponent implements OnInit {
     {title: 'Mark Assignments', description: 'Mark assignments for students',
       image_url: '', link_text: 'Mark assignment', target_url: 'assignment/mark'}
   ];
-  constructor() { }
+  constructor(
+    // private loginService: LoginService,
+  ) { }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('activeRole'));
+    console.log(localStorage.getItem('activeDocId'));
+    // console.log(this.loginService.getActiveAccount());
+    // console.log(this.loginService.getActiveRole());
+    // console.log(this.loginService.getActiveDocId());
   }
 }

@@ -22,7 +22,7 @@
           <td *ngIf="tableColumns.includes(assignmentInstructorColumn) && assignment.instructor">{{assignment.instructor.firstName + ' ' + assignment.instructor.lastName}}</td>
           <td *ngIf="tableColumns.includes(assignmentSchoolColumn)">{{assignment.school}}</td>
           <td *ngIf="tableColumns.includes(assignmentGroupColumn)">{{assignment.group}}</td>
-          <td *ngIf="tableColumns.includes(actionsColumn)">
+          <td *ngIf="tableColumns.includes(actionsColumn) && assignment">
             <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
             <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
             <button *ngIf="tableActions.includes(assignmentSubmitAction) && !assignment.assignmentSubmission.submitted_datetime" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>

@@ -5,6 +5,7 @@ import {AccountService} from '../../../core/services/account.service';
 import {Account, Role} from '../../../core/models/account';
 import {ConfirmModalComponent} from '../../../shared/components/confirm-modal/confirm-modal.component';
 import {Router} from '@angular/router';
+import {LoginService} from '../../../core/services/login.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    // private loginService: LoginService,
     private router: Router,
   ) { }
   @ViewChild('username') username: ElementRef;
@@ -33,6 +35,15 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.account = accounts[0];
+          localStorage.setItem('activeUsername', this.account.username);
+          localStorage.setItem('activeRole', this.account.role);
+          localStorage.setItem('activeDocId', this.account.ownerDocId);
+          // this.loginService.setActiveAccount(this.account);
+          // this.loginService.setActiveRole(this.account.role);
+          // this.loginService.setActiveDocId(this.account.ownerDocId);
+          // console.log(this.loginService.getActiveAccount());
+          // console.log(this.loginService.getActiveRole());
+          // console.log(this.loginService.getActiveDocId());
           this.confirmModalComponent.open('Login', 'Logged in successfully!', ['ok']);
           console.log(this.account.role);
         }

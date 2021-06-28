@@ -9,6 +9,8 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Input() role: string;
   url: string;
+  activeUsername = localStorage.getItem('activeUsername');
+  activeRole = localStorage.getItem('activeRole');
   constructor(
     private router: Router,
   ) { }
@@ -19,6 +21,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
+    localStorage.setItem('activeUsername', '');
+    localStorage.setItem('activeRole', '');
+    localStorage.setItem('activeDocId', '');
     this.router.navigate(['login']);
   }
 }
