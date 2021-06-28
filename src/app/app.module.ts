@@ -80,7 +80,7 @@ import {ToastrModule} from 'ngx-toastr';
         BrowserModule,
         BrowserAnimationsModule, // required animations module
         ToastrModule.forRoot({
-          timeOut: 3500,
+          timeOut: 2500,
           positionClass: 'toast-top-center',
           preventDuplicates: true,
         })

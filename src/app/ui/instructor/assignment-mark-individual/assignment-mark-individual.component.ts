@@ -8,6 +8,7 @@ import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 import {Student} from '../../../core/models/student';
 import {StudentService} from '../../../core/services/student.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-assignment-mark-individual',
@@ -32,6 +33,7 @@ export class AssignmentMarkIndividualComponent implements OnInit {
     private assignmentSubmissionService: AssignmentSubmissionService,
     private assignmentService: AssignmentService,
     private studentService: StudentService,
+    private toastrService: ToastrService,
   ) {}
   async ngOnInit(): Promise<void> {
     this.assignmentSubmission = await this.assignmentSubmissionService.getAssignmentSubmission(this.assignmentSubmissionDocId)
@@ -58,6 +60,7 @@ export class AssignmentMarkIndividualComponent implements OnInit {
     this.assignmentSubmission.feedback_datetime = Date.now();
     this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, this.assignmentSubmission)
       .then(r => console.log(r));
+    this.toastrService.success('Added feedback successfully!', '',{positionClass: 'toast-top-center'});
     this.router.navigate(['assignment/mark']);
     console.log(this.assignmentSubmission);
   }

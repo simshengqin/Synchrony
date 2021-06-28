@@ -4,8 +4,8 @@
   <h4 class="mb-3">Upload Information</h4>
   <p class="mb-3">Info</p>
   <h4 class="mb-3">Upload CSV File</h4>
-  <input class="mb-3" type="file">
+  <input #file class="mb-3" type="file">
   <h4 class="mb-3">CSV Template Example</h4>
   <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
-  <app-confirm-modal (response)="onCloseModal($event)"></app-confirm-modal>
+  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 </div>

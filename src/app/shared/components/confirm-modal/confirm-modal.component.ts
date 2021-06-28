@@ -5,6 +5,7 @@ import {AssignmentService} from '../../../core/services/assignment.service';
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {AccountService} from '../../../core/services/account.service';
 import {Account} from '../../../core/models/account';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -25,6 +26,7 @@ export class ConfirmModalComponent implements OnInit {
     private modalService: NgbModal,
     private assignmentService: AssignmentService,
     private accountService: AccountService,
+    private toastrService: ToastrService,
   ) {}
   open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null, assignmentSubmission: AssignmentSubmission = null, account: Account = null) {
     this.title = title;
@@ -35,11 +37,13 @@ export class ConfirmModalComponent implements OnInit {
       if (response === 'delete') {
         if (assignment){
           this.assignmentService.deleteAssignment(assignment.docId).then(r => {
+            this.toastrService.success('Deleted assignment successfully!', '',{positionClass: 'toast-top-center'});
             console.log(r);
           });
         }
         if (account){
           this.accountService.deleteAccount(account.docId).then(r => {
+            this.toastrService.success('Deleted account successfully!', '',{positionClass: 'toast-top-center'});
             console.log(r);
           });
         }

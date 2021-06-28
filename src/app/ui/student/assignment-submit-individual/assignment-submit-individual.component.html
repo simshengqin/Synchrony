@@ -18,5 +18,5 @@
   </div>
   <button *ngIf="assignment" class="btn btn-danger mr-4" (click)="onGoBackClick(assignment)">Go Back</button>
   <button *ngIf="assignment" class="btn btn-primary" (click)="onSubmitClick()">Submit</button>
-  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
+  <app-confirm-modal></app-confirm-modal>
 </div>

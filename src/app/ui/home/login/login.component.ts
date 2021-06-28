@@ -6,6 +6,7 @@ import {Account, Role} from '../../../core/models/account';
 import {ConfirmModalComponent} from '../../../shared/components/confirm-modal/confirm-modal.component';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../core/services/login.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-modal',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     // private loginService: LoginService,
     private router: Router,
+    private toastrService: ToastrService,
   ) { }
   @ViewChild('username') username: ElementRef;
   @ViewChild('password') password: ElementRef;
@@ -30,8 +32,7 @@ export class LoginComponent implements OnInit {
       .subscribe(async (accounts) => {
         console.log(accounts);
         if (accounts.length === 0) {
-          console.log('Wrong username/password combination!');
-          this.confirmModalComponent.open('Login', 'Wrong username/password combination', ['ok']);
+          this.toastrService.error('Wrong username/password combination!', '',{positionClass: 'toast-top-center'});
         }
         else {
           this.account = accounts[0];
@@ -44,7 +45,9 @@ export class LoginComponent implements OnInit {
           // console.log(this.loginService.getActiveAccount());
           // console.log(this.loginService.getActiveRole());
           // console.log(this.loginService.getActiveDocId());
-          this.confirmModalComponent.open('Login', 'Logged in successfully!', ['ok']);
+          // this.confirmModalComponent.open('Login', 'Logged in successfully!', ['ok']);
+          this.onCloseModal();
+          this.toastrService.success('Logged in successfully!', '',{positionClass: 'toast-top-center'});
           console.log(this.account.role);
         }
     });
@@ -54,10 +57,9 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['signup']);
   }
 
-  onCloseModal($event: string) {
+  onCloseModal() {
     switch (this.account.role) {
       case Role.student:
-        console.log('wowww');
         this.router.navigate(['assignment/view']);
         break;
       case Role.admin:

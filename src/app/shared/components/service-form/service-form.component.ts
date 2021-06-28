@@ -8,6 +8,7 @@ import {Instructor} from '../../../core/models/instructor';
 import {first} from 'rxjs/operators';
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-service-form',
@@ -29,6 +30,7 @@ export class ServiceFormComponent implements OnInit {
     private router: Router,
     private assignmentService: AssignmentService,
     private afStorage: AngularFireStorage,
+    private toastrService: ToastrService,
   ) {}
   async ngOnInit(): Promise<void> {
     if (this.assignmentDocId) {
@@ -40,20 +42,20 @@ export class ServiceFormComponent implements OnInit {
   async onCloseModal(response: string) {
     if (response === 'discard') {
       this.router.navigate(['assignment/edit']);
-    } else if (response === 'ok') {
-      if (this.file.nativeElement.files.item(0) != null) {
-        const path = 'assignments/' + this.file.nativeElement.files.item(0).name;
-        const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
-        return await task.then(async (result) => {
-          return await result.ref.getDownloadURL().then(
-            (downloadUrl) => {
-              this.setOrUpdateAssignment(downloadUrl);
-            });
-        });
-      }
-      else {
-        this.setOrUpdateAssignment('');
-      }
+    }
+  }
+  async onClick() {
+    if (this.file.nativeElement.files.item(0) != null) {
+      const path = 'assignments/' + this.file.nativeElement.files.item(0).name;
+      const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
+      return await task.then(async (result) => {
+        return await result.ref.getDownloadURL().then(
+          (downloadUrl) => {
+            this.setOrUpdateAssignment(downloadUrl);
+          });
+      });
+    } else {
+      this.setOrUpdateAssignment('');
     }
   }
   setOrUpdateAssignment(downloadUrl) {
@@ -70,8 +72,10 @@ export class ServiceFormComponent implements OnInit {
     };
     if (this.assignment) {
       this.assignmentService.updateAssignment(this.assignmentDocId, newOrUpdatedAssignment).then(r => console.log('a' + r));
+      this.toastrService.success('Updated assignment successfully!', '',{positionClass: 'toast-top-center'});
     } else {
       this.assignmentService.setAssignment(newOrUpdatedAssignment).then(r => console.log(r));
+      this.toastrService.success('Created assignment successfully!', '',{positionClass: 'toast-top-center'});
     }
     this.router.navigate(['assignment/edit']);
   }

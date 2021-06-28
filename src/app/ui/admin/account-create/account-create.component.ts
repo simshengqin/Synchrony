@@ -32,10 +32,6 @@ export class AccountCreateComponent implements OnInit {
       }
     }
     else {
-      console.log('Please upload a file!');
-      // this.toastrService.warning('Some warning message', 'some title', {
-      //   positionClass: 'toast-top-center'
-      // });
       this.toastrService.error('Please upload a file!', '',{positionClass: 'toast-top-center'});
     }
 

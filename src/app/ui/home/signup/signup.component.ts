@@ -10,6 +10,7 @@ import {FreelancerService} from '../../../core/services/freelancer.service';
 import {Instructor} from '../../../core/models/instructor';
 import {Freelancer} from '../../../core/models/freelancer';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -32,6 +33,7 @@ export class SignupComponent implements OnInit {
     private instructorService: InstructorService,
     private freelancerService: FreelancerService,
     private router: Router,
+    private toastrService: ToastrService,
   ) {
   }
 
@@ -74,7 +76,8 @@ export class SignupComponent implements OnInit {
       ownerDocId,
     };
     this.accountService.setAccount(account).then(r => console.log(r));
-    this.confirmModalComponent.open('Sign up', 'Account created successfully!', ['ok']);
+    this.toastrService.success('Account created successfully!', '', {positionClass: 'toast-top-center'});
+    this.goLoginPage();
   }
   async onCloseModal(response: string) {
 

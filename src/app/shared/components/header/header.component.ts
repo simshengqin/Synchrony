@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ export class HeaderComponent implements OnInit {
   activeRole = localStorage.getItem('activeRole');
   constructor(
     private router: Router,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem('activeUsername', '');
     localStorage.setItem('activeRole', '');
     localStorage.setItem('activeDocId', '');
+    this.toastrService.success('Logged out successfully!', '',{positionClass: 'toast-top-center'});
     this.router.navigate(['login']);
   }
 }

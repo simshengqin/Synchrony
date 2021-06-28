@@ -12,6 +12,7 @@ import {InstructorService} from '../../../core/services/instructor.service';
 import {StudentService} from '../../../core/services/student.service';
 import {Student} from '../../../core/models/student';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-assignment-submit-individual',
@@ -31,6 +32,7 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
     private assignmentSubmissionService: AssignmentSubmissionService,
     private router: Router,
     private afStorage: AngularFireStorage,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -52,43 +54,43 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
     this.router.navigate(['assignment/view']);
   }
   async onSubmitClick() {
-    const path = 'assignment_submissions/' + this.file.nativeElement.files.item(0).name;
-    console.log(this.file.nativeElement.files.item(0));
-    const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
-    return await task.then(async (result) => {
-      return await result.ref.getDownloadURL().then(
-        (downloadUrl) => {
-          console.log(downloadUrl);
-          const newAssignmentSubmission: AssignmentSubmission = {
-            student_attachment: downloadUrl,
-            student_attachment_name: this.file.nativeElement.files.item(0).name,
-            submitted_datetime: Date.now(),
-            assignmentDocId: this.assignmentDocId,
-            studentDocId: localStorage.getItem('activeDocId'),
-            instructorDocId: this.assignment.instructorDocId,
-            school: this.assignment.school,
-            group: this.assignment.group,
-            feedback: '',
-            feedback_datetime: -1
-          };
-          if (this.assignmentSubmission) {
-            this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, newAssignmentSubmission)
-              .then(r => console.log('a' + r));
-          } else {
-            this.assignmentSubmissionService.setAssignmentSubmission(newAssignmentSubmission).then(r =>
-            {console.log(r); });
-          }
-          this.confirmModalComponent.open('Submit Assignment', 'Submitted assignment successfully!', ['ok']);
-
-
-        });
-    });
-  }
-onCloseModal(response: string) {
-    if (response === 'ok') {
-      this.router.navigate(['assignment/view']);
+    if (!this.file.nativeElement.files.item(0)) {
+      this.toastrService.error('Please upload a file!', '',{positionClass: 'toast-top-center'});
+    }
+    else {
+      const path = 'assignment_submissions/' + this.file.nativeElement.files.item(0).name;
+      console.log(this.file.nativeElement.files.item(0));
+      const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
+      return await task.then(async (result) => {
+        return await result.ref.getDownloadURL().then(
+          (downloadUrl) => {
+            console.log(downloadUrl);
+            const newAssignmentSubmission: AssignmentSubmission = {
+              student_attachment: downloadUrl,
+              student_attachment_name: this.file.nativeElement.files.item(0).name,
+              submitted_datetime: Date.now(),
+              assignmentDocId: this.assignmentDocId,
+              studentDocId: localStorage.getItem('activeDocId'),
+              instructorDocId: this.assignment.instructorDocId,
+              school: this.assignment.school,
+              group: this.assignment.group,
+              feedback: '',
+              feedback_datetime: -1
+            };
+            if (this.assignmentSubmission) {
+              this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, newAssignmentSubmission)
+                .then(r => console.log('a' + r));
+            } else {
+              this.assignmentSubmissionService.setAssignmentSubmission(newAssignmentSubmission).then(r =>
+              {console.log(r); });
+            }
+            this.toastrService.success('Submitted assignment successfully!', '',{positionClass: 'toast-top-center'});
+            this.router.navigate(['assignment/view']);
+          });
+      });
     }
 
   }
+
 
 }
