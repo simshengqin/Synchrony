@@ -33,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { HeaderComponent } from './header/header.component';
     DropzoneComponent,
     ServiceFormComponent,
     ConfirmModalComponent,
+    HeaderComponent,
   ],
     imports: [
         BrowserModule,
@@ -69,7 +71,8 @@ import { HeaderComponent } from './header/header.component';
         NgbModule,
         FormsModule,
         BrowserAnimationsModule,
-        AngularFireModule.initializeApp(environment.firebase)
+        AngularFireModule.initializeApp(environment.firebase),
+        CommonModule,
 
     ],
   providers: [],

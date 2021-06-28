@@ -1,9 +1,10 @@
+<app-header [role]="'admin'"></app-header>
 <div class="wages-view-wrapper wrapper-padding">
   <ng-container *ngIf="freelancerDocId">
     <app-wages-view-individual ></app-wages-view-individual>
   </ng-container>
   <ng-container *ngIf="!freelancerDocId">
-    <h1 class="mb-3">Calculate Freelance Wages</h1>
+    <h1 class="mb-3">Manage Freelancers</h1>
     <app-search-filter [filterActions] = "filterActions"></app-search-filter>
     <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [freelancers]="freelancers"></app-common-table>
     <button class="btn btn-danger mr-4" (click)="onGoBackClick()">Go Back</button>
