@@ -44,7 +44,9 @@ export class ConfirmModalComponent implements OnInit {
           });
         }
       }
-      this.feedbackEmit.emit(this.feedback);
+      if (response === 'submit') {
+        this.feedbackEmit.emit(this.feedback);
+      }
       this.responseEmit.emit(response);
     }, (reason) => {
       this.responseEmit.emit('close');

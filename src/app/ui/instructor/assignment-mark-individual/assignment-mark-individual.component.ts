@@ -22,6 +22,11 @@ export class AssignmentMarkIndividualComponent implements OnInit {
   assignment: Assignment;
   student: Student;
   isRecording = false;
+  recorded = false;
+  // hardcoded instructor_feedback_attachment
+  instructorFeedbackAttachmentName = 'Feedback.mp3';
+  instructorFeedbackAttachment = 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/assignment_submissions%2FScreenshot_2021-04-11-20-09-37-49_bb71f92a87515742bfe522efc6c7e253%20(1)%20(2).jpg?alt=media&token=cf1ceacd-715d-4286-b2de-78e612bbf889';
+
   constructor(
     private router: Router,
     private assignmentSubmissionService: AssignmentSubmissionService,
@@ -41,11 +46,14 @@ export class AssignmentMarkIndividualComponent implements OnInit {
   }
   onCloseModal(response: string) {
     console.log(response);
+    if (response === 'discard') {
+      this.isRecording = true;
+      this.recorded = false;
+    }
   }
   onFeedback(feedback: string) {
-    // hardcoded instructor_feedback_attachment
-    this.assignmentSubmission.instructor_feedback_attachment_name = 'Feedback.mp3';
-    this.assignmentSubmission.instructor_feedback_attachment = 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/assignment_submissions%2FScreenshot_2021-04-11-20-09-37-49_bb71f92a87515742bfe522efc6c7e253%20(1)%20(2).jpg?alt=media&token=cf1ceacd-715d-4286-b2de-78e612bbf889';
+    this.assignmentSubmission.instructor_feedback_attachment_name = this.instructorFeedbackAttachmentName;
+    this.assignmentSubmission.instructor_feedback_attachment = this.instructorFeedbackAttachment;
     this.assignmentSubmission.feedback = feedback;
     this.assignmentSubmission.feedback_datetime = Date.now();
     this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, this.assignmentSubmission)
@@ -53,13 +61,23 @@ export class AssignmentMarkIndividualComponent implements OnInit {
     this.router.navigate(['assignment/mark']);
     console.log(this.assignmentSubmission);
   }
-
-  startRecording() {
-    this.isRecording = true;
+  onRecordClick() {
+    if (this.recorded) {
+      this.confirmModalComponent.open
+      ('Mark Assignment', 'Are you sure you want to record again? This will delete your previous recording.',
+        ['close', 'discard'], null, this.assignmentSubmission);
+    }
+    else {
+      this.isRecording = true;
+    }
+  }
+  stopRecording() {
+    this.isRecording = false;
+    this.recorded = true;
   }
 
-  stopRecording() {
+  submitFeedback() {
     this.confirmModalComponent.open
-    ('Recording Complete', 'Would you like to submit your feedback?', ['delete', 'submit'], null, this.assignmentSubmission);
+    ('Recording Complete', 'Would you like to submit your feedback?', ['close', 'submit'], null, this.assignmentSubmission);
   }
 }

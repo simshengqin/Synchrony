@@ -10,10 +10,10 @@
         <tr *ngFor="let assignment of assignments; index as i;">
           <th scope="row">{{i + 1}}</th>
           <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignment.name}}</td>
-<!--          <td *ngIf="tableColumns.includes(assignmentStatusColumn)">-->
-<!--            <ng-container *ngIf="!assignment.submitted_datetime">Pending Submission</ng-container>-->
-<!--            <ng-container *ngIf="assignment.submitted_datetime">Last submitted on {{assignment.submitted_datetime  | date : dateTimeFormat}}</ng-container>-->
-<!--          </td>-->
+          <td *ngIf="tableColumns.includes(assignmentStatusColumn)">
+            <ng-container *ngIf="!assignment.assignmentSubmission">Pending Submission</ng-container>
+            <ng-container *ngIf="assignment.assignmentSubmission">Last submitted on {{assignment.assignmentSubmission.submitted_datetime  | date : dateTimeFormat}}</ng-container>
+          </td>
           <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn) && assignment.dueDatetime">{{assignment.dueDatetime  | date : dateTimeFormat}}</td>
           <td *ngIf="tableColumns.includes(assignmentFeedbackDatetimeColumn)">
 <!--            <ng-container *ngIf="assignment.feedback_datetime == -1">Not marked yet</ng-container>-->
@@ -25,8 +25,8 @@
           <td *ngIf="tableColumns.includes(actionsColumn) && assignment">
             <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
             <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
-            <button *ngIf="tableActions.includes(assignmentSubmitAction) && assignment.assignmentSubmission && !assignment.assignmentSubmission.submitted_datetime" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
-            <button *ngIf="tableActions.includes(assignmentResubmitAction) && assignment.assignmentSubmission && assignment.assignmentSubmission.submitted_datetime" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
+            <button *ngIf="tableActions.includes(assignmentSubmitAction) && !assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
+            <button *ngIf="tableActions.includes(assignmentResubmitAction) && assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
             <button *ngIf="tableActions.includes(assignmentFeedbackAction) && assignment.assignmentSubmission && assignment.assignmentSubmission.feedback" class="mr-3 btn btn-primary" (click)="onFeedbackStudentClick(assignment.assignmentSubmission)">View Feedback</button>
           </td>
         </tr>
@@ -35,7 +35,7 @@
           <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignmentSubmission.assignment.name}}</td>
           <td *ngIf="tableColumns.includes(assignmentStudentColumn) && assignmentSubmission.student">{{assignmentSubmission.student.firstName + ' ' + assignmentSubmission.student.lastName}}</td>
           <td *ngIf="tableColumns.includes(assignmentStatusColumn)">
-            <ng-container *ngIf="assignmentSubmission.submitted_datetime">{{assignmentSubmission.submitted_datetime  | date : dateTimeFormat}}</ng-container>
+            <ng-container *ngIf="assignmentSubmission.submitted_datetime">Last submitted on {{assignmentSubmission.submitted_datetime  | date : dateTimeFormat}}</ng-container>
           </td>
           <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn) && assignmentSubmission.assignment.dueDatetime">{{assignmentSubmission.assignment.dueDatetime  | date : dateTimeFormat}}</td>
           <td *ngIf="tableColumns.includes(assignmentFeedbackDatetimeColumn)">

@@ -64,7 +64,7 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
             student_attachment_name: this.file.nativeElement.files.item(0).name,
             submitted_datetime: Date.now(),
             assignmentDocId: this.assignmentDocId,
-            studentDocId: 'TiMPk1PgPWhztZnb5HHp',
+            studentDocId: localStorage.getItem('activeDocId'),
             instructorDocId: this.assignment.instructorDocId,
             school: this.assignment.school,
             group: this.assignment.group,

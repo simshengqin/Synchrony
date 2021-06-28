@@ -8,7 +8,7 @@
     </div>
     <div  class="modal-body">
       {{description}}
-      <input *ngIf="title == 'Recording Complete'" class="modal-content form-control mt-2" placeholder="Enter your feedback here" [(ngModel)]="feedback">
+      <textarea *ngIf="title == 'Recording Complete'" class="modal-content form-control mt-2" placeholder="Enter your feedback here" [(ngModel)]="feedback"></textarea>
       <small *ngIf="assignmentSubmission && assignmentSubmission.feedback" class="form-text text-muted" >
         Previous feedback: {{assignmentSubmission.feedback}}
       </small>
