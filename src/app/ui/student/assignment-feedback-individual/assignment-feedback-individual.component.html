@@ -1,5 +1,10 @@
 <div class="assignment-feedback-individual-wrapper wrapper-padding">
   <h1 class="mb-3">Assignment 1's Feedback</h1>
   <h2 class="mb-3">Instructor's feedback</h2>
-  <p>Feedback</p>
+  <p *ngIf="assignmentSubmission"class="mb-3">{{assignmentSubmission.feedback}}</p>
+  <h2 class="mb-3">Attachments</h2>
+  <div *ngIf="assignmentSubmission && assignmentSubmission.instructor_feedback_attachment" class="form-text mb-3" >
+      Click to download: <a [href]="assignmentSubmission.instructor_feedback_attachment">{{assignmentSubmission.instructor_feedback_attachment_name}}</a>
+  </div>
+  <button class="btn btn-danger mr-4" (click)="onGoBackClick()">Go Back</button>
 </div>

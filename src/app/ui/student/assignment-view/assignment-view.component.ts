@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {Instructor} from '../../../core/models/instructor';
@@ -15,7 +15,7 @@ import {AssignmentSubmissionService} from '../../../core/services/assignment-sub
   styleUrls: ['./assignment-view.component.scss']
 })
 export class AssignmentViewComponent implements OnInit {
-  tableActions?: Array<TableAction> = [TableAction.assignment_submit, TableAction.assignment_resubmit];
+  tableActions?: Array<TableAction> = [TableAction.assignment_submit, TableAction.assignment_resubmit, TableAction.assignment_feedback];
   showOngoing = true;
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name,
     TableColumn.assignment_status, TableColumn.assignment_due_datetime,
@@ -46,8 +46,7 @@ export class AssignmentViewComponent implements OnInit {
         // Hardcoded studentDocId
         this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment('TiMPk1PgPWhztZnb5HHp', assignment.docId)
           .subscribe(async (assignmentSubmissions) => {
-            const assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
-            assignment.submitted_datetime = assignmentSubmission.submitted_datetime;
+            assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
           });
       }
       console.log(this.assignments);

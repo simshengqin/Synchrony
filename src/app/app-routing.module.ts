@@ -34,17 +34,12 @@ const routes: Routes = [{
       pathMatch: 'full',
       component: AssignmentEditComponent
     },
-
     {
       path: 'assignment/mark',
       pathMatch: 'full',
       component: AssignmentMarkComponent
     },
-    {
-      path: 'assignment/mark/:assignment-id',
-      pathMatch: 'full',
-      component: AssignmentMarkIndividualComponent
-    },
+
     {
       path: 'assignment/view',
       pathMatch: 'full',
@@ -56,7 +51,7 @@ const routes: Routes = [{
       component: AssignmentSubmitIndividualComponent
     },
     {
-      path: 'assignment/feedback/:assignment-id',
+      path: 'assignment/feedback',
       pathMatch: 'full',
       component: AssignmentFeedbackIndividualComponent
     },

@@ -19,6 +19,15 @@ export class AssignmentSubmissionService {
     console.log(data);
     return this.fs.add('assignment_submissions', data);
   }
+  getAssignmentSubmission(docId: string): Observable<AssignmentSubmission> {
+    return this.fs.doc$('assignment_submissions/' + docId);
+  }
+  getAssignmentSubmissionsByInstructor(instructorDocId: string): Observable<any[]> {
+    return this.fs.col$('assignment_submissions', ref => {
+      return ref
+        .where('instructorDocId', '==', instructorDocId)
+    });
+  }
   getAssignmentSubmissionsByStudentAndAssignment(studentDocId: string, assignmentDocId: string): Observable<any[]> {
     return this.fs.col$('assignment_submissions', ref => {
       return ref

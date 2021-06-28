@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Temp
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Assignment} from '../../../core/models/assignment';
 import {AssignmentService} from '../../../core/services/assignment.service';
+import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -13,9 +14,8 @@ export class ConfirmModalComponent implements OnInit {
   title = 'Confirm Modal';
   description = '';
   feedback = '';
-  button = '';
   buttons = [];
-  closeResult: string;
+  assignmentSubmission: AssignmentSubmission;
   @Output() feedbackEmit: EventEmitter<string> = new EventEmitter<string>();
   @Output() responseEmit: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('confirmModal') confirmModal: TemplateRef<any>;
@@ -23,10 +23,11 @@ export class ConfirmModalComponent implements OnInit {
     private modalService: NgbModal,
     private assignmentService: AssignmentService
   ) {}
-  open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null) {
+  open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null, assignmentSubmission: AssignmentSubmission = null) {
     this.title = title;
     this.description = description;
     this.buttons = buttons;
+    this.assignmentSubmission = assignmentSubmission;
     this.modalService.open(this.confirmModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((response) => {
       if (response === 'delete') {
         this.assignmentService.deleteAssignment(assignment.docId).then(r => {

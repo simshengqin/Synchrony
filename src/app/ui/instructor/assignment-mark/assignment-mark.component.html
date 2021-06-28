@@ -1,5 +1,10 @@
 <div class="assignment-mark-wrapper wrapper-padding">
-  <h1 class="mb-3">Mark Assignments</h1>
-  <app-search-filter [filterActions] = "filterActions"></app-search-filter>
-  <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [assignments]="assignments"></app-common-table>
+  <ng-container *ngIf="assignmentSubmissionDocId">
+    <app-assignment-mark-individual [assignmentSubmissionDocId]="assignmentSubmissionDocId"></app-assignment-mark-individual>
+  </ng-container>
+  <ng-container *ngIf="!assignmentSubmissionDocId">
+    <h1 class="mb-3">Mark Assignments</h1>
+    <app-search-filter [filterActions] = "filterActions"></app-search-filter>
+    <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [assignmentSubmissions]="assignmentSubmissions"></app-common-table>
+  </ng-container>
 </div>

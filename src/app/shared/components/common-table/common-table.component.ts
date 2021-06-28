@@ -11,6 +11,7 @@ import {InstructorService} from '../../../core/services/instructor.service';
 import {first} from 'rxjs/operators';
 import {Instructor} from '../../../core/models/instructor';
 import {Router} from '@angular/router';
+import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 
 @Component({
   selector: 'app-common-table',
@@ -44,6 +45,7 @@ export class CommonTableComponent implements OnInit {
   @Input() tableActions?: Array<TableAction>;
   @Input() tableColumns?: Array<TableColumn>;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
+  @Input() assignmentSubmissions: Array<AssignmentSubmission> = [];
   @Input() assignments: Array<Assignment> = [];
   monthDayYearFormat: string;
   fullMonthDayYearFormat: string;
@@ -82,5 +84,19 @@ export class CommonTableComponent implements OnInit {
 
   onSubmitClick(assignment: Assignment) {
     this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : assignment.docId }});
+  }
+  onMarkClick(assignmentSubmission: AssignmentSubmission) {
+    this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
+  }
+
+  onRemarkClick(assignmentSubmission: AssignmentSubmission) {
+    this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
+  }
+
+  onFeedbackInstructorClick(assignmentSubmission: AssignmentSubmission) {
+    this.confirmModalComponent.open('View Feedback', assignmentSubmission.feedback, ['ok']);
+  }
+  onFeedbackStudentClick(assignmentSubmission: AssignmentSubmission) {
+    this.router.navigate(['assignment/feedback'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
   }
 }

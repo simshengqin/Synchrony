@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
-import {Instructor} from '../../../core/models/instructor';
 import {first} from 'rxjs/operators';
 import {AssignmentService} from '../../../core/services/assignment.service';
-import {Assignment} from '../../../core/models/assignment';
 import {StudentService} from '../../../core/services/student.service';
-import {Student} from '../../../core/models/student';
+import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
+import {AssignmentSubmission} from '../../../core/models/assignment-submission';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-assignment-mark',
@@ -19,25 +19,32 @@ export class AssignmentMarkComponent implements OnInit {
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_student, TableColumn.assignment_status
     , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
-  assignments: Array<Assignment>;
+  assignmentSubmissions: Array<AssignmentSubmission>;
   // Hardcoded instructor id
   instructorId = '9KunUkUy4bjYdhuRrHs8';
+  assignmentSubmissionDocId: string;
   constructor(
     private assignmentService: AssignmentService,
+    private assignmentSubmissionService: AssignmentSubmissionService,
     private studentService: StudentService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.assignmentService.getAssignmentsByInstructor(this.instructorId).subscribe(async (assignments) => {
-      for (const assignment of assignments) {
-        let student: Student;
-        student = await this.studentService.getStudent(assignment.studentDocId)
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.assignmentSubmissionDocId = params.assignmentSubmissionDocId;
+    });
+    this.assignmentSubmissionService.getAssignmentSubmissionsByInstructor(this.instructorId).subscribe(async (assignmentSubmissions) => {
+      for (const assignmentSubmission of assignmentSubmissions) {
+        assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
           .pipe(first())
           .toPromise();
-        assignment.student = student;
+        assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
+          .pipe(first())
+          .toPromise();
       }
-      this.assignments = assignments;
-      console.log(this.assignments);
+      this.assignmentSubmissions = assignmentSubmissions;
+      console.log(this.assignmentSubmissions);
     });
   }
 

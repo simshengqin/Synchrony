@@ -2,6 +2,7 @@ import {Student} from './student';
 import {Instructor} from './instructor';
 import {Attachment} from './attachment';
 import {Group} from './group';
+import {AssignmentSubmission} from './assignment-submission';
 
 export interface Assignment {
   docId?: string;
@@ -16,10 +17,11 @@ export interface Assignment {
   createdDatetime?: number;
   instructor_attachment: Attachment;
   instructor_attachment_name: string;
+
+  // Not in database, manually created
+  assignmentSubmission?: AssignmentSubmission;
   student?: Student;
   instructor?: Instructor;
-  // Not in database, manually created
-  submitted_datetime?: number;
   // submitted_datetime?: number;
   // student?: Student;
   // studentId?: string;
