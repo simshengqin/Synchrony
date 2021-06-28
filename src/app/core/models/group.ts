@@ -1,7 +1,7 @@
-import {School} from './School';
+import {School} from './school';
 
 export interface Group {
-  GroupId?: number;
+  docId?: number;
   name?: string;
   school?: School;
 }

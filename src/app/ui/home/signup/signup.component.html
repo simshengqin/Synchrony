@@ -1,0 +1,49 @@
+<div class="signup-wrapper">
+  <h1 class="mb-3">Create Account</h1>
+  <form>
+    <div class="form-group">
+      <label>Username</label>
+      <input #username type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input #password type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Select Group</label>
+      <select #role class="form-control">
+        <!-- Hardcoded -->
+        <option>Student</option>
+        <option>Instructor</option>
+        <option>Freelancer</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Select School</label>
+      <select #school class="form-control" >
+        <!-- Hardcoded -->
+        <option>School 1</option>
+        <option>School 2</option>
+        <option>School 3</option>
+        <option>School 4</option>
+        <option>School 5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Select Group</label>
+      <select #group class="form-control">
+        <!-- Hardcoded -->
+        <option>Group 1</option>
+        <option>Group 2</option>
+        <option>Group 3</option>
+        <option>Group 4</option>
+        <option>Group 5</option>
+      </select>
+    </div>
+    <button class="btn btn-danger mr-4" (click)="createAccount()">Create Account</button>
+
+  </form>
+
+  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
+
+</div>

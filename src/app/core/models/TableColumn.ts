@@ -12,6 +12,8 @@ export enum TableColumn {
   freelancer_group = 'Groups',
   wage_created_datetime = 'Month/Year',
   wage_hours = 'Hours',
+  account_role = 'Role',
   account_username = 'Username',
+  account_created_datetime = 'Created Date',
   actions = 'Actions'
 }

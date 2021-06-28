@@ -1,5 +1,5 @@
 <div class="assignment-mark-individual-wrapper wrapper-padding">
-  <h1 *ngIf="assignment && student" class="mb-3">Mark {{assignment.name}} for {{student.name}}</h1>
+  <h1 *ngIf="assignment && student" class="mb-3">Mark {{assignment.name}} for {{student.firstName + ' ' +student.lastName}}</h1>
   <button *ngIf="!isRecording" class="btn btn-success" (click)="startRecording()">Start</button>
   <button *ngIf="isRecording"  class="btn btn-danger" (click)="stopRecording()">Stop</button>
   <app-confirm-modal (response)="onCloseModal($event)" (feedbackEmit)="onFeedback($event)"></app-confirm-modal>

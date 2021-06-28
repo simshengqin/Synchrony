@@ -12,6 +12,9 @@ import {first} from 'rxjs/operators';
 import {Instructor} from '../../../core/models/instructor';
 import {Router} from '@angular/router';
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
+import {Freelancer} from '../../../core/models/freelancer';
+import {Wage} from '../../../core/models/wage';
+import {Account} from '../../../core/models/account';
 
 @Component({
   selector: 'app-common-table',
@@ -32,6 +35,8 @@ export class CommonTableComponent implements OnInit {
   freelancerGroupColumn = TableColumn.freelancer_group;
   wageCreatedDatetimeColumn = TableColumn.wage_created_datetime;
   wageHoursColumn = TableColumn.wage_hours;
+  accountRoleColumn = TableColumn.account_role;
+  accountCreatedDatetimeColumn = TableColumn.account_created_datetime;
   accountUsernameColumn = TableColumn.account_username;
   actionsColumn = TableColumn.actions;
   assignmentEditAction = TableAction.assignment_edit;
@@ -47,9 +52,13 @@ export class CommonTableComponent implements OnInit {
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
   @Input() assignmentSubmissions: Array<AssignmentSubmission> = [];
   @Input() assignments: Array<Assignment> = [];
+  @Input() freelancers: Array<Freelancer> = [];
+  @Input() wages: Array<Wage> = [];
+  @Input() accounts: Array<Account> = [];
   monthDayYearFormat: string;
   fullMonthDayYearFormat: string;
   dateTimeFormat: string;
+  monthYearFormat: string;
   constructor(
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
@@ -61,10 +70,12 @@ export class CommonTableComponent implements OnInit {
       this.dateHelper.getFormat('monthDayYear'),
       this.dateHelper.getFormat('fullMonthDayYear'),
       this.dateHelper.getFormat('dateTime'),
+      this.dateHelper.getFormat('monthYear'),
     ]).then((results) => {
       this.monthDayYearFormat = results[0];
       this.fullMonthDayYearFormat = results[1];
       this.dateTimeFormat = results[2];
+      this.monthYearFormat = results[3];
     });
 
 
@@ -98,5 +109,14 @@ export class CommonTableComponent implements OnInit {
   }
   onFeedbackStudentClick(assignmentSubmission: AssignmentSubmission) {
     this.router.navigate(['assignment/feedback'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
+  }
+
+  onViewHours(freelancer: Freelancer) {
+    this.router.navigate(['wages/view'], { queryParams: { freelancerDocId : freelancer.docId }});
+  }
+
+  onDeleteClickAccount(account: Account) {
+    this.confirmModalComponent.open('Delete Account', 'Are you sure you want to delete '
+      + account.username + '?', ['close', 'delete'], null, null, account);
   }
 }

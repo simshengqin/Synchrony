@@ -3,7 +3,8 @@ import {Attachment} from './attachment';
 
 export interface Instructor {
   docId?: string;
-  name?: string;
-  group?: Group;
-  attachments?: Array<Attachment>;
+  firstName?: string;
+  lastName?: string;
+  school?: string;
+  group?: string;
 }

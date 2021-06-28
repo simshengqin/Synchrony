@@ -1,8 +1,8 @@
 import {Freelancer} from './freelancer';
 
 export interface Wage {
-  WageId?: number;
+  docId?: string;
   created_datetime?: number;
   hours?: number;
-  freelancer?: Freelancer;
+  freelancerDocId?: string;
 }

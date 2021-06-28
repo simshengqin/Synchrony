@@ -14,7 +14,10 @@ export class InstructorService {
     private fs: FirestoreService
   ) {
   }
-
+  setInstructor(data: Instructor): Promise<string> {
+    console.log(data);
+    return this.fs.add('instructors', data);
+  }
   getInstructor(id: string): Observable<Instructor> {
     return this.fs.doc$('instructors/' + id);
   }

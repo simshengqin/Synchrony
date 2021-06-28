@@ -1,9 +1,10 @@
-import {School} from './School';
+import {School} from './school';
 import {Group} from './group';
 
 export interface Freelancer {
-  FreelancerId?: number;
-  username?: string;
-  schools?: Array<School>;
-  groups?: Array<Group>;
+  docId?: string;
+  firstName?: string;
+  lastName?: string;
+  school?: string;
+  group?: string;
 }

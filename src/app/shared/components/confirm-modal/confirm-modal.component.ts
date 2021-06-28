@@ -3,6 +3,8 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Assignment} from '../../../core/models/assignment';
 import {AssignmentService} from '../../../core/services/assignment.service';
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
+import {AccountService} from '../../../core/services/account.service';
+import {Account} from '../../../core/models/account';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -21,18 +23,26 @@ export class ConfirmModalComponent implements OnInit {
   @ViewChild('confirmModal') confirmModal: TemplateRef<any>;
   constructor(
     private modalService: NgbModal,
-    private assignmentService: AssignmentService
+    private assignmentService: AssignmentService,
+    private accountService: AccountService,
   ) {}
-  open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null, assignmentSubmission: AssignmentSubmission = null) {
+  open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null, assignmentSubmission: AssignmentSubmission = null, account: Account = null) {
     this.title = title;
     this.description = description;
     this.buttons = buttons;
     this.assignmentSubmission = assignmentSubmission;
     this.modalService.open(this.confirmModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((response) => {
       if (response === 'delete') {
-        this.assignmentService.deleteAssignment(assignment.docId).then(r => {
-          console.log(r);
-        });
+        if (assignment){
+          this.assignmentService.deleteAssignment(assignment.docId).then(r => {
+            console.log(r);
+          });
+        }
+        if (account){
+          this.accountService.deleteAccount(account.docId).then(r => {
+            console.log(r);
+          });
+        }
       }
       this.feedbackEmit.emit(this.feedback);
       this.responseEmit.emit(response);

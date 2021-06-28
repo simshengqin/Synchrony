@@ -23,7 +23,7 @@ import { WagesViewIndividualComponent } from './ui/admin/wages-view-individual/w
 import { AccountCreateComponent } from './ui/admin/account-create/account-create.component';
 import { AccountDeleteComponent } from './ui/admin/account-delete/account-delete.component';
 import { LoginModalComponent } from './ui/home/login-modal/login-modal.component';
-import { SignupModalComponent } from './ui/home/signup-modal/signup-modal.component';
+import {SignupComponent} from './ui/home/signup/signup.component';
 import { UploadedViewComponent } from './shared/components/uploaded-view/uploaded-view.component';
 import { DropzoneComponent } from './shared/components/dropzone/dropzone.component';
 import { ServiceFormComponent } from './shared/components/service-form/service-form.component';
@@ -55,7 +55,7 @@ import {environment} from '../environments/environment';
     AccountCreateComponent,
     AccountDeleteComponent,
     LoginModalComponent,
-    SignupModalComponent,
+    SignupComponent,
     UploadedViewComponent,
     DropzoneComponent,
     ServiceFormComponent,

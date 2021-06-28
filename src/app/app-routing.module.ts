@@ -66,11 +66,6 @@ const routes: Routes = [{
       component: WagesViewComponent
     },
     {
-      path: 'wages/view/:freelancer-name',
-      pathMatch: 'full',
-      component: WagesViewIndividualComponent
-    },
-    {
       path: 'account/create',
       pathMatch: 'full',
       component: AccountCreateComponent

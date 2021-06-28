@@ -1,9 +1,10 @@
-import {School} from './School';
+import {School} from './school';
 import {Group} from './group';
 
 export interface Student {
-  StudentId?: number;
-  name?: string;
-  school: string;
+  docId?: number;
+  firstName?: string;
+  lastName?: string;
+  school?: string;
   group?: string;
 }

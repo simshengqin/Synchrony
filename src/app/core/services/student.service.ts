@@ -15,7 +15,10 @@ export class StudentService {
     private fs: FirestoreService
   ) {
   }
-
+  setStudent(data: Student): Promise<string> {
+    console.log(data);
+    return this.fs.add('students', data);
+  }
   getStudent(id: string): Observable<Student> {
     return this.fs.doc$('students/' + id);
   }
