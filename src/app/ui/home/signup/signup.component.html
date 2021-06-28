@@ -1,4 +1,4 @@
-<div class="signup-wrapper">
+<div class="signup-wrapper wrapper-padding">
   <h1 class="mb-3">Create Account</h1>
   <form>
     <div class="form-group">
@@ -7,7 +7,15 @@
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input #password type="text" class="form-control">
+      <input #password type="password" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>First Name</label>
+      <input #firstName type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input #lastName type="text" class="form-control">
     </div>
     <div class="form-group">
       <label>Select Group</label>
@@ -40,8 +48,8 @@
         <option>Group 5</option>
       </select>
     </div>
-    <button class="btn btn-danger mr-4" (click)="createAccount()">Create Account</button>
-
+    <button class="btn btn-success mr-4" (click)="signUp()">Sign up</button>
+    <button class="btn btn-secondary mr-4" (click)="goLoginPage()">Go login page</button>
   </form>
 
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>

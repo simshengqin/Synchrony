@@ -24,6 +24,13 @@ export class AccountService {
         // .orderBy('createdDatetime', 'desc');
     });
   }
+  getAccountByUsernameAndPassword(username: string, password: string): Observable<Array<Account>> {
+    return this.fs.col$('accounts', ref => {
+      return ref
+        .where('username', '==', username)
+        .where('password', '==', password);
+    });
+  }
   deleteAccount(docId: string): Promise<void> {
     return this.fs.delete('accounts/' + docId);
   }

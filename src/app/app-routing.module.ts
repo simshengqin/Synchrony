@@ -14,11 +14,23 @@ import {WagesViewComponent} from './ui/admin/wages-view/wages-view.component';
 import {WagesViewIndividualComponent} from './ui/admin/wages-view-individual/wages-view-individual.component';
 import {AccountCreateComponent} from './ui/admin/account-create/account-create.component';
 import {AccountDeleteComponent} from './ui/admin/account-delete/account-delete.component';
+import {SignupComponent} from './ui/home/signup/signup.component';
+import {LoginComponent} from './ui/home/login/login.component';
 
 
 const routes: Routes = [{
   path: '',
   children: [
+    {
+      path: 'signup',
+      pathMatch: 'full',
+      component: SignupComponent
+    },
+    {
+      path: 'login',
+      pathMatch: 'full',
+      component: LoginComponent
+    },
     {
       path: 'home/instructor',
       pathMatch: 'full',
@@ -79,7 +91,7 @@ const routes: Routes = [{
     {
       path: '**',
       pathMatch: 'full',
-      component: InstructorHomeComponent
+      component: LoginComponent
     },
 
 

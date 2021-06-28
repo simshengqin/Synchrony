@@ -22,7 +22,7 @@ import { WagesViewComponent } from './ui/admin/wages-view/wages-view.component';
 import { WagesViewIndividualComponent } from './ui/admin/wages-view-individual/wages-view-individual.component';
 import { AccountCreateComponent } from './ui/admin/account-create/account-create.component';
 import { AccountDeleteComponent } from './ui/admin/account-delete/account-delete.component';
-import { LoginModalComponent } from './ui/home/login-modal/login-modal.component';
+import { LoginComponent } from './ui/home/login/login.component';
 import {SignupComponent} from './ui/home/signup/signup.component';
 import { UploadedViewComponent } from './shared/components/uploaded-view/uploaded-view.component';
 import { DropzoneComponent } from './shared/components/dropzone/dropzone.component';
@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -54,12 +55,12 @@ import {environment} from '../environments/environment';
     WagesViewIndividualComponent,
     AccountCreateComponent,
     AccountDeleteComponent,
-    LoginModalComponent,
+    LoginComponent,
     SignupComponent,
     UploadedViewComponent,
     DropzoneComponent,
     ServiceFormComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
   ],
     imports: [
         BrowserModule,

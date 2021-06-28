@@ -1,0 +1,18 @@
+<div class="login-wrapper wrapper-padding">
+  <h1 class="mb-3">Login</h1>
+  <form>
+    <div class="form-group">
+      <label>Username</label>
+      <input #username type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input #password type="password" class="form-control">
+    </div>
+    <button class="btn btn-success mr-4" (click)="login()">Log in</button>
+    <button class="btn btn-secondary mr-4" (click)="goSignUpPage()">Go sign-up page</button>
+  </form>
+
+  <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
+
+</div>

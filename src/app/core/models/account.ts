@@ -8,9 +8,9 @@ export interface Account {
   ownerDocId?: string;
 }
 export enum Role {
-  admin = 'admin',
-  student = 'student',
-  instructor = 'instructor',
-  freelancer = 'freelancer'
+  admin = 'Admin',
+  student = 'Student',
+  instructor = 'Instructor',
+  freelancer = 'Freelancer'
 }
 
