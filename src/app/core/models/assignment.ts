@@ -22,6 +22,7 @@ export interface Assignment {
   assignmentSubmission?: AssignmentSubmission;
   student?: Student;
   instructor?: Instructor;
+  assignmentCompletionStatus?: string;
   // submitted_datetime?: number;
   // student?: Student;
   // studentId?: string;

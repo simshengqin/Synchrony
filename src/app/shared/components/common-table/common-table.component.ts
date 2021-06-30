@@ -36,6 +36,7 @@ export class CommonTableComponent implements OnInit {
   fullMonthDayYearFormat: string;
   dateTimeFormat: string;
   monthYearFormat: string;
+  dateNow = Date.now();
   constructor(
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,

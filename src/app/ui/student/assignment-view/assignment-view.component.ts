@@ -46,13 +46,14 @@ export class AssignmentViewComponent implements OnInit {
       this.filterService.get('assignments',
         'school', '==', school,
         'group', '==', group).subscribe(async (assignments) => {
-          let filteredAssignments = [];
+          const filteredAssignments = [];
           for (let i = 0; i < assignments.length; i++) {
             const assignment = assignments[i];
             console.log(assignment.dueDatetime, Date.now(), Date.now() > assignment.dueDatetime);
             if (assignmentCompletionStatus === '' ||
               assignmentCompletionStatus === 'Ongoing' && Date.now() <= assignment.dueDatetime ||
               assignmentCompletionStatus === 'Completed' && Date.now() > assignment.dueDatetime) {
+              assignment.assignmentCompletionStatus = assignmentCompletionStatus;
               const instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
                 .pipe(first())
                 .toPromise();
@@ -61,29 +62,17 @@ export class AssignmentViewComponent implements OnInit {
                 localStorage.getItem('activeDocId'), assignment.docId)
                 .subscribe(async (assignmentSubmissions) => {
                   assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
+                  filteredAssignments.push(assignment);
+                  console.log('bbb');
+                  console.log(assignment.assignmentSubmission);
                 });
-              filteredAssignments.push(assignment);
+
             }
 
             this.assignments = filteredAssignments;
           }
       });
     });
-    // this.assignmentService.getAssignmentsBySchoolAndGroup(student.school, student.group).subscribe(async (assignments) => {
-    //   this.assignments = assignments;
-    //   for (const assignment of assignments) {
-    //     let instructor: Instructor;
-    //     instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
-    //       .pipe(first())
-    //       .toPromise();
-    //     assignment.instructor = instructor;
-    //
-    //     this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
-    //       localStorage.getItem('activeDocId'), assignment.docId)
-    //       .subscribe(async (assignmentSubmissions) => {
-    //         assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
-    //       });
-    //   }
     console.log(this.assignments);
   }
 

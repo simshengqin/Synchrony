@@ -25,6 +25,8 @@ export class AssignmentFeedbackIndividualComponent implements OnInit {
       this.assignmentSubmission = await this.assignmentSubmissionService.getAssignmentSubmission(this.assignmentSubmissionDocId)
         .pipe(first())
         .toPromise();
+      console.log('tttt');
+      console.log(this.assignmentSubmission);
     });
 
   }

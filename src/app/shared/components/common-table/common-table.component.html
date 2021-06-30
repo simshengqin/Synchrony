@@ -26,8 +26,8 @@
             <button *ngIf="tableActions.includes(TableAction.assignment_edit)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
             <button *ngIf="tableActions.includes(TableAction.assignment_delete)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
             <button *ngIf="tableActions.includes(TableAction.assignment_submit) && !assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
-            <button *ngIf="tableActions.includes(TableAction.assignment_resubmit) && assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
-            <button *ngIf="tableActions.includes(TableAction.assignment_feedback) && assignment.assignmentSubmission && assignment.assignmentSubmission.feedback" class="mr-3 btn btn-primary" (click)="onFeedbackStudentClick(assignment.assignmentSubmission)">View Feedback</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_resubmit) && assignment.assignmentSubmission && assignment.dueDatetime >= dateNow" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_feedback) && assignment.assignmentSubmission && assignment.assignmentSubmission.feedback_datetime != -1" class="mr-3 btn btn-primary" (click)="onFeedbackStudentClick(assignment.assignmentSubmission)">View Feedback</button>
           </td>
         </tr>
         <tr *ngFor="let assignmentSubmission of assignmentSubmissions; index as i;">
