@@ -2,8 +2,6 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {FirestoreService} from './firestore.service';
 import {AssignmentSubmission} from '../models/assignment-submission';
-import {Role} from '../models/account';
-import {FeedbackFilter} from '../models/FeedbackFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +34,6 @@ export class AssignmentSubmissionService {
       return ref
         .where('school', '==', school);
     });
-  }
-  getAssignmentSubmissionsByGroup(group: string, feedbackFilter = FeedbackFilter.with_and_without_feedback): Observable<any[]> {
-    return this.fs.col$('assignment_submissions', ref => {
-      switch (feedbackFilter) {
-        case FeedbackFilter.with_feedback:
-          return ref.where('group', '==', group).where('feedback_datetime', '!=', -1);
-        case FeedbackFilter.without_feedback:
-          return ref.where('group', '==', group).where('feedback_datetime', '==', -1);
-        case FeedbackFilter.with_and_without_feedback:
-          return ref.where('group', '==', group)
-      }
-      });
   }
   getAssignmentSubmissionsByInstructor(instructorDocId: string): Observable<any[]> {
     return this.fs.col$('assignment_submissions', ref => {

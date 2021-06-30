@@ -1,0 +1,6 @@
+username,password,firstName,lastName,role,school,group
+test1,1,a1,b1,admin,School 1,Group 1
+test2,2,a2,b2,freelancer,School 2,Group 2
+test3,3,a3,b3,instructor,School 3,Group 3
+test4,4,a4,b4,student,School 4,Group 4
+test5,5,a5,b5,student,School 5,Group 5

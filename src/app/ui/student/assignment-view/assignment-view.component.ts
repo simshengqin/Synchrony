@@ -8,6 +8,7 @@ import {AssignmentService} from '../../../core/services/assignment.service';
 import {InstructorService} from '../../../core/services/instructor.service';
 import {StudentService} from '../../../core/services/student.service';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
+import {FilterAction} from '../../../core/models/FilterAction';
 
 @Component({
   selector: 'app-assignment-view',
@@ -20,6 +21,7 @@ export class AssignmentViewComponent implements OnInit {
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name,
     TableColumn.assignment_status, TableColumn.assignment_due_datetime,
     TableColumn.assignment_instructor, TableColumn.actions];
+  filterActions?: Array<FilterAction> = [FilterAction.assignment_completion_status];
   assignments: Array<Assignment> = [];
   constructor(
     private studentService: StudentService,

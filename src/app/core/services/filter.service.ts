@@ -14,14 +14,27 @@ export class FilterService {
   }
   get(collection: string, filterName1: string, filterOp1: any, filterValue1: string,
       filterName2: string = '', filterOp2: any = '', filterValue2: string = '',
+      filterName3: string = '', filterOp3: any = '', filterValue3: string = '',
       sortColumn = '', isAsc = false): Observable<any[]> {
     return this.fs.col$(collection, ref => {
-      if (filterName2 === '') {
-        return ref.where(filterName1, filterOp1, filterValue1);
+      let result;
+      if (filterValue1 !== '') {result = ref.where(filterName1, filterOp1, filterValue1); }
+      else if (filterValue2 !== '') {result = ref.where(filterName2, filterOp2, filterValue2); }
+      else if (filterValue3 !== '') {result = ref.where(filterName3, filterOp3, filterValue3); }
+      for (let i = 1; i <= 3; i++) {
+        switch (i) {
+          case 1:
+            if (filterValue1 !== '') {result = result.where(filterName1, filterOp1, filterValue1); }
+            break;
+          case 2:
+            if (filterValue2 !== '') {result = result.where(filterName2, filterOp2, filterValue2); }
+            break;
+          case 3:
+            if (filterValue3 !== '') {result = result.where(filterName3, filterOp3, filterValue3); }
+            break;
+        }
       }
-      else {
-        return ref.where(filterName1, filterOp1, filterValue1).where(filterName2, filterOp2, filterValue2);
-      }
+      return result;
     });
   }
 

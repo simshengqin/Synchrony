@@ -9,67 +9,67 @@
     <tbody>
         <tr *ngFor="let assignment of assignments; index as i;">
           <th scope="row">{{i + 1}}</th>
-          <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignment.name}}</td>
-          <td *ngIf="tableColumns.includes(assignmentStatusColumn)">
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_name)">{{assignment.name}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_status)">
             <ng-container *ngIf="!assignment.assignmentSubmission">Pending Submission</ng-container>
             <ng-container *ngIf="assignment.assignmentSubmission">Last submitted on {{assignment.assignmentSubmission.submitted_datetime  | date : dateTimeFormat}}</ng-container>
           </td>
-          <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn) && assignment.dueDatetime">{{assignment.dueDatetime  | date : dateTimeFormat}}</td>
-          <td *ngIf="tableColumns.includes(assignmentFeedbackDatetimeColumn)">
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_due_datetime) && assignment.dueDatetime">{{assignment.dueDatetime  | date : dateTimeFormat}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_feedback_datetime)">
 <!--            <ng-container *ngIf="assignment.feedback_datetime == -1">Not marked yet</ng-container>-->
 <!--            <ng-container *ngIf="assignment.feedback_datetime != -1">Last marked on {{assignment.feedback_datetime  | date : dateTimeFormat}}</ng-container>-->
           </td>
-          <td *ngIf="tableColumns.includes(assignmentInstructorColumn) && assignment.instructor">{{assignment.instructor.firstName + ' ' + assignment.instructor.lastName}}</td>
-          <td *ngIf="tableColumns.includes(assignmentSchoolColumn)">{{assignment.school}}</td>
-          <td *ngIf="tableColumns.includes(assignmentGroupColumn)">{{assignment.group}}</td>
-          <td *ngIf="tableColumns.includes(actionsColumn) && assignment">
-            <button *ngIf="tableActions.includes(assignmentEditAction)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
-            <button *ngIf="tableActions.includes(assignmentDeleteAction)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
-            <button *ngIf="tableActions.includes(assignmentSubmitAction) && !assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
-            <button *ngIf="tableActions.includes(assignmentResubmitAction) && assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
-            <button *ngIf="tableActions.includes(assignmentFeedbackAction) && assignment.assignmentSubmission && assignment.assignmentSubmission.feedback" class="mr-3 btn btn-primary" (click)="onFeedbackStudentClick(assignment.assignmentSubmission)">View Feedback</button>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_instructor) && assignment.instructor">{{assignment.instructor.firstName + ' ' + assignment.instructor.lastName}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_school)">{{assignment.school}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_group)">{{assignment.group}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.actions) && assignment">
+            <button *ngIf="tableActions.includes(TableAction.assignment_edit)" class="mr-3 btn btn-primary" (click)="onEditClick(assignment)">Edit</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_delete)" class="mr-3 btn btn-danger" (click)="onDeleteClick(assignment)">Delete</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_submit) && !assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Submit</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_resubmit) && assignment.assignmentSubmission" class="mr-3 btn btn-primary" (click)="onSubmitClick(assignment)">Resubmit</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_feedback) && assignment.assignmentSubmission && assignment.assignmentSubmission.feedback" class="mr-3 btn btn-primary" (click)="onFeedbackStudentClick(assignment.assignmentSubmission)">View Feedback</button>
           </td>
         </tr>
         <tr *ngFor="let assignmentSubmission of assignmentSubmissions; index as i;">
           <th scope="row">{{i + 1}}</th>
-          <td *ngIf="tableColumns.includes(assignmentNameColumn)">{{assignmentSubmission.assignment.name}}</td>
-          <td *ngIf="tableColumns.includes(assignmentStudentColumn) && assignmentSubmission.student">{{assignmentSubmission.student.firstName + ' ' + assignmentSubmission.student.lastName}}</td>
-          <td *ngIf="tableColumns.includes(assignmentStatusColumn)">
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_name)">{{assignmentSubmission.assignment.name}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_student) && assignmentSubmission.student">{{assignmentSubmission.student.firstName + ' ' + assignmentSubmission.student.lastName}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_status)">
             <ng-container *ngIf="assignmentSubmission.submitted_datetime">Last submitted on {{assignmentSubmission.submitted_datetime  | date : dateTimeFormat}}</ng-container>
           </td>
-          <td *ngIf="tableColumns.includes(assignmentDueDatetimeColumn) && assignmentSubmission.assignment.dueDatetime">{{assignmentSubmission.assignment.dueDatetime  | date : dateTimeFormat}}</td>
-          <td *ngIf="tableColumns.includes(assignmentFeedbackDatetimeColumn)">
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_due_datetime) && assignmentSubmission.assignment.dueDatetime">{{assignmentSubmission.assignment.dueDatetime  | date : dateTimeFormat}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.assignment_feedback_datetime)">
             <ng-container *ngIf="assignmentSubmission.feedback_datetime == -1">Not marked yet</ng-container>
             <ng-container *ngIf="assignmentSubmission.feedback_datetime != -1">Last marked on {{assignmentSubmission.feedback_datetime  | date : dateTimeFormat}}</ng-container>
           </td>
-          <td *ngIf="tableColumns.includes(actionsColumn)">
-            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignmentSubmission.feedback_datetime == -1" class="mr-3 btn btn-primary" (click)="onMarkClick(assignmentSubmission)">Mark</button>
+          <td *ngIf="tableColumns.includes(TableColumn.actions)">
+            <button *ngIf="tableActions.includes(TableAction.assignment_mark) && assignmentSubmission.feedback_datetime == -1" class="mr-3 btn btn-primary" (click)="onMarkClick(assignmentSubmission)">Mark</button>
 
-            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignmentSubmission.feedback_datetime != -1" class="mr-3 btn btn-primary" (click)="onRemarkClick(assignmentSubmission)">Re-mark</button>
-            <button *ngIf="tableActions.includes(assignmentMarkAction) && assignmentSubmission.feedback_datetime != -1" class="mr-3 btn btn-primary" (click)="onFeedbackInstructorClick(assignmentSubmission)">View Feedback</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_mark) && assignmentSubmission.feedback_datetime != -1" class="mr-3 btn btn-primary" (click)="onRemarkClick(assignmentSubmission)">Re-mark</button>
+            <button *ngIf="tableActions.includes(TableAction.assignment_mark) && assignmentSubmission.feedback_datetime != -1" class="mr-3 btn btn-primary" (click)="onFeedbackInstructorClick(assignmentSubmission)">View Feedback</button>
           </td>
         </tr>
         <tr *ngFor="let freelancer of freelancers; index as i;">
           <th scope="row">{{i + 1}}</th>
-          <td *ngIf="tableColumns.includes(freelancerUsernameColumn)">{{freelancer.firstName + ' ' + freelancer.lastName}}</td>
-          <td *ngIf="tableColumns.includes(freelancerSchoolColumn)">{{freelancer.school}}</td>
-          <td *ngIf="tableColumns.includes(freelancerGroupColumn)">{{freelancer.group}}</td>
-          <td *ngIf="tableColumns.includes(actionsColumn)">
-            <button *ngIf="tableActions.includes(freelancerHoursAction)" class="mr-3 btn btn-primary" (click)="onViewHours(freelancer)">View Hours</button>
+          <td *ngIf="tableColumns.includes(TableColumn.freelancer_username)">{{freelancer.firstName + ' ' + freelancer.lastName}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.freelancer_school)">{{freelancer.school}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.freelancer_group)">{{freelancer.group}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.actions)">
+            <button *ngIf="tableActions.includes(TableAction.freelancer_hours)" class="mr-3 btn btn-primary" (click)="onViewHours(freelancer)">View Hours</button>
          </td>
         </tr>
         <tr *ngFor="let wage of wages; index as i;">
           <th scope="row">{{i + 1}}</th>
-          <td *ngIf="tableColumns.includes(wageCreatedDatetimeColumn)">{{wage.created_datetime | date: monthYearFormat}}</td>
-          <td *ngIf="tableColumns.includes(wageHoursColumn)">{{wage.hours}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.wage_created_datetime)">{{wage.created_datetime | date: monthYearFormat}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.wage_hours)">{{wage.hours}}</td>
         </tr>
         <tr *ngFor="let account of accounts; index as i;">
           <th scope="row">{{i + 1}}</th>
-          <td *ngIf="tableColumns.includes(accountRoleColumn)">{{account.role}}</td>
-          <td *ngIf="tableColumns.includes(accountCreatedDatetimeColumn)">{{account.created_datetime | date: monthYearFormat}}</td>
-          <td *ngIf="tableColumns.includes(accountUsernameColumn)">{{account.username}}</td>
-          <td *ngIf="tableColumns.includes(actionsColumn)">
-            <button *ngIf="tableActions.includes(accountDeleteAction) && account" class="mr-3 btn btn-danger" (click)="onDeleteClickAccount(account)">Delete Account</button>
+          <td *ngIf="tableColumns.includes(TableColumn.account_role)">{{account.role}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.account_created_datetime)">{{account.created_datetime | date: monthYearFormat}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.account_username)">{{account.username}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.actions)">
+            <button *ngIf="tableActions.includes(TableAction.account_delete) && account" class="mr-3 btn btn-danger" (click)="onDeleteClickAccount(account)">Delete Account</button>
            </td>
 
         </tr>

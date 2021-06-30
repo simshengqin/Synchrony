@@ -1,3 +1,13 @@
 <div class="search-filter-wrapper">
+  <form>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <div *ngFor="let filterAction of filterActions">
+        <label>Select {{FilterActionLabel[filterAction]}}</label>
+        <select class="form-control mb-3" (change)="onSelect($event, filterAction)">
+          <option *ngFor="let option of options[FilterActionLabel[filterAction]]" [value]="option.key == 'Select ' + FilterActionLabel[filterAction] ? '' : option.key" [selected]="option.selected">{{option.key}}</option>
+        </select>
+      </div>
+    </div>
 
+  </form>
 </div>

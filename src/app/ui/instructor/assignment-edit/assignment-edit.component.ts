@@ -8,6 +8,7 @@ import {Student} from '../../../core/models/student';
 import {first} from 'rxjs/operators';
 import {Assignment} from '../../../core/models/assignment';
 import {ActivatedRoute} from '@angular/router';
+import {FilterService} from '../../../core/services/filter.service';
 
 @Component({
   selector: 'app-assignment-edit',
@@ -25,24 +26,23 @@ export class AssignmentEditComponent implements OnInit {
   constructor(
     private assignmentService: AssignmentService,
     private studentService: StudentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private filterService: FilterService,
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(async params => {
       this.assignmentDocId = params.assignmentDocId;
+      const school = params.assignment_school ? params.assignment_school : '';
+      const group = params.assignment_group ? params.assignment_group : '';
+      console.log('Changed to ' + school + ',' + group);
+      this.filterService.get('assignments', 'instructorDocId', '==', this.instructorDocId,
+        'school', '==', school,
+        'group', '==', group).subscribe(async (assignments) => {
+       this.assignments = assignments;
+      });
     });
-    this.assignmentService.getAssignmentsByInstructor(this.instructorDocId).subscribe(async (assignments) => {
-      for (const assignment of assignments) {
-        let student: Student;
-        student = await this.studentService.getStudent(assignment.studentDocId)
-          .pipe(first())
-          .toPromise();
-        assignment.student = student;
-      }
-      this.assignments = assignments;
-      console.log(this.assignments);
-    });
+
   }
 
 }

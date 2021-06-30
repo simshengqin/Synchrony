@@ -18,7 +18,7 @@ export class AssignmentMarkComponent implements OnInit {
   tableActions?: Array<TableAction> = [TableAction.assignment_mark];
   tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_student, TableColumn.assignment_status
     , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
-  filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
+  filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group, FilterAction.assignment_feedback];
   assignmentSubmissions: Array<AssignmentSubmission>;
   instructorId = localStorage.getItem('activeDocId');
   assignmentSubmissionDocId: string;

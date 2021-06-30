@@ -1,11 +1,19 @@
 <app-header [role]="'admin'"></app-header>
 <div class="account-create-wrapper wrapper-padding">
   <h1 class="mb-3">Create Accounts and Groups</h1>
-  <h4 class="mb-3">Upload Information</h4>
-  <p class="mb-3">Info</p>
+  <h4 class="mb-2">Upload Information</h4>
+  <div class="mb-2">Please upload a file similar to the following format:
+     <div class="form-text text-muted" >
+      Accounts:<a [href]="'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/sample_data%2Faccounts_sample.csv?alt=media&token=3c65aa7e-3981-4b3e-9076-18a39261acad'">
+         {{"accounts_sample.csv"}}
+       </a>
+    </div>
+  </div>
+
   <h4 class="mb-3">Upload CSV File</h4>
-  <input #file class="mb-3" type="file">
-  <h4 class="mb-3">CSV Template Example</h4>
-  <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+  <span class="mr-1 mb-3">Upload accounts: </span> <input #file class="mb-3" type="file">
+  <div>
+    <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+  </div>
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 </div>
