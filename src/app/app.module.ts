@@ -36,6 +36,7 @@ import {environment} from '../environments/environment';
 import { HeaderComponent } from './shared/components/header/header.component';
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
+import {NgxCsvParserModule} from 'ngx-csv-parser';
 // import {SharedModule} from './shared/shared.module';
 
 
@@ -83,7 +84,9 @@ import {ToastrModule} from 'ngx-toastr';
           timeOut: 2500,
           positionClass: 'toast-top-center',
           preventDuplicates: true,
-        })
+        }),
+        NgxCsvParserModule
+
     ],
   providers: [],
   bootstrap: [AppComponent]
