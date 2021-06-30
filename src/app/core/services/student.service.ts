@@ -19,7 +19,19 @@ export class StudentService {
     console.log(data);
     return this.fs.add('students', data);
   }
+  getStudents(): Observable<Array<Student>> {
+    return this.fs.col$('students', ref => {
+      return ref;
+      // .orderBy('createdDatetime', 'desc');
+    });
+  }
   getStudent(id: string): Observable<Student> {
     return this.fs.doc$('students/' + id);
+  }
+  updateStudent(docId: string, data: Student): Promise<void> {
+    return this.fs.update('students/' + docId, data);
+  }
+  deleteStudent(docId: string): Promise<void> {
+    return this.fs.delete('students/' + docId);
   }
 }

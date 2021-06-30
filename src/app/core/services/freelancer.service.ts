@@ -19,14 +19,21 @@ export class FreelancerService {
     console.log(data);
     return this.fs.add('freelancers', data);
   }
-  getFreelancer(docId: string): Observable<Freelancer> {
-    return this.fs.doc$('freelancers/' + docId);
-  }
   getFreelancers(): Observable<Array<Freelancer>> {
     return this.fs.col$('freelancers', ref => {
       return ref;
-        // .orderBy('createdDatetime', 'desc');
+      // .orderBy('createdDatetime', 'desc');
     });
+  }
+  getFreelancer(docId: string): Observable<Freelancer> {
+    return this.fs.doc$('freelancers/' + docId);
+  }
+
+  updateFreelancer(docId: string, data: Freelancer): Promise<void> {
+    return this.fs.update('freelancers/' + docId, data);
+  }
+  deleteFreelancer(docId: string): Promise<void> {
+    return this.fs.delete('freelancers/' + docId);
   }
 
 
