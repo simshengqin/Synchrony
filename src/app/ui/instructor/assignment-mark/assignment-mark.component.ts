@@ -8,6 +8,7 @@ import {StudentService} from '../../../core/services/student.service';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {ActivatedRoute} from '@angular/router';
+import {FilterService} from '../../../core/services/filter.service';
 
 @Component({
   selector: 'app-assignment-mark',
@@ -20,30 +21,54 @@ export class AssignmentMarkComponent implements OnInit {
     , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group, FilterAction.assignment_feedback];
   assignmentSubmissions: Array<AssignmentSubmission>;
-  instructorId = localStorage.getItem('activeDocId');
+  instructorDocId = localStorage.getItem('activeDocId');
   assignmentSubmissionDocId: string;
   constructor(
     private assignmentService: AssignmentService,
     private assignmentSubmissionService: AssignmentSubmissionService,
     private studentService: StudentService,
     private activatedRoute: ActivatedRoute,
+    private filterService: FilterService,
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   this.assignmentSubmissionDocId = params.assignmentSubmissionDocId;
+    // });
+    // this.assignmentSubmissionService.getAssignmentSubmissionsByInstructor(this.instructorId).subscribe(async (assignmentSubmissions) => {
+    //   for (const assignmentSubmission of assignmentSubmissions) {
+    //     assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
+    //       .pipe(first())
+    //       .toPromise();
+    //     assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
+    //       .pipe(first())
+    //       .toPromise();
+    //   }
+    //   this.assignmentSubmissions = assignmentSubmissions;
+    //   console.log(this.assignmentSubmissions);
+    // });
+    this.activatedRoute.queryParams.subscribe(async params => {
       this.assignmentSubmissionDocId = params.assignmentSubmissionDocId;
-    });
-    this.assignmentSubmissionService.getAssignmentSubmissionsByInstructor(this.instructorId).subscribe(async (assignmentSubmissions) => {
-      for (const assignmentSubmission of assignmentSubmissions) {
-        assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
-          .pipe(first())
-          .toPromise();
-        assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
-          .pipe(first())
-          .toPromise();
-      }
-      this.assignmentSubmissions = assignmentSubmissions;
-      console.log(this.assignmentSubmissions);
+      const school = params.assignment_school ? params.assignment_school : '';
+      const group = params.assignment_group ? params.assignment_group : '';
+      const assignmentFeedback = params.assignment_feedback ? params.assignment_feedback : '';
+      const filterOp4 = assignmentFeedback === 'With Feedback' ? '!=' : '==';
+      const filterVal4 = assignmentFeedback === '' ? '' : -1;
+      console.log(school + ',' + group + ',' + assignmentFeedback + ',');
+      this.filterService.get('assignment_submissions', 'instructorDocId', '==', this.instructorDocId,
+        'school', '==', school,
+        'group', '==', group,
+        'feedback_datetime', filterOp4, filterVal4).subscribe(async (assignmentSubmissions) => {
+        for (const assignmentSubmission of assignmentSubmissions) {
+          assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
+            .pipe(first())
+            .toPromise();
+          assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
+            .pipe(first())
+            .toPromise();
+        }
+        this.assignmentSubmissions = assignmentSubmissions;
+      });
     });
   }
 

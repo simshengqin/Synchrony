@@ -35,7 +35,6 @@ export class AssignmentEditComponent implements OnInit {
       this.assignmentDocId = params.assignmentDocId;
       const school = params.assignment_school ? params.assignment_school : '';
       const group = params.assignment_group ? params.assignment_group : '';
-      console.log('Changed to ' + school + ',' + group);
       this.filterService.get('assignments', 'instructorDocId', '==', this.instructorDocId,
         'school', '==', school,
         'group', '==', group).subscribe(async (assignments) => {

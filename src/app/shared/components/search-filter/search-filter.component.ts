@@ -30,20 +30,24 @@ export class SearchFilterComponent implements OnInit {
       {key: 'Group 5', selected: ''},
     ],
     'Feedback Status': [
+      {key: 'Select Feedback Status', selected: 'selected'},
       {key: 'With Feedback', selected: ''},
       {key: 'Without Feedback', selected: ''},
     ],
     'Completion Status': [
+      {key: 'Select Completion Status', selected: 'selected'},
       {key: 'Ongoing', selected: ''},
       {key: 'Completed', selected: ''},
     ],
     Role: [
+      {key: 'Select Role', selected: 'selected'},
       {key: 'Admin', selected: ''},
       {key: 'Freelancer', selected: ''},
       {key: 'Student', selected: ''},
       {key: 'Instructor', selected: ''},
     ],
     'Month/Year': [
+      {key: 'Select Month/Year', selected: 'selected'},
       {key: 'Jan 2021', selected: ''},
       {key: 'Feb 2021', selected: ''},
       {key: 'Mar 2021', selected: ''},

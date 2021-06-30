@@ -9,6 +9,8 @@ import {InstructorService} from '../../../core/services/instructor.service';
 import {StudentService} from '../../../core/services/student.service';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 import {FilterAction} from '../../../core/models/FilterAction';
+import {ActivatedRoute} from '@angular/router';
+import {FilterService} from '../../../core/services/filter.service';
 
 @Component({
   selector: 'app-assignment-view',
@@ -28,6 +30,8 @@ export class AssignmentViewComponent implements OnInit {
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
     private assignmentSubmissionService: AssignmentSubmissionService,
+    private activatedRoute: ActivatedRoute,
+    private filterService: FilterService,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -35,23 +39,52 @@ export class AssignmentViewComponent implements OnInit {
       .pipe(first())
       .toPromise();
     console.log(student);
-    this.assignmentService.getAssignmentsBySchoolAndGroup(student.school, student.group).subscribe(async (assignments) => {
-      this.assignments = assignments;
-      for (const assignment of assignments) {
-        let instructor: Instructor;
-        instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
-          .pipe(first())
-          .toPromise();
-        assignment.instructor = instructor;
+    this.activatedRoute.queryParams.subscribe(async params => {
+      const school = student.school;
+      const group = student.group;
+      const assignmentCompletionStatus = params.assignment_completion_status ? params.assignment_completion_status : '';
+      this.filterService.get('assignments',
+        'school', '==', school,
+        'group', '==', group).subscribe(async (assignments) => {
+          let filteredAssignments = [];
+          for (let i = 0; i < assignments.length; i++) {
+            const assignment = assignments[i];
+            console.log(assignment.dueDatetime, Date.now(), Date.now() > assignment.dueDatetime);
+            if (assignmentCompletionStatus === '' ||
+              assignmentCompletionStatus === 'Ongoing' && Date.now() <= assignment.dueDatetime ||
+              assignmentCompletionStatus === 'Completed' && Date.now() > assignment.dueDatetime) {
+              const instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
+                .pipe(first())
+                .toPromise();
+              assignment.instructor = instructor;
+              this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
+                localStorage.getItem('activeDocId'), assignment.docId)
+                .subscribe(async (assignmentSubmissions) => {
+                  assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
+                });
+              filteredAssignments.push(assignment);
+            }
 
-        this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
-          localStorage.getItem('activeDocId'), assignment.docId)
-          .subscribe(async (assignmentSubmissions) => {
-            assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
-          });
-      }
-      console.log(this.assignments);
+            this.assignments = filteredAssignments;
+          }
+      });
     });
+    // this.assignmentService.getAssignmentsBySchoolAndGroup(student.school, student.group).subscribe(async (assignments) => {
+    //   this.assignments = assignments;
+    //   for (const assignment of assignments) {
+    //     let instructor: Instructor;
+    //     instructor = await this.instructorService.getInstructor(assignment.instructorDocId)
+    //       .pipe(first())
+    //       .toPromise();
+    //     assignment.instructor = instructor;
+    //
+    //     this.assignmentSubmissionService.getAssignmentSubmissionsByStudentAndAssignment(
+    //       localStorage.getItem('activeDocId'), assignment.docId)
+    //       .subscribe(async (assignmentSubmissions) => {
+    //         assignment.assignmentSubmission = assignmentSubmissions[assignmentSubmissions.length - 1];
+    //       });
+    //   }
+    console.log(this.assignments);
   }
 
 }
