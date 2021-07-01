@@ -6,6 +6,9 @@ export interface Account {
   role?: Role;
   created_datetime?: number;
   ownerDocId?: string;
+  // Not in database, manually created
+  school?: string;
+  group?: string;
 }
 export enum Role {
   admin = 'Admin',

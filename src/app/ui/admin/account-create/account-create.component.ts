@@ -75,13 +75,14 @@ export class AccountCreateComponent implements OnInit {
   }
   async createAccount(csvRecord: any, afsi) {
     let ownerDocId = '';
-    if (csvRecord.role === 'admin') {
+    csvRecord.role = csvRecord.role[0].toUpperCase() + csvRecord.role.substr(1).toLowerCase();
+    if (csvRecord.role === 'Admin') {
       await this.adminService.setAdmin(afsi).then(r => ownerDocId = r);
-    } else if (csvRecord.role === 'student') {
+    } else if (csvRecord.role === 'Student') {
       await this.studentService.setStudent(afsi).then(r => ownerDocId = r);
-    } else if (csvRecord.role === 'instructor') {
+    } else if (csvRecord.role === 'Instructor') {
       await this.instructorService.setInstructor(afsi).then(r => ownerDocId = r);
-    } else if (csvRecord.role === 'freelancer') {
+    } else if (csvRecord.role === 'Freelancer') {
       await this.freelancerService.setFreelancer(afsi).then(r => ownerDocId = r);
     }
     console.log(afsi);

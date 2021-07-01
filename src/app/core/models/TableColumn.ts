@@ -14,6 +14,8 @@ export enum TableColumn {
   wage_hours = 'Hours',
   account_role = 'Role',
   account_username = 'Username',
+  account_school = 'School',
+  account_group = 'Group',
   account_created_datetime = 'Created Date',
   actions = 'Actions'
 }

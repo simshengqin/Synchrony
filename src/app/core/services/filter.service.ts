@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FirestoreService} from './firestore.service';
 import {Observable} from 'rxjs';
+import {Student} from '../models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,17 @@ export class FilterService {
     private fs: FirestoreService
   ) {
   }
+  getByDocId(collection: string, docId: string): Observable<any> {
+    return this.fs.doc$(collection + '/' + docId);
+  }
   get(collection: string, filterName1: string = '', filterOp1: any = '', filterValue1: any = '',
       filterName2: string = '', filterOp2: any = '', filterValue2: any = '',
       filterName3: string = '', filterOp3: any = '', filterValue3: any = '',
       filterName4: string = '', filterOp4: any = '', filterValue4: any = '',
       sortColumn = '', isAsc = false): Observable<any[]> {
     // Cannot use === as filterValue1 etc can be a number
+    // tslint:disable-next-line:triple-equals
+    console.log(filterValue1 + ',' + filterValue2 + ',' + filterValue3 + ',' + filterValue4 + ',');
     // tslint:disable-next-line:triple-equals
     if (filterValue1 == '' && filterValue2 == '' && filterValue3 == '' && filterValue4 == '') {
       return this.fs.col$(collection, ref => {

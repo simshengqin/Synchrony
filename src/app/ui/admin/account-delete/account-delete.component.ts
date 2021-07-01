@@ -8,6 +8,7 @@ import {FreelancerService} from '../../../core/services/freelancer.service';
 import {Account} from '../../../core/models/account';
 import {AccountService} from '../../../core/services/account.service';
 import {FilterService} from '../../../core/services/filter.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-delete',
@@ -17,7 +18,7 @@ import {FilterService} from '../../../core/services/filter.service';
 export class AccountDeleteComponent implements OnInit {
   tableActions?: Array<TableAction> = [TableAction.account_delete];
   tableColumns?: Array<TableColumn> = [TableColumn.account_role, TableColumn.account_created_datetime,
-    TableColumn.account_username, TableColumn.actions];
+    TableColumn.account_username, TableColumn.account_school, TableColumn.account_group, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.account_role, FilterAction.account_school, FilterAction.account_group];
   accounts?: Array<Account>;
   constructor(
@@ -32,10 +33,24 @@ export class AccountDeleteComponent implements OnInit {
       const role = params.account_role ? params.account_role : '';
       const school = params.account_school ? params.account_school : '';
       const group = params.account_group ? params.account_group : '';
-      console.log(role + ',' + school + ',' + group + ',')
-      this.filterService.get('accounts', 'school', '==', school,
-        'group', '==', group, 'role', '==', role)?.subscribe(async (accounts) => {
-        this.accounts = accounts;
+      this.filterService.get('accounts', 'role', '==', role)?.subscribe(async (accounts) => {
+        const filteredAccounts = [];
+        for (const account of accounts) {
+          const asci = await this.filterService.getByDocId(account.role.toLowerCase() + 's', account.ownerDocId)
+            .pipe(first())
+            .toPromise();
+          if ( asci && ((school === '' && group === '') || (group === '' && asci.school === school) ||
+            (school === '' && asci.group === group)  || (asci.school === school && asci.group === group)) ) {
+              account.school = asci.school;
+              account.group = asci.group;
+              filteredAccounts.push(account);
+          }
+        }
+        this.accounts = filteredAccounts;
+
+        console.log(this.accounts);
+
+
       });
       // this.accountService.getAccounts().subscribe(async (accounts) => {
       //   this.accounts = accounts;

@@ -68,6 +68,8 @@
           <td *ngIf="tableColumns.includes(TableColumn.account_role)">{{account.role}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.account_created_datetime)">{{account.created_datetime | date: monthYearFormat}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.account_username)">{{account.username}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.account_school)">{{account.school}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.account_group)">{{account.group}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.actions)">
             <button *ngIf="tableActions.includes(TableAction.account_delete) && account" class="mr-3 btn btn-danger" (click)="onDeleteClickAccount(account)">Delete Account</button>
            </td>
