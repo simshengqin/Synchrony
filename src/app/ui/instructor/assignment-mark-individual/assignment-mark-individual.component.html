@@ -1,6 +1,15 @@
 <div class="assignment-mark-individual-wrapper wrapper-padding">
   <h1 *ngIf="assignment && student" class="mb-3">Mark {{assignment.name}} for {{student.firstName + ' ' +student.lastName}}</h1>
-  <!-- Harcoded assignment feedback attachment -->
+  <div *ngIf="!isRecording && !recorded" class="form-text mb-3" >
+    Download the scoresheet <a #scoresheet target="_blank" [href]="assignmentSubmission.student_attachment_scoresheet">here</a> and open it in the pdf viewer on the left:
+  </div>
+  <div fxLayout="row" class="mb-3">
+    <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
+    <div fxLayout="column" fxFlex="50">
+      Video
+    </div>
+  </div>
+
   <div *ngIf="recorded" class="form-text mb-3" >
     Recorded file: <a [href]="instructorFeedbackAttachment">{{instructorFeedbackAttachmentName}}</a>
   </div>

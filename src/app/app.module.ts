@@ -38,6 +38,8 @@ import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import {NgxCsvParserModule} from 'ngx-csv-parser';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer';
+import {HttpClientModule} from '@angular/common/http';
 // import {SharedModule} from './shared/shared.module';
 
 
@@ -87,7 +89,9 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
           preventDuplicates: true,
         }),
         NgxCsvParserModule,
-        PdfViewerModule
+        PdfViewerModule,
+        NgxExtendedPdfViewerModule,
+        HttpClientModule
 
     ],
   providers: [],
