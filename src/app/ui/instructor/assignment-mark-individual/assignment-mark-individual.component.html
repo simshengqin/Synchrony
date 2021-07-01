@@ -3,10 +3,10 @@
   <div *ngIf="!isRecording" class="form-text mb-3" >
     Download the scoresheet <a #scoresheet target="_blank" [href]="assignmentSubmission.student_attachment_scoresheet">here</a> and open it in the pdf viewer on the left:
   </div>
-  <div fxLayout="row" class="mb-3">
+  <div fxLayout="row" fxLayoutGap="32px" class="mb-3">
     <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
-    <div fxLayout="column" fxFlex="50">
-      Video
+    <div fxLayout="column" fxLayoutAlign="center" fxFlex="50">
+      <app-video-player></app-video-player>
     </div>
   </div>
 

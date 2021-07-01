@@ -40,6 +40,11 @@ import {NgxCsvParserModule} from 'ngx-csv-parser';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer';
 import {HttpClientModule} from '@angular/common/http';
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import { VideoPlayerComponent } from './shared/components/video-player/video-player.component';
 // import {SharedModule} from './shared/shared.module';
 
 
@@ -70,6 +75,7 @@ import {HttpClientModule} from '@angular/common/http';
     ServiceFormComponent,
     ConfirmModalComponent,
     HeaderComponent,
+    VideoPlayerComponent,
   ],
     imports: [
         BrowserModule,
@@ -91,7 +97,11 @@ import {HttpClientModule} from '@angular/common/http';
         NgxCsvParserModule,
         PdfViewerModule,
         NgxExtendedPdfViewerModule,
-        HttpClientModule
+        HttpClientModule,
+        VgCoreModule,
+        VgControlsModule,
+        VgOverlayPlayModule,
+        VgBufferingModule
 
     ],
   providers: [],
