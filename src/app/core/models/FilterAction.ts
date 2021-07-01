@@ -6,7 +6,8 @@ export enum FilterAction {
   assignment_instructor = 'assignment_instructor',
   wage_school = 'wage_school',
   wage_group = 'wage_group',
-  wage_created_datetime = 'wage_created_datetime',
+  wage_month = 'wage_month',
+  wage_year = 'wage_year',
   account_role = 'account_role',
   account_school = 'account_school',
   account_group = 'account_group'
@@ -19,7 +20,8 @@ export enum FilterActionLabel {
   assignment_instructor = 'Instructor',
   wage_school = 'School',
   wage_group = 'Group',
-  wage_created_datetime = 'Month/Year',
+  wage_month = 'Month',
+  wage_year = 'Year',
   account_role = 'Role',
   account_school = 'School',
   account_group = 'Group'

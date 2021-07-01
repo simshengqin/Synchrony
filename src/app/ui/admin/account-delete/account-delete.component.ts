@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FreelancerService} from '../../../core/services/freelancer.service';
 import {Account} from '../../../core/models/account';
 import {AccountService} from '../../../core/services/account.service';
+import {FilterService} from '../../../core/services/filter.service';
 
 @Component({
   selector: 'app-account-delete',
@@ -23,16 +24,25 @@ export class AccountDeleteComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
+    private filterService: FilterService,
   ) { }
 
   ngOnInit(): void {
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.freelancerDocId = params.freelancerDocId;
-    // });
-    this.accountService.getAccounts().subscribe(async (accounts) => {
-      this.accounts = accounts;
-      console.log(this.accounts);
+    this.activatedRoute.queryParams.subscribe(params => {
+      const role = params.account_role ? params.account_role : '';
+      const school = params.account_school ? params.account_school : '';
+      const group = params.account_group ? params.account_group : '';
+      console.log(role + ',' + school + ',' + group + ',')
+      this.filterService.get('accounts', 'school', '==', school,
+        'group', '==', group, 'role', '==', role)?.subscribe(async (accounts) => {
+        this.accounts = accounts;
+      });
+      // this.accountService.getAccounts().subscribe(async (accounts) => {
+      //   this.accounts = accounts;
+      //   console.log(this.accounts);
+      // });
     });
+
   }
   onGoBackClick() {
     this.router.navigate(['home/admin']);

@@ -12,11 +12,19 @@ export class FilterService {
     private fs: FirestoreService
   ) {
   }
-  get(collection: string, filterName1: string, filterOp1: any, filterValue1: string,
+  get(collection: string, filterName1: string = '', filterOp1: any = '', filterValue1: any = '',
       filterName2: string = '', filterOp2: any = '', filterValue2: any = '',
       filterName3: string = '', filterOp3: any = '', filterValue3: any = '',
       filterName4: string = '', filterOp4: any = '', filterValue4: any = '',
       sortColumn = '', isAsc = false): Observable<any[]> {
+    // Cannot use === as filterValue1 etc can be a number
+    // tslint:disable-next-line:triple-equals
+    if (filterValue1 == '' && filterValue2 == '' && filterValue3 == '' && filterValue4 == '') {
+      return this.fs.col$(collection, ref => {
+        return ref;
+        // .orderBy('createdDatetime', 'desc');
+      });
+    }
     return this.fs.col$(collection, ref => {
       let result;
       if (filterValue1 !== '') {result = ref.where(filterName1, filterOp1, filterValue1); }

@@ -5,6 +5,7 @@ import {TableAction} from '../../../core/models/TableAction';
 import {FreelancerService} from '../../../core/services/freelancer.service';
 import {Freelancer} from '../../../core/models/freelancer';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FilterService} from '../../../core/services/filter.service';
 
 @Component({
   selector: 'app-wages-view',
@@ -16,22 +17,24 @@ export class WagesViewComponent implements OnInit {
   tableColumns?: Array<TableColumn> = [TableColumn.freelancer_username, TableColumn.freelancer_school,
     TableColumn.freelancer_group , TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.wage_school, FilterAction.wage_group];
-  freelancers?: Array<Freelancer>;
+  freelancers?: Array<Freelancer> = [];
   freelancerDocId: string;
   constructor(
     private router: Router,
     private freelancerService: FreelancerService,
     private activatedRoute: ActivatedRoute,
+    private filterService: FilterService,
   ) { }
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
+  async ngOnInit(): Promise<void> {
+    this.activatedRoute.queryParams.subscribe(async params => {
       this.freelancerDocId = params.freelancerDocId;
-    });
-    this.freelancerService.getFreelancers().subscribe(async (freelancers) => {
-      this.freelancers = freelancers;
-      console.log('tt');
-      console.log(this.freelancers);
+      const school = params.wage_school ? params.wage_school : '';
+      const group = params.wage_group ? params.wage_group : '';
+      this.filterService.get('freelancers', 'school', '==', school,
+        'group', '==', group)?.subscribe(async (freelancers) => {
+        this.freelancers = freelancers;
+      });
     });
   }
   onGoBackClick() {
