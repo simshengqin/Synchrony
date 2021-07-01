@@ -80,10 +80,71 @@ export class SearchFilterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(async params => {
+      if (params.assignment_school || params.wage_school || params.account_school) {
+        for (let i = 0; i < this.options.School.length; i++) {
+          this.options.School[i].selected = '';
+          if (this.options.School[i].key === params.assignment_school || this.options.School[i].key === params.wage_school ||
+            this.options.School[i].key === params.account_school) {
+            this.options.School[i].selected = 'selected';
+          }
+        }
+      }
+      if (params.assignment_group || params.wage_group || params.account_group) {
+        for (let i = 0; i < this.options.Group.length; i++) {
+          this.options.Group[i].selected = '';
+          if (this.options.Group[i].key === params.assignment_group || this.options.Group[i].key === params.wage_group ||
+            this.options.Group[i].key === params.account_group) {
+            this.options.Group[i].selected = 'selected';
+          }
+        }
+      }
+      if (params.assignment_feedback) {
+        for (let i = 0; i < this.options['Feedback Status'].length; i++) {
+          this.options['Feedback Status'][i].selected = '';
+          if (this.options['Feedback Status'][i].key === params.assignment_feedback) {
+            this.options['Feedback Status'][i].selected = 'selected';
+          }
+        }
+      }
+      if (params.assignment_completion_status) {
+        for (let i = 0; i < this.options['Completion Status'].length; i++) {
+          this.options['Completion Status'][i].selected = '';
+          if (this.options['Completion Status'][i].key === params.assignment_completion_status) {
+            this.options['Completion Status'][i].selected = 'selected';
+          }
+        }
+      }
+
+      if (params.account_role) {
+        for (let i = 0; i < this.options.Role.length; i++) {
+          this.options.Role[i].selected = '';
+          if (this.options.Role[i].key === params.account_role) {
+            this.options.Role[i].selected = 'selected';
+          }
+        }
+      }
+      if (params.wage_month) {
+        for (let i = 0; i < this.options.Month.length; i++) {
+          this.options.Month[i].selected = '';
+          if (this.options.Month[i].key === params.wage_month) {
+            this.options.Month[i].selected = 'selected';
+          }
+        }
+      }
+      if (params.wage_year) {
+        for (let i = 0; i < this.options.Year.length; i++) {
+          this.options.Year[i].selected = '';
+          if (this.options.Year[i].key === params.wage_year) {
+            this.options.Year[i].selected = 'selected';
+          }
+        }
+      }
+    });
   }
 
   onSelect($event, filterAction) {
@@ -91,7 +152,7 @@ export class SearchFilterComponent implements OnInit {
     // changes the route without moving from the current view or
     // triggering a navigation event,
     this.router.navigate([], {
-      relativeTo: this.route,
+      relativeTo: this.activatedRoute,
       queryParams: {
         [filterAction]: $event.target.value
       },
