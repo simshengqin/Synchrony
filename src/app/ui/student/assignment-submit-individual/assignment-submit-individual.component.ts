@@ -24,7 +24,8 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
   assignment: Assignment;
   assignmentSubmission: AssignmentSubmission;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
-  @ViewChild('file') file: ElementRef;
+  @ViewChild('scoresheetFile') scoresheetFile: ElementRef;
+  @ViewChild('recordingFile') recordingFile: ElementRef;
   // progress: number;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,20 +55,28 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
     this.router.navigate(['assignment/view']);
   }
   async onSubmitClick() {
-    if (!this.file.nativeElement.files.item(0)) {
+    if (!this.scoresheetFile.nativeElement.files.item(0) && !this.recordingFile.nativeElement.files.item(0)) {
       this.toastrService.error('Please upload a file!', '',{positionClass: 'toast-top-center'});
     }
     else {
-      const path = 'assignment_submissions/' + this.file.nativeElement.files.item(0).name;
-      console.log(this.file.nativeElement.files.item(0));
-      const task = this.afStorage.upload(path, this.file.nativeElement.files.item(0));
-      return await task.then(async (result) => {
-        return await result.ref.getDownloadURL().then(
-          (downloadUrl) => {
-            console.log(downloadUrl);
-            const newAssignmentSubmission: AssignmentSubmission = {
-              student_attachment: downloadUrl,
-              student_attachment_name: this.file.nativeElement.files.item(0).name,
+      if (this.scoresheetFile.nativeElement.files.item(0)) { await this.uploadFile(this.scoresheetFile, 'scoresheet'); }
+      if (this.recordingFile.nativeElement.files.item(0)) { await this.uploadFile(this.recordingFile, 'recording'); }
+      this.router.navigate(['assignment/view']);
+    }
+  }
+  async uploadFile(file, type) {
+    const path = 'assignment_submissions/' + file.nativeElement.files.item(0).name;
+    console.log(file.nativeElement.files.item(0));
+    const task = this.afStorage.upload(path, file.nativeElement.files.item(0));
+    await task.then(async (result) => {
+      await result.ref.getDownloadURL().then(
+        (downloadUrl) => {
+          console.log(downloadUrl);
+          let newAssignmentSubmission: AssignmentSubmission;
+          if (type === 'scoresheet') {
+             newAssignmentSubmission  = {
+              student_attachment_scoresheet: downloadUrl,
+              student_attachment_scoresheet_name: file.nativeElement.files.item(0).name,
               submitted_datetime: Date.now(),
               assignmentDocId: this.assignmentDocId,
               studentDocId: localStorage.getItem('activeDocId'),
@@ -77,19 +86,34 @@ export class AssignmentSubmitIndividualComponent implements OnInit {
               feedback: '',
               feedback_datetime: -1
             };
-            if (this.assignmentSubmission) {
-              this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, newAssignmentSubmission)
-                .then(r => console.log('a' + r));
-            } else {
-              this.assignmentSubmissionService.setAssignmentSubmission(newAssignmentSubmission).then(r =>
-              {console.log(r); });
-            }
-            this.toastrService.success('Submitted assignment successfully!', '',{positionClass: 'toast-top-center'});
-            this.router.navigate(['assignment/view']);
-          });
-      });
-    }
+          }
+          else if (type === 'recording') {
+            newAssignmentSubmission  = {
+              student_attachment_recording: downloadUrl,
+              student_attachment_recording_name: file.nativeElement.files.item(0).name,
+              submitted_datetime: Date.now(),
+              assignmentDocId: this.assignmentDocId,
+              studentDocId: localStorage.getItem('activeDocId'),
+              instructorDocId: this.assignment.instructorDocId,
+              school: this.assignment.school,
+              group: this.assignment.group,
+              feedback: '',
+              feedback_datetime: -1
+            };
+          }
 
+          if (this.assignmentSubmission) {
+            this.assignmentSubmissionService.updateAssignmentSubmission(this.assignmentSubmission.docId, newAssignmentSubmission)
+              .then(r => {
+                this.toastrService.success('Updated ' + type + ' successfully!', '', {positionClass: 'toast-top-center'});
+              });
+          } else {
+            this.assignmentSubmissionService.setAssignmentSubmission(newAssignmentSubmission).then(r => {
+              this.toastrService.success('Uploaded ' + type + ' successfully!', '', {positionClass: 'toast-top-center'});
+            });
+          }
+        });
+    });
   }
 
 

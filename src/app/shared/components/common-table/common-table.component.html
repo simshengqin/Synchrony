@@ -66,7 +66,7 @@
         <tr *ngFor="let account of accounts; index as i;">
           <th scope="row">{{i + 1}}</th>
           <td *ngIf="tableColumns.includes(TableColumn.account_role)">{{account.role}}</td>
-          <td *ngIf="tableColumns.includes(TableColumn.account_created_datetime)">{{account.created_datetime | date: monthYearFormat}}</td>
+          <td *ngIf="tableColumns.includes(TableColumn.account_created_datetime)">{{account.created_datetime | date: dateTimeFormat}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.account_username)">{{account.username}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.account_school)">{{account.school}}</td>
           <td *ngIf="tableColumns.includes(TableColumn.account_group)">{{account.group}}</td>

@@ -12,8 +12,10 @@ export interface AssignmentSubmission {
   school?: string;
   group?: string;
   submitted_datetime?: number;
-  student_attachment?: Attachment;
-  student_attachment_name?: string;
+  student_attachment_scoresheet?: Attachment;
+  student_attachment_scoresheet_name?: string;
+  student_attachment_recording?: Attachment;
+  student_attachment_recording_name?: string;
   feedback?: string;
   instructor_feedback_attachment_name?: string,
   instructor_feedback_attachment?: string;
