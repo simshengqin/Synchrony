@@ -9,9 +9,24 @@
     <div  class="modal-body">
       {{description}}
       <textarea *ngIf="title == 'Recording Complete'" class="modal-content form-control mt-2" placeholder="Enter your feedback here" [(ngModel)]="feedback"></textarea>
-      <small *ngIf="assignmentSubmission && assignmentSubmission.feedback" class="form-text text-muted" >
+      <small *ngIf="assignmentSubmission && assignmentSubmission.feedback && title !== 'Recording Instructions'" class="form-text text-muted" >
         Previous feedback: {{assignmentSubmission.feedback}}
       </small>
+      <div *ngIf="title == 'Recording Instructions'">
+        <div class="form-text" >
+          Download the scoresheet pdf and load it:
+          <a #scoresheet target="_blank" [href]="assignmentSubmission?.student_attachment_scoresheet">
+            {{assignmentSubmission?.student_attachment_scoresheet_name}}
+          </a>
+        </div>
+        <div class="form-text" >
+          Download the video recording and load it:
+          <a #videoPlayer target="_blank" [href]="assignmentSubmission?.student_attachment_recording">
+            {{assignmentSubmission?.student_attachment_recording_name}}
+          </a>
+          <p>Then, click on the grey button below to share your screen and the white circle record button to start recording</p>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <div *ngFor="let button of buttons">

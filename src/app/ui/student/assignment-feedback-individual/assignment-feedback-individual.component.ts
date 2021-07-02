@@ -4,6 +4,7 @@ import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Assignment} from '../../../core/models/assignment';
+import {AssignmentService} from '../../../core/services/assignment.service';
 
 @Component({
   selector: 'app-assignment-feedback-individual',
@@ -13,8 +14,10 @@ import {Assignment} from '../../../core/models/assignment';
 export class AssignmentFeedbackIndividualComponent implements OnInit {
   assignmentSubmission: AssignmentSubmission;
   assignmentSubmissionDocId: string;
+  assignment: Assignment;
   constructor(
     private assignmentSubmissionService: AssignmentSubmissionService,
+    private assignmentService: AssignmentService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) { }
@@ -25,7 +28,9 @@ export class AssignmentFeedbackIndividualComponent implements OnInit {
       this.assignmentSubmission = await this.assignmentSubmissionService.getAssignmentSubmission(this.assignmentSubmissionDocId)
         .pipe(first())
         .toPromise();
-      console.log('tttt');
+      this.assignment = await this.assignmentService.getAssignment(this.assignmentSubmission.assignmentDocId)
+        .pipe(first())
+        .toPromise();
       console.log(this.assignmentSubmission);
     });
 

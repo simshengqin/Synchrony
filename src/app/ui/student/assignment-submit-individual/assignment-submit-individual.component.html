@@ -11,7 +11,7 @@
 
   <div class="form-group mb-3">
     <label>Attach Score Sheet</label>
-    <input #scoresheetFile type="file" class="form-control">
+    <input #scoresheetFile type="file" class="form-control" accept="application/pdf">
     <div *ngIf="assignmentSubmission && assignmentSubmission.student_attachment_scoresheet" class="form-text text-muted" >
       Previous Submission: <a [href]="assignmentSubmission.student_attachment_scoresheet">{{assignmentSubmission.student_attachment_scoresheet_name}}</a>
     </div>
@@ -19,7 +19,7 @@
   </div>
   <div class="form-group mb-3">
     <label>Attach Recording</label>
-    <input #recordingFile type="file" class="form-control">
+    <input #recordingFile type="file" class="form-control" accept="video/*">
     <div *ngIf="assignmentSubmission && assignmentSubmission.student_attachment_recording" class="form-text text-muted" >
       Previous Submission: <a [href]="assignmentSubmission.student_attachment_recording">{{assignmentSubmission.student_attachment_recording_name}}</a>
     </div>

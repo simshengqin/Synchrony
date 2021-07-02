@@ -1,17 +1,30 @@
 <div class="assignment-mark-individual-wrapper wrapper-padding">
-  <h1 *ngIf="assignment && student" class="mb-3">Mark {{assignment.name}} for {{student.firstName + ' ' +student.lastName}}</h1>
-  <div [ngClass]="{'invisible' : isRecording}" class="form-text mb-3" >
-    Download the scoresheet and open it in the pdf viewer on the left:
-    <a #scoresheet target="_blank" [href]="assignmentSubmission?.student_attachment_scoresheet">
-      {{assignmentSubmission?.student_attachment_scoresheet_name}}
-    </a>
+  <h1 *ngIf="assignment && student" class="mb-1">Mark {{assignment.name}} for {{student.firstName + ' ' +student.lastName}}</h1>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="16px" class="mb-2">
+    <button class="btn btn-info" (click)="onInstructionsClick()">View Instructions</button>
+    <label class="btn btn-primary mb-0">
+      <i class="fa fa-image"></i> Load PDF
+      <input #pdfInput type="file" accept="application/pdf"  class="d-none"(change)="onLoadPdfClick($event)" [textContent]="'Load Pdf'"/>
+    </label>
+    <label class="btn btn-primary mb-0">
+      <i class="fa fa-image"></i> Load video
+      <input #videoInput type="file" accept="video/*"  class="d-none"(change)="loadVideo()" [textContent]="'Upload Video'"/>
+    </label>
   </div>
-  <div [ngClass]="{'invisible' : isRecording}" class="form-text mb-3" >
-    Download the video recording and open it in the video player on the right:
-    <a #videoPlayer target="_blank" [href]="assignmentSubmission?.student_attachment_recording">
-      {{assignmentSubmission?.student_attachment_recording_name}}
-    </a>
-  </div>
+
+  <!--  <div [ngClass]="{'invisible' : isRecording}" class="form-text mb-1" >-->
+<!--    Download the scoresheet and open it in the pdf viewer on the left:-->
+<!--    <a #scoresheet target="_blank" [href]="assignmentSubmission?.student_attachment_scoresheet">-->
+<!--      {{assignmentSubmission?.student_attachment_scoresheet_name}}-->
+<!--    </a>-->
+<!--  </div>-->
+<!--  <div [ngClass]="{'invisible' : isRecording}" class="form-text mb-3" >-->
+<!--    Download the video recording and open it in the video player on the right:-->
+<!--    <a #videoPlayer target="_blank" [href]="assignmentSubmission?.student_attachment_recording">-->
+<!--      {{assignmentSubmission?.student_attachment_recording_name}}-->
+<!--    </a>-->
+<!--    <p>Then, click on the grey button below to share your screen and the white circle record button to start recording</p>-->
+<!--  </div>-->
   <div fxLayout="row" fxLayoutGap="32px" class="mb-5">
     <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
     <div fxLayout="column" fxLayoutAlign="center" fxFlex="50">

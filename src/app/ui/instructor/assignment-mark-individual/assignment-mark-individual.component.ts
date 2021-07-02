@@ -14,6 +14,8 @@ import {HttpClient} from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {VideojsRecordComponent} from '../../../shared/components/videojs-record/videojs-record.component';
+import {VideoPlayerComponent} from '../../../shared/components/video-player/video-player.component';
+import {NgxExtendedPdfViewerComponent} from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-assignment-mark-individual',
   templateUrl: './assignment-mark-individual.component.html',
@@ -32,6 +34,9 @@ export class AssignmentMarkIndividualComponent implements OnInit {
   @ViewChild('feedbackAttachment') feedbackAttachment: ElementRef;
   recordedVideo: Blob;
   @ViewChild(VideojsRecordComponent) videojsRecordComponent: VideojsRecordComponent;
+  @ViewChild(VideoPlayerComponent) videoPlayerComponent: VideoPlayerComponent;
+  @ViewChild('videoInput') videoInput: ElementRef;
+  @ViewChild(NgxExtendedPdfViewerComponent) ngxExtendedPdfViewerComponent: NgxExtendedPdfViewerComponent;
   constructor(
     private router: Router,
     private assignmentSubmissionService: AssignmentSubmissionService,
@@ -103,7 +108,7 @@ export class AssignmentMarkIndividualComponent implements OnInit {
     }
   }
   async onFeedback(feedback: string) {
-    const filename = 'Feedback.mp4';
+    const filename = this.assignment.name + ' - ' + this.student.firstName + ' ' + this.student.lastName + '\'s Feedback.mp4';
     const path = 'feedbacks/' + filename;
     this.assignmentSubmission.instructor_feedback_attachment_name = filename;
     const task = this.afStorage.upload(path, this.recordedVideo);
@@ -149,4 +154,16 @@ export class AssignmentMarkIndividualComponent implements OnInit {
     this.feedbackAttachment.nativeElement.download = 'feedback.mp4';
   }
 
+  onInstructionsClick() {
+    this.confirmModalComponent.open
+    ('Recording Instructions', '', ['ok'], null, this.assignmentSubmission);
+  }
+
+  loadVideo() {
+    this.videoPlayerComponent.loadVideo(this.videoInput);
+  }
+
+  onLoadPdfClick($event) {
+    this.ngxExtendedPdfViewerComponent.src = $event.target.files.item(0);
+  }
 }
