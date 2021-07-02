@@ -13,6 +13,7 @@ import {ToastrService} from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {VideojsRecordComponent} from '../../../shared/components/videojs-record/videojs-record.component';
 @Component({
   selector: 'app-assignment-mark-individual',
   templateUrl: './assignment-mark-individual.component.html',
@@ -30,6 +31,7 @@ export class AssignmentMarkIndividualComponent implements OnInit {
   @ViewChild('scoresheet') scoresheet: ElementRef;
   @ViewChild('feedbackAttachment') feedbackAttachment: ElementRef;
   recordedVideo: Blob;
+  @ViewChild(VideojsRecordComponent) videojsRecordComponent: VideojsRecordComponent;
   constructor(
     private router: Router,
     private assignmentSubmissionService: AssignmentSubmissionService,
@@ -127,6 +129,7 @@ export class AssignmentMarkIndividualComponent implements OnInit {
         ['close', 'discard'], null, this.assignmentSubmission);
     }
     else {
+      this.videojsRecordComponent.startRecording();
       this.isRecording = true;
     }
   }

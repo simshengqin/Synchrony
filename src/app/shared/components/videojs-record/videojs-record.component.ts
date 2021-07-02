@@ -75,14 +75,16 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
       // video.js configuration
     this.config = {
       controls: true,
-      autoplay: false,
+      // autoplay: false,
       fluid: false,
-      loop: false,
-      width: 320,
-      height: 240,
+      // loop: false,
+      width: 80,
+      height: 45,
       bigPlayButton: false,
       controlBar: {
-        volumePanel: false
+        volumePanel: false,
+        fullscreenToggle: false,
+        bigPlayButton: false
       },
       plugins: {
         // wavesurfer section is only needed when recording audio-only
@@ -92,7 +94,9 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
           audio: true,
           screen: true,
           // video: true,
-          debug: true
+          debug: true,
+          displayMilliseconds: false,
+          maxLength: 600
         }
       }
     };
@@ -104,14 +108,13 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
   // after the component template itself has been rendered
   ngAfterViewInit() {
     // ID with which to access the template's video element
-    let el = 'video_' + this.idx;
-
+    const el = 'video_' + this.idx;
     // setup the player via the unique element ID
     this.player = videojs(document.getElementById(el), this.config, () => {
       console.log('player ready! id:', el);
 
       // print version information at startup
-      var msg = 'Using video.js ' + videojs.VERSION +
+      const msg = 'Using video.js ' + videojs.VERSION +
         ' with videojs-record ' + videojs.getPluginVersion('record') +
         ' and recordrtc ' + RecordRTC.version;
       videojs.log(msg);
@@ -132,9 +135,8 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
+      // this.player.record().saveAs({video: 'my-video-file-name.webm'});
       this.recordingEmit.emit(this.player.recordedData);
-
-      // this.player.record().saveAs({video: 'foo'}, 'convert');
     });
 
     // error handling
@@ -153,6 +155,10 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
       this.player.dispose();
       this.player = false;
     }
+  }
+
+  startRecording() {
+    this.player.record().start();
   }
 
 }

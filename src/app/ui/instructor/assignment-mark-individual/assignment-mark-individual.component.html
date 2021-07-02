@@ -12,20 +12,24 @@
       {{assignmentSubmission?.student_attachment_recording_name}}
     </a>
   </div>
-  <div fxLayout="row" fxLayoutGap="32px" class="mb-3">
+  <div fxLayout="row" fxLayoutGap="32px" class="mb-5">
     <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
     <div fxLayout="column" fxLayoutAlign="center" fxFlex="50">
       <app-video-player></app-video-player>
     </div>
   </div>
-  <div  fxLayout="row"  class="form-text mb-3" ><!-- *ngIf="recorded"-->
-    Recorded file: <a #feedbackAttachment>Download here</a>
+<!--  <div fxLayout="row" fxLayoutAlign="center">-->
+<!--    <button *ngIf="!isRecording" class="btn btn-success mr-3" (click)="onRecordClick()">{{recorded ? 'Record Again' : 'Record'}}</button>-->
+<!--    <button *ngIf="isRecording"  class="btn btn-danger mr-3" (click)="stopRecording()">Stop</button>-->
+<!--  </div>-->
+  <div  fxLayout="row" fxLayoutAlign="center" class="form-text mb-3" ><!-- *ngIf="recorded"-->
+    <app-videojs-record class = "mb-3"(recordingEmit)="updateFeedbackAttachment($event)"></app-videojs-record>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" class="form-text mb-3" [ngClass]="{'invisible' : !recorded}" ><!-- *ngIf="recorded"-->
+    Click <a #feedbackAttachment>&nbsp;here&nbsp;</a> to download the recording
   </div>
   <div fxLayout="row" fxLayoutAlign="center">
-    <button *ngIf="!isRecording" class="btn btn-success mr-3" (click)="onRecordClick()">{{recorded ? 'Record Again' : 'Record'}}</button>
-    <button *ngIf="isRecording"  class="btn btn-danger mr-3" (click)="stopRecording()">Stop</button>
     <button *ngIf="!isRecording && recorded"  class="btn btn-secondary" (click)="submitFeedback()">Submit</button>
   </div>
-  <app-videojs-record (recordingEmit)="updateFeedbackAttachment($event)"></app-videojs-record>
   <app-confirm-modal (responseEmit)="onCloseModal($event)" (feedbackEmit)="onFeedback($event)"></app-confirm-modal>
 </div>
