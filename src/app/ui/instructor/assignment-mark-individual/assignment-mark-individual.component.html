@@ -18,14 +18,14 @@
       <app-video-player></app-video-player>
     </div>
   </div>
-  <div fxLayout="row" *ngIf="recorded" class="form-text mb-3" >
-    Recorded file: <a [href]="instructorFeedbackAttachment">{{instructorFeedbackAttachmentName}}</a>
+  <div  fxLayout="row"  class="form-text mb-3" ><!-- *ngIf="recorded"-->
+    Recorded file: <a #feedbackAttachment>Download here</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="center">
     <button *ngIf="!isRecording" class="btn btn-success mr-3" (click)="onRecordClick()">{{recorded ? 'Record Again' : 'Record'}}</button>
     <button *ngIf="isRecording"  class="btn btn-danger mr-3" (click)="stopRecording()">Stop</button>
     <button *ngIf="!isRecording && recorded"  class="btn btn-secondary" (click)="submitFeedback()">Submit</button>
   </div>
-  <app-videojs-record></app-videojs-record>
+  <app-videojs-record (recordingEmit)="updateFeedbackAttachment($event)"></app-videojs-record>
   <app-confirm-modal (responseEmit)="onCloseModal($event)" (feedbackEmit)="onFeedback($event)"></app-confirm-modal>
 </div>

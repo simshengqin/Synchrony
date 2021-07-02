@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ElementRef
+  ElementRef, Output, EventEmitter
 } from '@angular/core';
 
 import videojs from 'video.js';
@@ -35,7 +35,7 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
   private WaveSurfer = require('wavesurfer.js');
   // reference to the element itself: used to access events and methods
   private _elementRef: ElementRef;
-
+  @Output() recordingEmit: EventEmitter<Blob> = new EventEmitter<Blob>();
   // index to create unique ID for component
   idx = 'clip1';
 
@@ -132,6 +132,9 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
+      this.recordingEmit.emit(this.player.recordedData);
+
+      // this.player.record().saveAs({video: 'foo'}, 'convert');
     });
 
     // error handling
