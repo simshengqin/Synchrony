@@ -26,6 +26,6 @@
     <button *ngIf="isRecording"  class="btn btn-danger mr-3" (click)="stopRecording()">Stop</button>
     <button *ngIf="!isRecording && recorded"  class="btn btn-secondary" (click)="submitFeedback()">Submit</button>
   </div>
-
+  <app-videojs-record></app-videojs-record>
   <app-confirm-modal (responseEmit)="onCloseModal($event)" (feedbackEmit)="onFeedback($event)"></app-confirm-modal>
 </div>

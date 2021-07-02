@@ -45,6 +45,7 @@ import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import { VideoPlayerComponent } from './shared/components/video-player/video-player.component';
+import { VideojsRecordComponent } from './shared/components/videojs-record/videojs-record.component';
 // import {SharedModule} from './shared/shared.module';
 
 
@@ -76,6 +77,7 @@ import { VideoPlayerComponent } from './shared/components/video-player/video-pla
     ConfirmModalComponent,
     HeaderComponent,
     VideoPlayerComponent,
+    VideojsRecordComponent,
   ],
     imports: [
         BrowserModule,
