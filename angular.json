@@ -39,7 +39,10 @@
               "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@videogular/ngx-videogular/fonts/videogular.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/wavesurfer.js/dist/wavesurfer.js",
+              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -113,7 +116,10 @@
               "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@videogular/ngx-videogular/fonts/videogular.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/wavesurfer.js/dist/wavesurfer.js",
+              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js"
+            ]
           }
         },
         "lint": {
@@ -142,6 +148,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Synchrony"
+    }
+  },
+  "defaultProject": "Synchrony",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -9,28 +9,32 @@ import videojs from 'video.js';
 import * as adapter from 'webrtc-adapter/out/adapter_no_global.js';
 import * as RecordRTC from 'recordrtc';
 
-/*
+
 // Required imports when recording audio-only using the videojs-wavesurfer plugin
 import * as WaveSurfer from 'wavesurfer.js';
+
 import * as MicrophonePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.microphone.js';
 WaveSurfer.microphone = MicrophonePlugin;
 
 // Register videojs-wavesurfer plugin
 import * as Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
-*/
+
 
 // register videojs-record plugin with this import
 import * as Record from 'videojs-record/dist/videojs.record.js';
 
+declare var require: any;
+// import * as WaveSurfer from 'wavesurfer.js';
+import * as WaveSurferRegions from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
 @Component({
   selector: 'app-videojs-record',
   templateUrl: './videojs-record.component.html',
   styleUrls: ['./videojs-record.component.scss']
 })
 export class VideojsRecordComponent implements OnInit, OnDestroy {
-
+  private WaveSurfer = require('wavesurfer.js');
   // reference to the element itself: used to access events and methods
-  private _elementRef: ElementRef
+  private _elementRef: ElementRef;
 
   // index to create unique ID for component
   idx = 'clip1';
@@ -45,8 +49,30 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
 
     // save reference to plugin (so it initializes)
     this.plugin = Record;
+    // const ws  = WaveSurfer.create( {
+    //     container: this.player,
+    //     backend: 'WebAudio',
+    //     waveColor: '#36393b',
+    //     progressColor: 'black',
+    //     debug: true,
+    //     cursorWidth: 1,
+    //     displayMilliseconds: true,
+    //     hideScrollbar: true,
+    //     plugins: [
+    //       // enable microphone plugin
+    //       WaveSurfer.microphone.create({
+    //         bufferSize: 4096,
+    //         numberOfInputChannels: 1,
+    //         numberOfOutputChannels: 1,
+    //         constraints: {
+    //           video: false,
+    //           audio: true
+    //         }
+    //       })
+    //     ]
+    //   });
 
-    // video.js configuration
+      // video.js configuration
     this.config = {
       controls: true,
       autoplay: false,
@@ -59,34 +85,13 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
         volumePanel: false
       },
       plugins: {
-        /*
         // wavesurfer section is only needed when recording audio-only
-        wavesurfer: {
-            backend: 'WebAudio',
-            waveColor: '#36393b',
-            progressColor: 'black',
-            debug: true,
-            cursorWidth: 1,
-            displayMilliseconds: true,
-            hideScrollbar: true,
-            plugins: [
-                // enable microphone plugin
-                WaveSurfer.microphone.create({
-                    bufferSize: 4096,
-                    numberOfInputChannels: 1,
-                    numberOfOutputChannels: 1,
-                    constraints: {
-                        video: false,
-                        audio: true
-                    }
-                })
-            ]
-        },
-        */
         // configure videojs-record plugin
+        // wavesurfer: ws,
         record: {
-          audio: false,
-          video: true,
+          audio: true,
+          screen: true,
+          // video: true,
           debug: true
         }
       }

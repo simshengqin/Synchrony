@@ -103,7 +103,7 @@ import { VideojsRecordComponent } from './shared/components/videojs-record/video
         VgCoreModule,
         VgControlsModule,
         VgOverlayPlayModule,
-        VgBufferingModule
+        VgBufferingModule,
 
     ],
   providers: [],
