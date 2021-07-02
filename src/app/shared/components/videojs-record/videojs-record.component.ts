@@ -22,7 +22,7 @@ import * as Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
 
 // register videojs-record plugin with this import
 import * as Record from 'videojs-record/dist/videojs.record.js';
-
+import 'videojs-record/dist/plugins/videojs.record.ts-ebml.js';
 declare var require: any;
 // import * as WaveSurfer from 'wavesurfer.js';
 import * as WaveSurferRegions from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
@@ -96,7 +96,8 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
           // video: true,
           debug: true,
           displayMilliseconds: false,
-          maxLength: 600
+          maxLength: 600,
+          convertEngine: 'ts-ebml'
         }
       }
     };
@@ -135,7 +136,9 @@ export class VideojsRecordComponent implements OnInit, OnDestroy {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
-      // this.player.record().saveAs({video: 'my-video-file-name.webm'});
+      // const recordedDataMp4 = this.player.record().saveAs({video: 'my-video-file-name.mp4'}, 'convert');
+      // console.log(recordedDataMp4);
+      // this.recordingEmit.emit(recordedDataMp4);
       this.recordingEmit.emit(this.player.recordedData);
     });
 
