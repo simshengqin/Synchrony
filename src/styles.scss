@@ -3,13 +3,13 @@
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-//@import '~@angular/material/theming';
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-//@include mat-core();
+@include mat-core();
 
 // import custom theme
 @import 'theme';
@@ -18,12 +18,12 @@
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-//@include angular-material-theme($gigworks-web-theme);
+@include angular-material-theme($gigworks-web-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
 // regular style toast
-// @import '~ngx-toastr/toastr';
+@import '~ngx-toastr/toastr';
 .wrapper-padding {
   padding: 32px;
 }
@@ -114,10 +114,10 @@ textarea {
 }
 
 /* Importing Bootstrap SCSS file. */
-//@import '~bootstrap/scss/bootstrap.scss';
-//@import "~bootstrap/dist/css/bootstrap.css";
-//@import "~slick-carousel/slick/slick.scss";
-//@import "~slick-carousel/slick/slick-theme.scss";
+@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/dist/css/bootstrap.css";
+// @import "~slick-carousel/slick/slick.scss";
+// @import "~slick-carousel/slick/slick-theme.scss";
 
 
 @mixin margin-classes {
