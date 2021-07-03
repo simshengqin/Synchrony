@@ -41,7 +41,9 @@
             ],
             "scripts": [
               "./node_modules/wavesurfer.js/dist/wavesurfer.js",
-              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js"
+              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"  
             ]
           },
           "configurations": {
@@ -119,7 +121,9 @@
             ],
             "scripts": [
               "./node_modules/wavesurfer.js/dist/wavesurfer.js",
-              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js"
+              "./node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"  
             ]
           }
         },
