@@ -48,7 +48,36 @@ import { VideoPlayerComponent } from './shared/components/video-player/video-pla
 import { VideojsRecordComponent } from './shared/components/videojs-record/videojs-record.component';
 // import {SharedModule} from './shared/shared.module';
 
-
+import { MatCardModule } from '@angular/material/card';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_DATE_FORMATS, MatOptionModule, MatRippleModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RouterModule } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,6 +133,45 @@ import { VideojsRecordComponent } from './shared/components/videojs-record/video
         VgControlsModule,
         VgOverlayPlayModule,
         VgBufferingModule,
+        
+        MatButtonToggleModule,
+        CommonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatOptionModule,
+        MatAutocompleteModule,
+        MatGridListModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        RouterModule,
+        MatGridListModule,
+        MatDividerModule,
+        FlexLayoutModule,
+        MatChipsModule,
+        MatTabsModule,
+        ToastrModule,
+        MatDialogModule,
+        NgbModule,
+        MatProgressBarModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatSliderModule,
+        FormsModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        DragDropModule,
+        MatRippleModule,
+        MatRadioModule,
 
     ],
   providers: [],
