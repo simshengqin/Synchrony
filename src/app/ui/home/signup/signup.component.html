@@ -48,8 +48,14 @@
         <option>Group 5</option>
       </select>
     </div>
-    <button class="btn btn-success mr-4" (click)="signUp()">Sign up</button>
-    <button class="btn btn-secondary mr-4" (click)="goLoginPage()">Go login page</button>
+    <div fxLayout="row">
+      <div fxLayout="row">
+        <button class="primary-btn mr-3" (click)="signUp()">Sign Up</button>
+      </div>  
+      <div fxLayout="row">
+        <button class="outline-btn mr-3" (click)="goLoginPage()">Go back</button>       
+      </div>
+    </div>
   </form>
 
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
