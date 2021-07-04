@@ -11,9 +11,14 @@
   </div>
 
   <h4 class="mb-3">Upload CSV File</h4>
-  <span class="mr-1 mb-3">Upload accounts: </span> <input #file class="mb-3" type="file">
+  <span class="mr-1 mb-3">Upload accounts: </span>
+  <label class="btn primary-btn">
+    <i class="fa fa-image"></i> Choose File
+    <input #file type="file" accept="text/csv"  class="d-none" [textContent]="'Choose File'"/>
+  </label>
+<!--  <input #file class="mb-3" type="file">-->
   <div>
-    <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+    <button class="btn primary-btn" (click)="uploadFile()">Upload</button>
   </div>
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 </div>
