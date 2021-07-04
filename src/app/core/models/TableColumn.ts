@@ -17,10 +17,10 @@ export enum TableColumn {
   freelancer_group = 'Groups',
   wage_created_datetime = 'Month/Year',
   wage_hours = 'Hours',
-  account_role = 'Role',
-  account_username = 'Username',
-  account_school = 'School',
-  account_group = 'Group',
-  account_created_datetime = 'Created Date',
+  account_role = 'role',
+  account_username = 'username',
+  account_school = 'school',
+  account_group = 'group',
+  account_created_datetime = 'created_datetime',
   actions = 'actions'
 }

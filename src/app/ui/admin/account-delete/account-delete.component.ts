@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
-import {Freelancer} from '../../../core/models/freelancer';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FreelancerService} from '../../../core/services/freelancer.service';
 import {Account} from '../../../core/models/account';
 import {AccountService} from '../../../core/services/account.service';
 import {FilterService} from '../../../core/services/filter.service';
 import {first} from 'rxjs/operators';
+import {CommonTableComponent} from '../../../shared/components/common-table/common-table.component';
 
 @Component({
   selector: 'app-account-delete',
@@ -17,10 +16,11 @@ import {first} from 'rxjs/operators';
 })
 export class AccountDeleteComponent implements OnInit {
   tableActions?: Array<TableAction> = [TableAction.account_delete];
-  tableColumns?: Array<TableColumn> = [TableColumn.account_role, TableColumn.account_created_datetime,
+  tableColumns?: Array<TableColumn> = [TableColumn.position, TableColumn.account_role, TableColumn.account_created_datetime,
     TableColumn.account_username, TableColumn.account_school, TableColumn.account_group, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.account_role, FilterAction.account_school, FilterAction.account_group];
   accounts?: Array<Account>;
+  @ViewChild(CommonTableComponent) commonTableComponent: CommonTableComponent;
   constructor(
     private router: Router,
     private accountService: AccountService,
@@ -47,7 +47,7 @@ export class AccountDeleteComponent implements OnInit {
           }
         }
         this.accounts = filteredAccounts;
-
+        this.commonTableComponent.loadTableData(this.accounts);
         console.log(this.accounts);
 
 

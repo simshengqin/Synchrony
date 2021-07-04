@@ -16,6 +16,7 @@ import {DateHelper} from '../../helpers/date-helper';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
+import {AccountService} from '../../../core/services/account.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -80,6 +81,7 @@ export class CommonTableComponent implements OnInit {
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
     private assignmentSubmissionService: AssignmentSubmissionService,
+    private accountService: AccountService,
     private dateHelper: DateHelper,
     private router: Router,
   ) {}
@@ -147,7 +149,10 @@ export class CommonTableComponent implements OnInit {
     this.router.navigate(['wages/view'], { queryParams: { freelancerDocId : freelancer.docId }});
   }
 
-  onDeleteClickAccount(account: Account) {
+  async onDeleteClickAccount(accountDocId: string) {
+    const account = await this.accountService.getAccount(accountDocId)
+      .pipe(first())
+      .toPromise();
     this.confirmModalComponent.open('Delete Account', 'Are you sure you want to delete '
       + account.username + '?', ['close', 'delete'], null, null, account);
   }
