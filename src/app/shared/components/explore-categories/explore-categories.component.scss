@@ -2,8 +2,12 @@
 
 .explore-categories-wrapper {
   .card {
-    height: 175px;
+    height: 357px;
     margin: 32px 32px 32px 32px;
+    .card-img-top {
+      // width: 100%;
+      height: 172px;
+    }
     .card-text {
       height: 40px;
     }

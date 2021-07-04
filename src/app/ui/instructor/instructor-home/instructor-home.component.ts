@@ -10,11 +10,14 @@ import {LoginService} from '../../../core/services/login.service';
 export class InstructorHomeComponent implements OnInit {
   homeCategories: Array<HomeCategory> = [
     {title: 'New Assignments', description: 'Create assignments for students',
-      image_url: '', link_text: 'Create new assignment', target_url: 'assignment/new'},
+      image_url: 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fhome_assignment_new.jpg?alt=media&token=8e41ad21-4c87-461e-bacb-6f7596cca34e',
+      link_text: 'Create Assignments', target_url: 'assignment/new'},
     {title: 'Edit Assignments', description: 'View & edit assignments',
-      image_url: '', link_text: 'View assignment', target_url: 'assignment/edit'},
+      image_url: 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fhome_assignment_edit.jpg?alt=media&token=b90baa0b-80f2-493f-aab0-69364d1e749b',
+      link_text: 'Edit Assignments', target_url: 'assignment/edit'},
     {title: 'Mark Assignments', description: 'Mark assignments for students',
-      image_url: '', link_text: 'Mark assignment', target_url: 'assignment/mark'}
+      image_url: 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fhome_assignment_mark.jpg?alt=media&token=7156b15a-b79e-422c-a539-2ad65eaa0348',
+      link_text: 'Mark Assignments', target_url: 'assignment/mark'}
   ];
   constructor(
     // private loginService: LoginService,
