@@ -2,14 +2,25 @@
   <div class="categories">
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
       <ng-container *ngFor="let category of homeCategories; let i = index">
-        <div class="category-group" fxLayout="column" fxFlex.gt-sm="33.3" fxFlex.gt-xs="50" fxFlex.lt-sm="50" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="start center" fxLayout="column">
-          <a class="hover-none" href="{{category.target_url}}">
-            <div><img class="category-img mb-3" src="{{category.image_url}}"></div>
-            <h2 class="category-name">{{ category.title}}</h2>
-            <p class="category-desc" fxHide.lt-sm>{{ category.description}}</p>
-            <h3 class="category-link coloured-link" fxHide.lt-sm>{{ category.link_text + ' >'}}</h3>
-          </a>
+        <div class="card" style="width: 18rem;">
+          <img *ngIf="category.image_url" class="card-img-top" src="category.image_url" alt="Card image cap">
+          <div class="card-body">
+            <div class="card-title bold-text mb-3">{{ category.title}}</div>
+            <p class="card-text">{{ category.description}}</p>
+            <a href="{{category.target_url}}" class="btn btn-primary">{{ category.link_text + ' >'}}</a>
+          </div>
         </div>
+<!--        <mat-card class="category-group" fxLayout="column" fxFlex.gt-sm="30" fxFlex.gt-xs="47" fxFlex.lt-sm="47" fxLayoutAlign="start start" fxLayoutAlign.lt-sm="start center" fxLayout="column">-->
+<!--          <a class="hover-none" href="{{category.target_url}}">-->
+<!--            <div><img class="category-img mb-3" src="{{category.image_url}}"></div>-->
+<!--            <mat-card-title class="category-name">{{ category.title}}</mat-card-title>-->
+<!--            <mat-card-content>-->
+<!--              <p class="category-desc">{{ category.description}}</p>-->
+<!--              <p class="category-link coloured-link">{{ category.link_text + ' >'}}</p>-->
+<!--            </mat-card-content>-->
+
+<!--          </a>-->
+<!--        </mat-card>-->
       </ng-container>
     </div>
   </div>

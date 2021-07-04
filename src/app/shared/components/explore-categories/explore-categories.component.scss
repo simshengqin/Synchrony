@@ -1,104 +1,13 @@
 @import "../../../styles/variables";
 
 .explore-categories-wrapper {
-  @media only screen and (max-width: 576px) {
-    padding: 16px 0;
-  }
-
-  .categories {
-    width: 80%;
-    margin: auto;
-
-    @media only screen and (max-width: 576px) {
-      width: 95%;
-
-      > div {
-        flex-wrap: nowrap !important;
-        overflow-x: auto;
-      }
+  .card {
+    height: 175px;
+    .card-text {
+      height: 40px;
     }
-    .hover-none:hover {
-      text-decoration: none;
-    }
-  }
-
-  .category-group {
-    padding-bottom: 64px;
-    padding-left: 32px;
-
-    .category-img {
-      padding-top:20px;
-      width:40%;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .category-group {
-      padding-bottom: 32px;
-      padding-left: 16px;
-
-      .category-img {
-        padding-top:8px;
-        width:40%;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 576px) {
-    .category-group {
-      padding-bottom: 16px;
-      padding-left: 8px;
-      min-width: 100px !important;
-
-      .category-img {
-        padding-top: 0;
-        width:80%;
-      }
-
-      > div {
-        display: flex;
-        justify-content: center;
-      }
-
-      h2 {
-        text-align: center;
-      }
-    }
-  }
-
-  h3 {
-    margin: 0 !important;
-  }
-
-  .category-link {
-    font: 100 16px/24px "Gilroy Regular", sans-serif;
-  }
-
-  .category-name {
-    font: 700 20px/24px "Gilroy Bold", sans-serif;
-
-    @media only screen and (max-width: 576px) {
-      font: 400 12px/14px "Gilroy Bold", sans-serif;
-    }
-  }
-
-  .category-name, .category-desc {
-    color: $coreBlack;
-  }
-}
-
-@media (max-width: 599px) {
-  .explore-categories-wrapper {
-    .categories {
-      width: 100%;
-    }
-  }
-}
-
-@media (min-width: 599px) and (max-width: 959px) {
-  .explore-categories-wrapper {
-    .categories {
-      width: 100%;
+    .card-title {
+      font-weight: bold;
     }
   }
 }
