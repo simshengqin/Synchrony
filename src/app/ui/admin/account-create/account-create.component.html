@@ -2,7 +2,7 @@
 <div class="account-create-wrapper wrapper-padding">
   <h1 class="mb-3">Create Accounts and Groups</h1>
   <div class="mb-2">Please upload a file similar to the following format:
-     <div class="form-text text-muted" >
+     <div class="mt-2 form-text text-muted" >
       Accounts:<a [href]="'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/sample_data%2Faccounts_sample.csv?alt=media&token=3c65aa7e-3981-4b3e-9076-18a39261acad'">
          {{"accounts_sample.csv"}}
        </a>
@@ -15,7 +15,7 @@
 <!--  </label>-->
   <input #file class="mb-3 form-control" accept=".csv" type="file">
   <div>
-    <button class="btn primary-btn" (click)="uploadFile()">Upload</button>
+    <button class="btn btn-info" (click)="uploadFile()">Upload</button>
   </div>
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 </div>

@@ -1,5 +1,12 @@
 @import "../../../styles/variables";
 
 .assignment-submit-individual-wrapper {
-
+  .attachment-name {
+    position: relative;
+    top: -5px;
+  }
+  .submit-btn {
+    position: relative;
+    top: -5px;
+  }
 }

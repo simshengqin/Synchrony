@@ -1,13 +1,14 @@
 <app-header [role]="'student'"></app-header>
-<div class="assignment-submit-individual-wrapper wrapper-padding">
+<div class="assignment-submit-individual-wrapper wrapper-padding max-width-section">
   <h1 class="mb-3" *ngIf="assignment">{{assignment.name}}</h1>
-  <h2 class="mb-3">Assignment Description</h2>
+  <h3 class="mb-3">Assignment Description</h3>
   <p class="mb-3" *ngIf="assignment">{{assignment.description}}</p>
-  <h2 class="mb-3">Assignment Attachments</h2>
-  <div *ngIf="assignment && assignment.instructor_attachment" >
-    <a [href]="assignment.instructor_attachment">{{assignment.instructor_attachment_name}}</a>
+  <h3 class="mb-3">Assignment Attachments</h3>
+  <div class="mb-2" *ngIf="assignment && assignment.instructor_attachment" >
+    <mat-icon class="mr-2">attachment</mat-icon>
+    <a class="attachment-name"[href]="assignment.instructor_attachment">{{assignment.instructor_attachment_name}}</a>
   </div>
-  <h2 class="mb-3">Assignment Submission</h2>
+  <h3 class="mb-3">Assignment Submission</h3>
 
   <div class="form-group mb-3">
     <label>Attach Score Sheet</label>
@@ -26,9 +27,10 @@
   </div>
 
   <div class="go-back-section" (click)="onGoBackClick(assignment)">
-    <mat-icon class="mr-1">arrow_back</mat-icon>
-    <span class="go-back-text">Back</span>
+    <mat-icon class="mr-1 mt-1">arrow_back</mat-icon>
+    <span class="go-back-text mr-3 mt-1">Back</span>
+    <button *ngIf="assignment" class="btn btn-info submit-btn" (click)="onSubmitClick()">Submit</button>
   </div>
-  <button *ngIf="assignment" class="btn btn-primary" (click)="onSubmitClick()">Submit</button>
+
   <app-confirm-modal></app-confirm-modal>
 </div>

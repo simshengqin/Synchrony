@@ -1,9 +1,9 @@
 <app-header [role]="'student'"></app-header>
-<div class="assignment-feedback-individual-wrapper wrapper-padding">
+<div class="assignment-feedback-individual-wrapper wrapper-padding max-width-section">
   <h1 *ngIf="assignment" class="mb-3">{{assignment.name}}'s Feedback</h1>
-  <h2 class="mb-3">Instructor's feedback</h2>
+  <h3 class="mb-3">Instructor's feedback</h3>
   <p *ngIf="assignmentSubmission"class="mb-3">{{assignmentSubmission.feedback}}</p>
-  <h2 class="mb-3">Attachments</h2>
+  <h3 class="mb-3">Attachments</h3>
   <div *ngIf="assignmentSubmission && assignmentSubmission.instructor_feedback_attachment" class="form-text mb-3" >
       Click to download: <a [href]="assignmentSubmission.instructor_feedback_attachment">{{assignmentSubmission.instructor_feedback_attachment_name}}</a>
   </div>
