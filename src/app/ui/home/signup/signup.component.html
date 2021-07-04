@@ -1,63 +1,72 @@
-<div class="signup-wrapper wrapper-padding">
-  <h1 class="mb-3">Create Account</h1>
-  <form>
-    <div class="form-group">
-      <label>Username</label>
-      <input #username type="text" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input #password type="password" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>First Name</label>
-      <input #firstName type="text" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input #lastName type="text" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Select Role</label>
-      <select #role class="form-control">
-        <!-- Hardcoded -->
-        <option>Student</option>
-        <option>Instructor</option>
-        <option>Freelancer</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Select School</label>
-      <select #school class="form-control" >
-        <!-- Hardcoded -->
-        <option>School 1</option>
-        <option>School 2</option>
-        <option>School 3</option>
-        <option>School 4</option>
-        <option>School 5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Select Group</label>
-      <select #group class="form-control">
-        <!-- Hardcoded -->
-        <option>Group 1</option>
-        <option>Group 2</option>
-        <option>Group 3</option>
-        <option>Group 4</option>
-        <option>Group 5</option>
-      </select>
-    </div>
-    <div fxLayout="row">
-      <div fxLayout="row">
-        <button class="primary-btn mr-3" (click)="signUp()">Sign Up</button>
-      </div>  
-      <div fxLayout="row">
-        <button class="outline-btn mr-3" (click)="goLoginPage()">Go back</button>       
-      </div>
-    </div>
-  </form>
+<div class="signup-wrapper">
+  <div fxLayout="row" class="row w-100" fxLayoutAlign="center center">
+    <div fxLayout="column" fxFlex.xl="40" fxFlex="50" fxHide.xs class="background-login-img max-vh"></div>
+    <div fxLayout="column" fxFlex.xl="60" fxFlex="50" fxFlex.xs="100" fxLayoutAlign="center center" class="max-vh right-section">
+      <div class="w-80">
+        <div class="align-content-center mx-auto">
+          <img fxLayout="row" class="mb-6 login-img mx-auto" src="https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Flogo.JPG?alt=media&token=53b10c15-aebe-4c6b-a578-6e675ac1130c">
+        </div>
+        <h3 class="login-heading mb-4">User Registration</h3>
+          <form>
+            <div class="input-group mb-3">
+              <input #username type="text" class="form-control"  placeholder="Username" required autofocus>
+            </div>
+            <div class="input-group mb-3">
+              <input #password type="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between"class="input-group mb-3">
+              <input #firstName fxFlex="38" type="text" class="form-control"  placeholder="First Name" required>
+              <input #lastName fxFlex="60" type="text" class="form-control"  placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+<!--              <label>Select Role</label>-->
+              <select #role class="form-control">
+                <!-- Hardcoded -->
+                <option>Select Role</option>
+                <option>Student</option>
+                <option>Instructor</option>
+                <option>Freelancer</option>
+              </select>
+            </div>
+<!--            <div fxLayout="row" fxLayoutAlign="space-between"class="input-group mb-1">-->
+<!--              <div fxFlex="50">Select School</div>-->
+<!--              <div fxFlex="50">Select Group</div>-->
+<!--            </div>-->
+            <div fxLayout="row" fxLayoutAlign="space-between"class="input-group mb-3">
+              <div fxFlex="49" class="form-group">
+                <select #school class="form-control" >
+                  <!-- Hardcoded -->
+                  <option>Select School</option>
+                  <option>School 1</option>
+                  <option>School 2</option>
+                  <option>School 3</option>
+                  <option>School 4</option>
+                  <option>School 5</option>
+                </select>
+              </div>
+              <div fxFlex="49" class="form-group">
+                <select #group class="form-control">
+                  <!-- Hardcoded -->
+                  <option>Select Group</option>
+                  <option>Group 1</option>
+                  <option>Group 2</option>
+                  <option>Group 3</option>
+                  <option>Group 4</option>
+                  <option>Group 5</option>
+                </select>
+              </div>
+            </div>
 
+            <button id="login" class="btn btn-lg btn-info btn-block btn-register font-weight-bold mb-2" type="submit" (click)="signUp()">Register</button>
+            <div class="text-center">
+              <br>
+              <a class="font-weight-bold .text-secondary" (click)="goLoginPage()">Back to login</a>
+            </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
   <app-confirm-modal (responseEmit)="onCloseModal($event)"></app-confirm-modal>
 
 </div>

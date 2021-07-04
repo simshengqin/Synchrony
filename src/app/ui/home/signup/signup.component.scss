@@ -1,5 +1,19 @@
 @import "../../../styles/variables";
 
 .signup-wrapper {
+  .max-vh {
+    min-height: 100vh;
+  }
+  .background-login-img {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fregister2.jpg?alt=media&token=c30808b2-5601-4db0-833d-309f24451992");
+    background-size: cover;
+    background-position: center;
+  }
+  .right-section {
+    //margin: 32px 0 32px 0;
+    input, select {
+      border-radius: 2rem;
+    }
+  }
 
 }

@@ -41,43 +41,51 @@ export class SignupComponent implements OnInit {
   }
 
   async signUp() {
-    let ownerDocId = '';
-    if (this.role.nativeElement.value === 'Student') {
-      const student: Student = {
-        firstName: this.firstName.nativeElement.value,
-        lastName: this.lastName.nativeElement.value,
-        school: this.school.nativeElement.value,
-        group: this.group.nativeElement.value
-      };
-      await this.studentService.setStudent(student).then(r => ownerDocId = r);
-    } else if (this.role.nativeElement.value === 'Instructor') {
-      const instructor: Instructor = {
-        firstName: this.firstName.nativeElement.value,
-        lastName: this.lastName.nativeElement.value,
-        school: this.school.nativeElement.value,
-        group: this.group.nativeElement.value
-      };
-      await this.instructorService.setInstructor(instructor).then(r => ownerDocId = r);
-    } else if (this.role.nativeElement.value === 'Freelancer') {
-      const freelancer: Freelancer = {
-        firstName: this.firstName.nativeElement.value,
-        lastName: this.lastName.nativeElement.value,
-        school: this.school.nativeElement.value,
-        group: this.group.nativeElement.value
-      };
-      await this.freelancerService.setFreelancer(freelancer).then(r => ownerDocId = r);
+    if (this.username.nativeElement.value === '' || this.password.nativeElement.value === '' || this.firstName.nativeElement.value === '' ||
+      this.lastName.nativeElement.value === '' || this.role.nativeElement.value === 'Select Role' ||
+      this.school.nativeElement.value === 'Select School' || this.group.nativeElement.value === 'Select Group'){
+      this.toastrService.error('Please fill up all fields!', '', {positionClass: 'toast-top-center'});
     }
-    console.log(ownerDocId);
-    const account: Account = {
-      username: this.username.nativeElement.value,
-      password: this.password.nativeElement.value,
-      role: this.role.nativeElement.value,
-      created_datetime: Date.now(),
-      ownerDocId,
-    };
-    this.accountService.setAccount(account).then(r => console.log(r));
-    this.toastrService.success('Account created successfully!', '', {positionClass: 'toast-top-center'});
-    this.goLoginPage();
+    else {
+      let ownerDocId = '';
+      if (this.role.nativeElement.value === 'Student') {
+        const student: Student = {
+          firstName: this.firstName.nativeElement.value,
+          lastName: this.lastName.nativeElement.value,
+          school: this.school.nativeElement.value,
+          group: this.group.nativeElement.value
+        };
+        await this.studentService.setStudent(student).then(r => ownerDocId = r);
+      } else if (this.role.nativeElement.value === 'Instructor') {
+        const instructor: Instructor = {
+          firstName: this.firstName.nativeElement.value,
+          lastName: this.lastName.nativeElement.value,
+          school: this.school.nativeElement.value,
+          group: this.group.nativeElement.value
+        };
+        await this.instructorService.setInstructor(instructor).then(r => ownerDocId = r);
+      } else if (this.role.nativeElement.value === 'Freelancer') {
+        const freelancer: Freelancer = {
+          firstName: this.firstName.nativeElement.value,
+          lastName: this.lastName.nativeElement.value,
+          school: this.school.nativeElement.value,
+          group: this.group.nativeElement.value
+        };
+        await this.freelancerService.setFreelancer(freelancer).then(r => ownerDocId = r);
+      }
+      console.log(ownerDocId);
+      const account: Account = {
+        username: this.username.nativeElement.value,
+        password: this.password.nativeElement.value,
+        role: this.role.nativeElement.value,
+        created_datetime: Date.now(),
+        ownerDocId,
+      };
+      this.accountService.setAccount(account).then(r => console.log(r));
+      this.toastrService.success('Account created successfully!', '', {positionClass: 'toast-top-center'});
+      this.goLoginPage();
+    }
+
   }
   async onCloseModal(response: string) {
 
