@@ -6,6 +6,7 @@ import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {AccountService} from '../../../core/services/account.service';
 import {Account} from '../../../core/models/account';
 import {ToastrService} from 'ngx-toastr';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -28,22 +29,28 @@ export class ConfirmModalComponent implements OnInit {
     private accountService: AccountService,
     private toastrService: ToastrService,
   ) {}
-  open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null, assignmentSubmission: AssignmentSubmission = null, account: Account = null) {
+  async open(title: string, description: string, buttons: Array<string>, assignment: Assignment = null,
+             assignmentSubmission: AssignmentSubmission = null, account: Account = null, assignmentDocId: string = '') {
     this.title = title;
     this.description = description;
     this.buttons = buttons;
     this.assignmentSubmission = assignmentSubmission;
+    if (assignmentDocId !== '') {
+      assignment = await this.assignmentService.getAssignment(assignmentDocId)
+        .pipe(first())
+        .toPromise();
+    }
     this.modalService.open(this.confirmModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((response) => {
       if (response === 'delete') {
-        if (assignment){
+        if (assignment) {
           this.assignmentService.deleteAssignment(assignment.docId).then(r => {
-            this.toastrService.success('Deleted assignment successfully!', '',{positionClass: 'toast-top-center'});
+            this.toastrService.success('Deleted assignment successfully!', '', {positionClass: 'toast-top-center'});
             console.log(r);
           });
         }
-        if (account){
+        if (account) {
           this.accountService.deleteAccount(account.docId).then(r => {
-            this.toastrService.success('Deleted account successfully!', '',{positionClass: 'toast-top-center'});
+            this.toastrService.success('Deleted account successfully!', '', {positionClass: 'toast-top-center'});
             console.log(r);
           });
         }

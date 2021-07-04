@@ -1,12 +1,13 @@
 export enum TableColumn {
-  assignment_name = 'Assignment Name',
-  assignment_due_datetime = 'Due Date',
+  position = 'position',
+  assignment_name = 'name',
+  assignment_due_datetime = 'dueDatetime',
   assignment_student = 'Student\'s Name',
   assignment_status = 'Submission Status',
   assignment_feedback_datetime = 'Feedback Status',
   assignment_instructor = 'Instructor',
-  assignment_school = 'School',
-  assignment_group = 'Group',
+  assignment_school = 'school',
+  assignment_group = 'group',
   freelancer_username = 'Freelancer\'s Name',
   freelancer_school = 'Schools',
   freelancer_group = 'Groups',
@@ -17,5 +18,5 @@ export enum TableColumn {
   account_school = 'School',
   account_group = 'Group',
   account_created_datetime = 'Created Date',
-  actions = 'Actions'
+  actions = 'actions'
 }

@@ -52,9 +52,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './common-table.component.html',
   styleUrls: ['./common-table.component.scss']
 })
-export class CommonTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class CommonTableComponent implements OnInit {
+  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  // dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource;
+  @Input() assignments: Array<Assignment> = [];
+  displayedColumns: string[];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   TableColumn = TableColumn;
@@ -63,7 +66,6 @@ export class CommonTableComponent implements OnInit, AfterViewInit {
   @Input() tableColumns?: Array<TableColumn>;
   @ViewChild(ConfirmModalComponent) confirmModalComponent: ConfirmModalComponent;
   @Input() assignmentSubmissions: Array<AssignmentSubmission> = [];
-  @Input() assignments: Array<Assignment> = [];
   @Input() freelancers: Array<Freelancer> = [];
   @Input() wages: Array<Wage> = [];
   @Input() accounts: Array<Account> = [];
@@ -79,7 +81,6 @@ export class CommonTableComponent implements OnInit, AfterViewInit {
     private router: Router,
   ) {}
   async ngOnInit(): Promise<void> {
-    console.log(ELEMENT_DATA);
     await Promise.all([
       this.dateHelper.getFormat('monthDayYear'),
       this.dateHelper.getFormat('fullMonthDayYear'),
@@ -94,21 +95,32 @@ export class CommonTableComponent implements OnInit, AfterViewInit {
 
 
   }
+  loadTableData(data: Array<any>) {
+    // console.log(ELEMENT_DATA);
+    // const dataSource2 = new MatTableDataSource(ELEMENT_DATA);
+    // console.log(dataSource2);
+    // this.displayedColumns = ['position', 'name', 'dueDatetime', 'school', 'group'];
+    console.log(data);
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource);
+  }
   onCloseModal(response: string) {
     console.log(response);
   }
 
-  onDeleteClick(assignment: Assignment) {
+  onDeleteClick(name: string, assignmentDocId: string) {
     this.confirmModalComponent.open('Delete Assignment', 'Are you sure you want to delete '
-      + assignment.name + '?', ['close', 'delete'], assignment);
+      + name + '?', ['close', 'delete'], null, null, null, assignmentDocId);
   }
 
-  onEditClick(assignment: Assignment) {
-    this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : assignment.docId }});
+  onEditClick(docId: string) {
+    this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : docId }});
   }
 
-  onSubmitClick(assignment: Assignment) {
-    this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : assignment.docId }});
+  onSubmitClick(docId: string) {
+    this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : docId }});
   }
   onMarkClick(assignmentSubmission: AssignmentSubmission) {
     this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
@@ -133,9 +145,6 @@ export class CommonTableComponent implements OnInit, AfterViewInit {
     this.confirmModalComponent.open('Delete Account', 'Are you sure you want to delete '
       + account.username + '?', ['close', 'delete'], null, null, account);
   }
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
+
 }
 

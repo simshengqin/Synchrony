@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
@@ -9,6 +9,8 @@ import {first} from 'rxjs/operators';
 import {Assignment} from '../../../core/models/assignment';
 import {ActivatedRoute} from '@angular/router';
 import {FilterService} from '../../../core/services/filter.service';
+import {ConfirmModalComponent} from '../../../shared/components/confirm-modal/confirm-modal.component';
+import {CommonTableComponent} from '../../../shared/components/common-table/common-table.component';
 
 @Component({
   selector: 'app-assignment-edit',
@@ -18,11 +20,12 @@ import {FilterService} from '../../../core/services/filter.service';
 export class AssignmentEditComponent implements OnInit {
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group];
   tableActions?: Array<TableAction> = [TableAction.assignment_edit, TableAction.assignment_delete];
-  tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_due_datetime,
+  tableColumns?: Array<TableColumn> = [TableColumn.position, TableColumn.assignment_name, TableColumn.assignment_due_datetime,
     TableColumn.assignment_school, TableColumn.assignment_group, TableColumn.actions];
   assignments: Array<Assignment>;
   instructorDocId = localStorage.getItem('activeDocId');
   assignmentDocId: string;
+  @ViewChild(CommonTableComponent) commonTableComponent: CommonTableComponent;
   constructor(
     private assignmentService: AssignmentService,
     private studentService: StudentService,
@@ -39,7 +42,7 @@ export class AssignmentEditComponent implements OnInit {
         'school', '==', school,
         'group', '==', group).subscribe(async (assignments) => {
        this.assignments = assignments;
-       console.log(this.assignments);
+       this.commonTableComponent.loadTableData(this.assignments);
       });
     });
 
