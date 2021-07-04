@@ -1,5 +1,13 @@
 @import "../../../styles/variables";
 
 .login-wrapper {
+  .max-vh {
+    min-height: 100vh;
+  }
+  .background-login-img {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Flogin.jpg?alt=media&token=8f06a8c9-3f08-4578-97b6-ac8c12c3ea4b");
+    background-size: cover;
+    background-position: center;
+  }
 
 }
