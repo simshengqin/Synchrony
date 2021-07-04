@@ -5,7 +5,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" [ngClass]="{'active': url == '/account/create'}">
             <a class="nav-link" href="account/create">Create Accounts And Groups<span class="sr-only">(current)</span></a>
@@ -29,10 +29,10 @@
     </ng-container>
     <ng-container *ngIf="role == 'instructor'">
       <a class="navbar-brand" href="home/instructor">Synchrony</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText2" aria-controls="navbarText2" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
+      <div class="collapse navbar-collapse" id="navbarText2">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" [ngClass]="{'active': url == '/assignment/new'}">
             <a class="nav-link" href="assignment/new">New Assignments<span class="sr-only">(current)</span></a>
@@ -56,10 +56,10 @@
     </ng-container>
     <ng-container *ngIf="role == 'student'">
       <a class="navbar-brand" href="assignment/view">Synchrony</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText3" aria-controls="navbarText3" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" id="navbarText3">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" [ngClass]="{'active': url == '/assignment/view'}">
             <a class="nav-link" href="assignment/view">View Assignments<span class="sr-only">(current)</span></a>
