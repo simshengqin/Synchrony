@@ -2,11 +2,13 @@
 
 .explore-categories-wrapper {
   .card {
-    height: 357px;
+    // height: 357px;
+    max-width: 285px !important;
     margin: 32px 32px 32px 32px;
     .card-img-top {
       // width: 100%;
-      height: 172px;
+      // height: 172px;
+      height: 250px;
     }
     .card-text {
       height: 40px;

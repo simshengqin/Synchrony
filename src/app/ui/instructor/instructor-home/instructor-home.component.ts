@@ -11,7 +11,7 @@ export class InstructorHomeComponent implements OnInit {
   homeCategories: Array<HomeCategory> = [
     {title: 'New Assignments', description: 'Create assignments for students',
       image_url: 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fhome_assignment_new.jpg?alt=media&token=8e41ad21-4c87-461e-bacb-6f7596cca34e',
-      link_text: 'Create Assignments', target_url: 'assignment/new'},
+      link_text: 'New Assignments', target_url: 'assignment/new'},
     {title: 'Edit Assignments', description: 'View & edit assignments',
       image_url: 'https://firebasestorage.googleapis.com/v0/b/synchrony-8287c.appspot.com/o/ui%2Fhome_assignment_edit.jpg?alt=media&token=b90baa0b-80f2-493f-aab0-69364d1e749b',
       link_text: 'Edit Assignments', target_url: 'assignment/edit'},
