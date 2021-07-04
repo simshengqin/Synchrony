@@ -14,6 +14,8 @@ import {AssignmentService} from '../../../core/services/assignment.service';
 import {InstructorService} from '../../../core/services/instructor.service';
 import {DateHelper} from '../../helpers/date-helper';
 import {Router} from '@angular/router';
+import {first} from 'rxjs/operators';
+import {AssignmentSubmissionService} from '../../../core/services/assignment-submission.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -77,6 +79,7 @@ export class CommonTableComponent implements OnInit {
   constructor(
     private assignmentService: AssignmentService,
     private instructorService: InstructorService,
+    private assignmentSubmissionService: AssignmentSubmissionService,
     private dateHelper: DateHelper,
     private router: Router,
   ) {}
@@ -122,15 +125,18 @@ export class CommonTableComponent implements OnInit {
   onSubmitClick(assignmentDocId: string) {
     this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : assignmentDocId }});
   }
-  onMarkClick(assignmentSubmission: AssignmentSubmission) {
-    this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
+  onMarkClick(assignmentSubmissionDocId: string) {
+    this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmissionDocId }});
   }
 
   onRemarkClick(assignmentSubmission: AssignmentSubmission) {
     this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
   }
 
-  onFeedbackInstructorClick(assignmentSubmission: AssignmentSubmission) {
+  async onFeedbackInstructorClick(assignmentSubmissionDocId: string) {
+    const assignmentSubmission = await this.assignmentSubmissionService.getAssignmentSubmission(assignmentSubmissionDocId)
+      .pipe(first())
+      .toPromise();
     this.confirmModalComponent.open('View Feedback', assignmentSubmission.feedback, ['ok']);
   }
   onFeedbackStudentClick(assignmentSubmissionDocId: string) {

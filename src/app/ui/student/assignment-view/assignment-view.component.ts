@@ -19,7 +19,7 @@ import {CommonTableComponent} from '../../../shared/components/common-table/comm
   styleUrls: ['./assignment-view.component.scss']
 })
 export class AssignmentViewComponent implements OnInit {
-  tableActions?: Array<TableAction> = [TableAction.assignment_submit, TableAction.assignment_resubmit, TableAction.assignment_feedback];
+  tableActions?: Array<TableAction> = [TableAction.assignment_submit, TableAction.assignment_resubmit, TableAction.assignment_student_feedback];
   showOngoing = true;
   tableColumns?: Array<TableColumn> = [TableColumn.position, TableColumn.assignment_name, TableColumn.assignment_submission_status,
     TableColumn.assignment_due_datetime, TableColumn.assignment_instructor, TableColumn.actions];
