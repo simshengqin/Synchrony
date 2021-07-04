@@ -14,7 +14,7 @@ export class SearchFilterComponent implements OnInit {
   FilterActionLabel = FilterActionLabel;
   options = {
     School: [
-      {key: 'Select School', selected: 'selected'},
+      {key: 'School', selected: 'selected'},
       {key: 'School 1', selected: ''},
       {key: 'School 2', selected: ''},
       {key: 'School 3', selected: ''},
@@ -22,7 +22,7 @@ export class SearchFilterComponent implements OnInit {
       {key: 'School 5', selected: ''},
     ],
     Group: [
-      {key: 'Select Group', selected: 'selected'},
+      {key: 'Group', selected: 'selected'},
       {key: 'Group 1', selected: ''},
       {key: 'Group 2', selected: ''},
       {key: 'Group 3', selected: ''},
@@ -30,24 +30,24 @@ export class SearchFilterComponent implements OnInit {
       {key: 'Group 5', selected: ''},
     ],
     'Feedback Status': [
-      {key: 'Select Feedback Status', selected: 'selected'},
+      {key: 'Feedback Status', selected: 'selected'},
       {key: 'With Feedback', selected: ''},
       {key: 'Without Feedback', selected: ''},
     ],
     'Completion Status': [
-      {key: 'Select Completion Status', selected: 'selected'},
+      {key: 'Completion Status', selected: 'selected'},
       {key: 'Ongoing', selected: ''},
       {key: 'Completed', selected: ''},
     ],
     Role: [
-      {key: 'Select Role', selected: 'selected'},
+      {key: 'Role', selected: 'selected'},
       {key: 'Admin', selected: ''},
       {key: 'Freelancer', selected: ''},
       {key: 'Student', selected: ''},
       {key: 'Instructor', selected: ''},
     ],
     Month: [
-      {key: 'Select Month', selected: 'selected'},
+      {key: 'Month', selected: 'selected'},
       {key: 'Jan', selected: ''},
       {key: 'Feb', selected: ''},
       {key: 'Mar', selected: ''},
@@ -62,7 +62,7 @@ export class SearchFilterComponent implements OnInit {
       {key: 'Dec', selected: ''},
     ],
     Year: [
-      {key: 'Select Year', selected: 'selected'},
+      {key: 'Year', selected: 'selected'},
       {key: '2010', selected: ''},
       {key: '2011', selected: ''},
       {key: '2012', selected: ''},
