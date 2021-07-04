@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TableAction} from '../../../core/models/TableAction';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
@@ -9,6 +9,7 @@ import {AssignmentSubmissionService} from '../../../core/services/assignment-sub
 import {AssignmentSubmission} from '../../../core/models/assignment-submission';
 import {ActivatedRoute} from '@angular/router';
 import {FilterService} from '../../../core/services/filter.service';
+import {CommonTableComponent} from '../../../shared/components/common-table/common-table.component';
 
 @Component({
   selector: 'app-assignment-mark',
@@ -17,12 +18,17 @@ import {FilterService} from '../../../core/services/filter.service';
 })
 export class AssignmentMarkComponent implements OnInit {
   tableActions?: Array<TableAction> = [TableAction.assignment_mark];
-  tableColumns?: Array<TableColumn> = [TableColumn.assignment_name, TableColumn.assignment_student, TableColumn.assignment_status
-    , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
+  tableColumns?: Array<TableColumn> = [ TableColumn.assignment_school, TableColumn.assignment_submission_feedback_datetime];
+  // tableColumns?: Array<TableColumn> = [TableColumn.position, TableColumn.assignment_submission_assignment_name,
+  //   TableColumn.assignment_submission_student_name, TableColumn.assignment_submission_submission_status,
+  // TableColumn.assignment_submission_due_datetime, TableColumn.assignment_submission_feedback_datetime, TableColumn.actions];
+  // , TableColumn.assignment_student, TableColumn.assignment_status
+  //   , TableColumn.assignment_due_datetime, TableColumn.assignment_feedback_datetime, TableColumn.actions];
   filterActions?: Array<FilterAction> = [FilterAction.assignment_school, FilterAction.assignment_group, FilterAction.assignment_feedback];
   assignmentSubmissions: Array<AssignmentSubmission>;
   instructorDocId = localStorage.getItem('activeDocId');
   assignmentSubmissionDocId: string;
+  @ViewChild(CommonTableComponent) commonTableComponent: CommonTableComponent;
   constructor(
     private assignmentService: AssignmentService,
     private assignmentSubmissionService: AssignmentSubmissionService,
@@ -59,15 +65,16 @@ export class AssignmentMarkComponent implements OnInit {
         'school', '==', school,
         'group', '==', group,
         'feedback_datetime', filterOp4, filterVal4).subscribe(async (assignmentSubmissions) => {
-        for (const assignmentSubmission of assignmentSubmissions) {
-          assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
-            .pipe(first())
-            .toPromise();
-          assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
-            .pipe(first())
-            .toPromise();
-        }
+        // for (const assignmentSubmission of assignmentSubmissions) {
+        //   assignmentSubmission.student = await this.studentService.getStudent(assignmentSubmission.studentDocId)
+        //     .pipe(first())
+        //     .toPromise();
+        //   assignmentSubmission.assignment = await this.assignmentService.getAssignment(assignmentSubmission.assignmentDocId)
+        //     .pipe(first())
+        //     .toPromise();
+        // }
         this.assignmentSubmissions = assignmentSubmissions;
+        this.commonTableComponent.loadTableData(this.assignmentSubmissions);
       });
     });
   }

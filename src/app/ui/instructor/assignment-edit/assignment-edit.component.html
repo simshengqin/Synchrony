@@ -6,7 +6,7 @@
   <ng-container *ngIf="!assignmentDocId">
     <h1 class="mb-3">Edit Assignments</h1>
     <app-search-filter [filterActions] = "filterActions"></app-search-filter>
-    <app-common-table #appCommonTable [tableActions]="tableActions" [tableColumns]="tableColumns" [assignments]="assignments" ></app-common-table>
+    <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [assignments]="assignments" ></app-common-table>
   </ng-container>
 
 </div>
