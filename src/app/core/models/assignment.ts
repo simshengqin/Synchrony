@@ -22,7 +22,9 @@ export interface Assignment {
   assignmentSubmission?: AssignmentSubmission;
   student?: Student;
   instructor?: Instructor;
+  instructor_name?: string;
   assignmentCompletionStatus?: string;
+  assignmentSubmissionStatus?: string;
   // submitted_datetime?: number;
   // student?: Student;
   // studentId?: string;

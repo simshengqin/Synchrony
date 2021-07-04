@@ -115,12 +115,12 @@ export class CommonTableComponent implements OnInit {
       + name + '?', ['close', 'delete'], null, null, null, assignmentDocId);
   }
 
-  onEditClick(docId: string) {
-    this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : docId }});
+  onEditClick(assignmentDocId: string) {
+    this.router.navigate(['assignment/edit'], { queryParams: { assignmentDocId : assignmentDocId }});
   }
 
-  onSubmitClick(docId: string) {
-    this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : docId }});
+  onSubmitClick(assignmentDocId: string) {
+    this.router.navigate(['assignment/submit'], { queryParams: { assignmentDocId : assignmentDocId }});
   }
   onMarkClick(assignmentSubmission: AssignmentSubmission) {
     this.router.navigate(['assignment/mark'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
@@ -133,8 +133,8 @@ export class CommonTableComponent implements OnInit {
   onFeedbackInstructorClick(assignmentSubmission: AssignmentSubmission) {
     this.confirmModalComponent.open('View Feedback', assignmentSubmission.feedback, ['ok']);
   }
-  onFeedbackStudentClick(assignmentSubmission: AssignmentSubmission) {
-    this.router.navigate(['assignment/feedback'], { queryParams: { assignmentSubmissionDocId : assignmentSubmission.docId }});
+  onFeedbackStudentClick(assignmentSubmissionDocId: string) {
+    this.router.navigate(['assignment/feedback'], { queryParams: { assignmentSubmissionDocId : assignmentSubmissionDocId }});
   }
 
   onViewHours(freelancer: Freelancer) {
