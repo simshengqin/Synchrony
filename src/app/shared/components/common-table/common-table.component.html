@@ -62,7 +62,11 @@
 
     <ng-container matColumnDef="created_datetime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.created_datetime | date : dateTimeFormat}} </td>
+
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.hours">{{element.created_datetime | date : dateTimeFormat}}</ng-container>
+        <ng-container *ngIf="element.hours">{{element.created_datetime | date : monthYearFormat}}</ng-container>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
@@ -70,18 +74,27 @@
       <td mat-cell *matCellDef="let element"> {{element.username | titlecase}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="freelancer_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.freelancer_name | titlecase}} </td>
+    </ng-container>
 
+    <ng-container matColumnDef="hours">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Hours </th>
+      <td mat-cell *matCellDef="let element"> {{element.hours}} </td>
+    </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element">
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_edit)" (click)="onEditClick(element.docId)" class="mr-2">edit</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_delete)" (click)="onDeleteClick(element.name, element.docId)">delete</mat-icon>
-        <mat-icon *ngIf="tableActions.includes(TableAction.account_delete)" (click)="onDeleteClickAccount(element.docId)">delete</mat-icon>
+        <mat-icon *ngIf="tableActions.includes(TableAction.account_delete)" (click)="onDeleteClickAccount(element.docId)" class="ml-2">delete</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_submit) && !element.assignmentSubmission" class="mr-2" (click)="onSubmitClick(element.docId)">attach_file</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_resubmit) && element.assignmentSubmission && element.dueDatetime >= dateNow" class="mr-2" (click)="onSubmitClick(element.docId)">attach_file</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_student_feedback) && element.assignmentSubmission && element.assignmentSubmission.feedback_datetime != -1" (click)="onFeedbackStudentClick(element.assignmentSubmission.docId)">insert_comment</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_mark)" (click)="onMarkClick(element.docId)" class="mr-2">add_comment</mat-icon>
         <mat-icon *ngIf="tableActions.includes(TableAction.assignment_instructor_feedback)" (click)="onFeedbackInstructorClick(element.docId)" class="mr-2">insert_comment</mat-icon>
+        <mat-icon *ngIf="tableActions.includes(TableAction.freelancer_hours)" (click)="onViewHours(element.docId)" class="ml-2">timer</mat-icon>
       </td>
     </ng-container>
 

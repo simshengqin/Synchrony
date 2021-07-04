@@ -145,8 +145,8 @@ export class CommonTableComponent implements OnInit {
     this.router.navigate(['assignment/feedback'], { queryParams: { assignmentSubmissionDocId : assignmentSubmissionDocId }});
   }
 
-  onViewHours(freelancer: Freelancer) {
-    this.router.navigate(['wages/view'], { queryParams: { freelancerDocId : freelancer.docId }});
+  onViewHours(freelancerDocId: string) {
+    this.router.navigate(['wages/view'], { queryParams: { freelancerDocId : freelancerDocId }});
   }
 
   async onDeleteClickAccount(accountDocId: string) {

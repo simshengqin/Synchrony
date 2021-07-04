@@ -7,6 +7,9 @@
     <h1 class="mb-3">Manage Freelancers</h1>
     <app-search-filter [filterActions] = "filterActions"></app-search-filter>
     <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [freelancers]="freelancers"></app-common-table>
-    <button class="btn btn-danger mr-4" (click)="onGoBackClick()">Go Back</button>
+    <div class="go-back-section" (click)="onGoBackClick()">
+      <mat-icon class="mr-1">arrow_back</mat-icon>
+      <span class="go-back-text">Back</span>
+    </div>
   </ng-container>
 </div>

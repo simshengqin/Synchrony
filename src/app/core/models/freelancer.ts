@@ -7,4 +7,7 @@ export interface Freelancer {
   lastName?: string;
   school?: string;
   group?: string;
+
+  // Not in database, manually created
+  freelancer_name?: string;
 }

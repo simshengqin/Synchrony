@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TableColumn} from '../../../core/models/TableColumn';
 import {FilterAction} from '../../../core/models/FilterAction';
 import {TableAction} from '../../../core/models/TableAction';
@@ -8,6 +8,7 @@ import {Freelancer} from '../../../core/models/freelancer';
 import {Wage} from '../../../core/models/wage';
 import {FreelancerService} from '../../../core/services/freelancer.service';
 import {FilterService} from '../../../core/services/filter.service';
+import {CommonTableComponent} from '../../../shared/components/common-table/common-table.component';
 
 @Component({
   selector: 'app-wages-view-individual',
@@ -21,6 +22,7 @@ export class WagesViewIndividualComponent implements OnInit {
   freelancer: Freelancer;
   freelancerDocId: string;
   wages: Array<Wage>;
+  @ViewChild(CommonTableComponent) commonTableComponent: CommonTableComponent;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -61,7 +63,7 @@ export class WagesViewIndividualComponent implements OnInit {
             }
             this.wages = filteredWages;
           }
-
+          this.commonTableComponent.loadTableData(this.wages);
           console.log(this.wages);
         });
         // this.wageService.getWagesByFreelancer(this.freelancerDocId).subscribe(async (wages) => {

@@ -7,5 +7,8 @@
   <div *ngIf="assignmentSubmission && assignmentSubmission.instructor_feedback_attachment" class="form-text mb-3" >
       Click to download: <a [href]="assignmentSubmission.instructor_feedback_attachment">{{assignmentSubmission.instructor_feedback_attachment_name}}</a>
   </div>
-  <button class="btn btn-danger mr-4" (click)="onGoBackClick()">Go Back</button>
+  <div class="go-back-section" (click)="onGoBackClick()">
+    <mat-icon class="mr-1">arrow_back</mat-icon>
+    <span class="go-back-text">Back</span>
+  </div>
 </div>

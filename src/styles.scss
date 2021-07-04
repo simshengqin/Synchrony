@@ -21,6 +21,21 @@
 @include angular-material-theme($gigworks-web-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import "./app/styles/variables";
+
+.go-back-text {
+  position: relative;
+  top: -5px;
+}
+.go-back-section {
+  cursor: pointer;
+}
+.go-back-section:hover {
+  color: $coreOrange;
+}
+.go-back-section:active {
+  color: orangered;
+}
 
 // regular style toast
 @import '~ngx-toastr/toastr';

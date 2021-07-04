@@ -25,7 +25,10 @@
     </div>
   </div>
 
-  <button *ngIf="assignment" class="btn btn-danger mr-4" (click)="onGoBackClick(assignment)">Go Back</button>
+  <div class="go-back-section" (click)="onGoBackClick(assignment)">
+    <mat-icon class="mr-1">arrow_back</mat-icon>
+    <span class="go-back-text">Back</span>
+  </div>
   <button *ngIf="assignment" class="btn btn-primary" (click)="onSubmitClick()">Submit</button>
   <app-confirm-modal></app-confirm-modal>
 </div>

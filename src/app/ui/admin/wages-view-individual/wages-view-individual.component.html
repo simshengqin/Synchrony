@@ -2,5 +2,9 @@
   <h1 *ngIf="freelancer" class="mb-3">{{freelancer.firstName + ' ' + freelancer.lastName}} - View Hours</h1>
   <app-search-filter [filterActions] = "filterActions"></app-search-filter>
   <app-common-table [tableActions]="tableActions" [tableColumns]="tableColumns" [wages]="wages"></app-common-table>
-  <button class="btn btn-danger mr-4" (click)="onGoBackClick()">Go Back</button>
+  <div class="go-back-section" (click)="onGoBackClick()">
+    <mat-icon class="mr-1">arrow_back</mat-icon>
+    <span class="go-back-text">Back</span>
+  </div>
+
 </div>
