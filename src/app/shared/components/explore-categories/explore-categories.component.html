@@ -1,8 +1,8 @@
 <section class="max-width-section explore-categories-wrapper">
   <div class="categories">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <div fxLayout="row wrap"fxLayoutAlign="center center">
       <ng-container *ngFor="let category of homeCategories; let i = index">
-        <div class="card" style="width: 18rem;">
+        <div fxLayout="column" fxFlex.lt-md="100" class="card" style="width: 18rem;">
           <img *ngIf="category.image_url" class="card-img-top" src="category.image_url" alt="Card image cap">
           <div class="card-body">
             <div class="card-title bold-text mb-3">{{ category.title}}</div>
