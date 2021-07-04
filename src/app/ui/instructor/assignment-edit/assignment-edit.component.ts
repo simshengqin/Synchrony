@@ -39,6 +39,7 @@ export class AssignmentEditComponent implements OnInit {
         'school', '==', school,
         'group', '==', group).subscribe(async (assignments) => {
        this.assignments = assignments;
+       console.log(this.assignments);
       });
     });
 
