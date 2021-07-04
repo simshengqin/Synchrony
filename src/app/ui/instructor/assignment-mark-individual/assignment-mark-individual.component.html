@@ -1,6 +1,6 @@
-<div class="assignment-mark-individual-wrapper wrapper-padding">
+<div class="assignment-mark-individual-wrapper">
   <h1 *ngIf="assignment && student" class="mb-1">Mark {{assignment.name}} for {{student.firstName + ' ' +student.lastName}}</h1>
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="16px" class="mb-2">
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="16px" class="mb-3">
     <button class="btn btn-info" (click)="onInstructionsClick()">View Instructions</button>
     <label class="btn btn-primary mb-0">
       <i class="fa fa-image"></i> Load PDF
@@ -25,9 +25,9 @@
 <!--    </a>-->
 <!--    <p>Then, click on the grey button below to share your screen and the white circle record button to start recording</p>-->
 <!--  </div>-->
-  <div fxLayout="row" fxLayoutGap="32px" class="mb-5">
-    <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
-    <div fxLayout="column" fxLayoutAlign="center" fxFlex="50">
+  <div fxLayout="row wrap" fxLayoutGap="32px grid" fxLayoutAlign="space-between" class="mb-2">
+    <ngx-extended-pdf-viewer fxLayout="column" fxFlex="50" fxFlex.lt-md="100" useBrowserLocale="true" height="80vh" [ngClass.lt-md]="'reduced-height'"></ngx-extended-pdf-viewer>
+    <div fxLayout="column" fxLayoutAlign="center" fxFlex="50" fxFlex.lt-md="100" >
       <app-video-player></app-video-player>
     </div>
   </div>
