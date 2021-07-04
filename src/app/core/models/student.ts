@@ -2,7 +2,7 @@ import {School} from './school';
 import {Group} from './group';
 
 export interface Student {
-  docId?: number;
+  docId?: string;
   firstName?: string;
   lastName?: string;
   school?: string;

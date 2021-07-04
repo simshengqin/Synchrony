@@ -1,6 +1,8 @@
 
 export interface Admin {
-  docId?: number;
+  docId?: string;
   firstName?: string;
   lastName?: string;
+  school?: string;
+  group?: string;
 }
